@@ -1,10 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import AuthContext from './context/AuthContext';
 import './Navbar.css';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
 
   return (
     <header>
@@ -17,10 +22,12 @@ const Navbar = () => {
             ))}
           </span>
         </Link>
-        <button className="hamburger-menu">
+        <button className="hamburger-menu" onClick={toggleMenu}>
+          <span className="hamburger"></span>
+          <span className="hamburger"></span>
           <span className="hamburger"></span>
         </button>
-        <ul className="navbar-menu">
+        <ul className={`navbar-menu ${menuOpen ? 'open' : ''}`}>
           {user ? (
             <>
               {user.role === 'admin' && (
