@@ -35,10 +35,10 @@ hr.dash {
   
 }
 p.hint {
-  color: #f4f4f4;
+  color: black;
 }
 h2 {
-  color: #f4f4f4;
+  color: black;
 }
 .input-wrapper {
   display: flex;
@@ -121,12 +121,15 @@ position: relative;
 flex: 1;
 height: 100vh;
 overflow: hidden;
-background: #1a1a1a;
+/* background: #1a1a1a; */
+background: aliceblue;
 max-width: 30%;
+box-shadow: 10px 10px 8px 10px #d1e3fc;
 
 }
 section.showcase.column.center{
-  background-color: #1d1d1d;
+  /* background-color:#1d1d1d; */
+  background: aliceblue;
 }
 .row {
   display: flex;
@@ -180,21 +183,22 @@ button {
 }
 
 .reg {
-  color: white;
-  background-color: aqua;
+  color: #8E24AA;
+  /* background-color: aqua; */
+  border: 1px solid rgba(104, 85, 224, 1);
 }
 
 .log {
-  color: aqua;
-  background-color: rgba(255, 255, 255, 1);
+  color: #8E24AA;
+  /* background-color: rgba(255, 255, 255, 1); */
   border: 1px solid rgba(104, 85, 224, 1);
 }
 
 button:hover {
   color: white;
   width:;
-  box-shadow: 0 0 20px aqua;
-  background-color: aqua;
+  /* box-shadow: 0 0 20px aqua; */
+  background-color: #8E24AA;
 }
 input {
     height: 1vh;
@@ -205,7 +209,7 @@ input {
     padding: 1rem;
     margin: 0;
     transition: all 0.5s;
-    background: #1a1a1a;
+    background: aliceblue;
 }
 showcase {
   flex: 1;
@@ -219,14 +223,14 @@ showcase {
   font-size: 3.8rem;
   width: 100%;
   line-height: 7rem;
-  color: #f4f4f4;
+  color: black;
   text-align: center;
   font-weight: 300;
   font-style: normal;
 }
 h4 {
   font-size: 2rem;
-  color: #f4f4f4;
+  color: black;
   text-align: center;
   font-weight: 300;
   font-style: normal;
@@ -239,7 +243,7 @@ h4 {
 }
 
 .primary-text{
-  color: aqua;
+  color: #8E24AA;
 }
 /* input[type=text],
 input[type=email],
