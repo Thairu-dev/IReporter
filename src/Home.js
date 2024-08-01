@@ -1,25 +1,12 @@
-<<<<<<< HEAD
 import React from 'react'
-import { Link } from 'react-router-dom'
 // import NavBar from './NavBar'
-
-=======
-import React from 'react';
 import './HowItWorks.css'; // Import a CSS file for additional styling
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faMapMarkerAlt, faPhotoVideo } from '@fortawesome/free-solid-svg-icons';
->>>>>>> 9b639fb4c536da5223db3433abcd17f92faef400
 export default function Home() {
   const currentYear = new Date().getFullYear(); 
   return (
-    <div>
-<<<<<<< HEAD
-      {/* <NavBar /> */}
-      <h1>Welcome Home</h1>
-      <p>This is the home page</p>
-      <Link to={"/signup"} >Signup</Link>
-      {/* <Link to="/login">login</Link> */}
-=======
+  <div>
       <section
         style={{
           backgroundImage: `
@@ -103,9 +90,10 @@ export default function Home() {
           boxSizing:'border-box'
         }}
       >
+        
         <p>&copy; {currentYear} iReporter. All rights reserved.</p>
       </footer>
->>>>>>> 9b639fb4c536da5223db3433abcd17f92faef400
     </div>
+    
   );
 }
