@@ -5,7 +5,8 @@ import Login from './Login';
 import UserDashboard from './User/UserDashboard';
 import AdminDashboard from './Admin/AdminDashboard';
 import ProtectedRoute from './ProtectedRoute';
-import Home from './Home';
+import Home from './Home'; 
+import SignupForm from './SignUpForm';
 
 const App = () => {
     return (
@@ -16,6 +17,8 @@ const App = () => {
                     <Route path="/user-dashboard" element={<ProtectedRoute element={UserDashboard}/>} />
                     <Route path="/admin-dashboard" element={<ProtectedRoute element={AdminDashboard} />} />
                     <Route path="/" element={<Home/>} />
+                    <Route path="/signup" element={<SignupForm />} />
+
                 </Routes>
             </Router>
         </AuthProvider>
