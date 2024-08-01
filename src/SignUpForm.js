@@ -69,13 +69,13 @@ function SignUpForm() {
      
                   <div class="container">
   <div>
-    <button class="log">Sign up</button>
+    <button class="reg">Sign up</button>
     <div className="row center">
                     <div className="row signin--or">
                       <span>or</span>
                     </div>
                   </div>
-    <button class="reg">Sign in</button>
+    <button class="log">Sign in</button>
     
   </div>
 </div>

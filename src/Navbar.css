@@ -3,7 +3,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #333;
+  background-color: #4545;
+  /* background-color: black; */
+
 }
 
 .navbar-logo {
@@ -72,7 +74,7 @@
 
 .navbar-link .active {
   font-weight: bold;
-  color: aqua;
+  color: #8E24AA;
 }
 
 #logout button {
