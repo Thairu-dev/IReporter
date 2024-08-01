@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const token = localStorage.getItem('access_token');
         if (token) {
-            fetch('http://127.0.0.1:5555/check_session', {
+            fetch('https://ireporter-server.onrender.com/check_session', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const login = (email, password) => {
-        return fetch('http://127.0.0.1:5555/login', {
+        return fetch('https://ireporter-server.onrender.com/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
         .then(data => {
             if (data.access_token) {
                 localStorage.setItem('access_token', data.access_token);
-                return fetch('http://127.0.0.1:5555/check_session', {
+                return fetch('https://ireporter-server.onrender.com/check_session', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
