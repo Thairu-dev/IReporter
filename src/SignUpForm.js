@@ -8,10 +8,10 @@ function SignUpForm() {
         <section className='sign in column center' >
         <Link to="/" className="home-icon"><i className="fas fa-home" /></Link>
           <h2 >
-                    <span className="primary-text">i</span>
+                    <span className="primary-text">👁️</span>
                     Reporter
                   </h2>
-         <p className="hint">Fill the form below to create an account</p>
+         <p className="hint">Fill the form below to create an account</p> <br></br>
       <hr className="dash" />
       <div className="input-wrapper">
         
@@ -64,18 +64,9 @@ function SignUpForm() {
         />
         
       </div>
+     
       
-      {/* <button type="submit" className="btn-register">REGISTER</button>
-      <div className="row center">
-                    <div className="row signin--or">
-                      <span>or</span>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    className="btn-signin"
-                    > SIGN IN
-                  </button> */}
+     
                   <div class="container">
   <div>
     <button class="log">Sign up</button>
@@ -98,9 +89,9 @@ function SignUpForm() {
                 <strong>together</strong>
               </h1>
               <h4>
-                <span className="primary-text">iReporter</span>
+                <span className="primary-text">👁️Reporter</span>
                 {' '}
-                is a platform for every citizens
+                is a platform for every citizen.
               </h4>
             </div>
           </section>
