@@ -8,14 +8,14 @@ const AdminDashboard = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('access_token'); // Make sure you use the correct key
-        fetch('http://127.0.0.1:5555/interventions', {
+        fetch('https://ireporter-server.onrender.com/interventions', {
             headers: { Authorization: `Bearer ${token}` }
         })
         .then(response => response.json())
         .then(data => setInterventions(data))
         .catch(err => console.error('Error fetching interventions:', err));
 
-        fetch('http://127.0.0.1:5555/redflags', {
+        fetch('https://ireporter-server.onrender.com/redflags', {
             headers: { Authorization: `Bearer ${token}` }
         })
         .then(response => response.json())
@@ -25,7 +25,7 @@ const AdminDashboard = () => {
 
     const updateStatus = (entityType, entityId, newStatus) => {
         const token = localStorage.getItem('access_token');
-        fetch(`http://127.0.0.1:5555/admin/${entityType}/${entityId}/status`, {
+        fetch(`https://ireporter-server.onrender.com/admin/${entityType}/${entityId}/status`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

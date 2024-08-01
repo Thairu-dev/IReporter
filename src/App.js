@@ -4,9 +4,11 @@ import { AuthProvider } from './context/AuthContext';
 import Login from './Login';
 import UserDashboard from './User/UserDashboard';
 import AdminDashboard from './Admin/AdminDashboard';
-import ProtectedRoute from './ProtectedRoute';
-import Home from './Home';
+import ProtectedRoute from './ProtectedRoute'
+import Home from './Home'; 
+import SignupForm from './SignUpForm';
 import Navbar from './NavBar';
+
 
 const App = () => {
     return (
@@ -18,6 +20,8 @@ const App = () => {
                     <Route path="/user-dashboard" element={<ProtectedRoute element={UserDashboard}/>} />
                     <Route path="/admin-dashboard" element={<ProtectedRoute element={AdminDashboard} />} />
                     <Route path="/" element={<Home/>} />
+                    <Route path="/sign-up" element={<SignupForm />} />
+
                 </Routes>
             </Router>
         </AuthProvider>

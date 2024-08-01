@@ -1,11 +1,12 @@
-import React from 'react';
+import React from 'react'
+// import NavBar from './NavBar'
 import './HowItWorks.css'; // Import a CSS file for additional styling
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faMapMarkerAlt, faPhotoVideo } from '@fortawesome/free-solid-svg-icons';
 export default function Home() {
   const currentYear = new Date().getFullYear(); 
   return (
-    <div>
+  <div>
       <section
         style={{
           backgroundImage: `
@@ -89,8 +90,10 @@ export default function Home() {
           boxSizing:'border-box'
         }}
       >
+        
         <p>&copy; {currentYear} iReporter. All rights reserved.</p>
       </footer>
     </div>
+    
   );
 }
