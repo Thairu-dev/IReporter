@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #333;
+  background-color:#F1F1EC;
 }
 
 .navbar-logo {
@@ -25,7 +25,7 @@
 .logo-letter {
   font-family: 'Pacifico', cursive;
   font-size: 1.5rem;
-  color: #fff;
+  color: #1d1d1d;
   transition: transform 0.2s, background-color 0.2s;
   margin: 0 2px;
 }
@@ -63,7 +63,7 @@
 }
 
 .navbar-link a, .navbar-link button {
-  color: #fff;
+  color: #1d1d1d;
   text-decoration: none;
   background: none;
   border: none;
@@ -72,7 +72,7 @@
 
 .navbar-link .active {
   font-weight: bold;
-  color: aqua;
+  color:#8E24AA;
 }
 
 #logout button {

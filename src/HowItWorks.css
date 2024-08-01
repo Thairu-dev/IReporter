@@ -1,6 +1,8 @@
 .how-it-works {
     padding: 50px 0;
     text-align: center;
+    background-color: aliceblue;
+    
   }
 .homepage-message{
     margin-bottom: 40px;
@@ -80,11 +82,3 @@
     margin: 0 auto 20px auto;
   }
   
-.footer {
-    background-color: #f1f1f1;
-    padding: 10px;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }

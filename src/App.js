@@ -8,6 +8,7 @@ import ProtectedRoute from './ProtectedRoute';
 import Home from './Home';
 import Navbar from './NavBar';
 
+
 const App = () => {
     return (
         <AuthProvider>

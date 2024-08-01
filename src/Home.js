@@ -9,8 +9,8 @@ export default function Home() {
       <section
         style={{
           backgroundImage: `
-            linear-gradient(to right bottom, rgba(11, 36, 162, 0.5), rgba(40, 180, 133, 0.8)),
-            url('https://chrismarcel.github.io/iReporter/UI/assets/img/crowd.jpg')`,
+            linear-gradient(to right bottom, rgba(32, 38, 57, 0.5), rgba(63, 76, 119, 0.8)),
+            url('https://images.unsplash.com/photo-1627676569762-ea59379ed3b3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cmFpc2VkJTIwaGFuZHN8ZW58MHx8MHx8fDA%3D')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           height: 'calc(100vh - 74px)',
@@ -77,7 +77,7 @@ export default function Home() {
       </section>
       <footer
         style={{
-          backgroundColor: '#f1f1f1',
+          backgroundColor: 'aliceblue',
           padding: '10px',
           height:'50px',
           justifyContent: 'center',
