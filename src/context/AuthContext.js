@@ -4,43 +4,58 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true); // Add loading state to manage async checks
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem('access_token');
         if (token) {
-            fetch('https://ireporter-server.onrender.com/check_session', {
+            fetch('https://ireporter-server.onrender.com/check_session', { // Ensure this URL is correct
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 }
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.statusText}`);
+                }
+                return response.json();
+            })
             .then(data => {
-                if (data.id) {
+                console.log('Session Check Response:', data); // Log the response
+                if (data && data.id && data.token_verified) {
                     setUser(data);
                 } else {
                     localStorage.removeItem('access_token');
+                    setUser(null);
                 }
             })
-            .catch(() => {
+            .catch(error => {
+                console.error('Error during session check:', error);
                 localStorage.removeItem('access_token');
+                setUser(null);
             })
-            .finally(() => setLoading(false)); // Set loading to false after check is complete
+            .finally(() => setLoading(false));
         } else {
-            setLoading(false); // Set loading to false if no token is found
+            setLoading(false);
         }
     }, []);
 
     const login = (email, password) => {
-        return fetch('https://ireporter-server.onrender.com/login', {
+        return fetch('https://ireporter-server.onrender.com/login', { 
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.json();
+        })
         .then(data => {
+            console.log('Login Response:', data); 
             if (data.access_token) {
                 localStorage.setItem('access_token', data.access_token);
                 return fetch('https://ireporter-server.onrender.com/check_session', {
@@ -50,18 +65,52 @@ export const AuthProvider = ({ children }) => {
                         'Authorization': `Bearer ${data.access_token}`
                     }
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Network response was not ok: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
                 .then(userData => {
-                    if (userData.id) {
+                    console.log('Session Check After Login:', userData); 
+                    if (userData.token_verified) {
                         setUser(userData);
                         return userData;
                     } else {
-                        throw new Error('Failed to fetch user details');
+                        throw new Error('Token not verified');
                     }
                 });
             } else {
                 throw new Error('Invalid email or password');
             }
+        });
+    };
+
+    const signup = (email, password, name) => {
+        return fetch('https://ireporter-server.onrender.com/users', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password, name })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.json();
+        });
+    };
+
+    const verifyToken = (email, token) => {
+        return fetch('https://ireporter-server.onrender.com/verify_token', {    
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, token })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.json();
         });
     };
 
@@ -71,11 +120,11 @@ export const AuthProvider = ({ children }) => {
     };
 
     if (loading) {
-        return <div>Loading...</div>; // Optionally show a loading spinner or message while checking session
+        return <div>Loading...</div>;
     }
 
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, login, logout, signup, verifyToken }}>
             {children}
         </AuthContext.Provider>
     );

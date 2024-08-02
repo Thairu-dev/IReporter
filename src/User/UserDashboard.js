@@ -41,27 +41,32 @@ const UserDashboard = () => {
     }
 
     return (
+    <div>
+    <h2>Welcome, {userData?.name || 'User'}</h2>
+    <button onClick={handleLogout}>Logout</button>
+    <div>
+        <h3>Interventions</h3>
+        <ul>
+            {userData?.intervention?.length > 0 ? (
+                userData.intervention.map((interv) => (
+                    <li key={interv.id}>
+                        <h4>{interv.intervention}</h4>
+                        <p>{interv.description}</p>
+                        <p>Status: {interv.status}</p>
+                        <p>Geolocation: {interv.geolocation}</p>
+                        <p>Date Added: {interv.date_added}</p>
+                    </li>
+                ))
+            ) : (
+                <p>No interventions available.</p>
+            )}
+        </ul>
+        </div>
         <div>
-            <h2>Welcome, {userData.name}</h2>
-            <button onClick={handleLogout}>Logout</button>
-            <div>
-                <h3>Interventions</h3>
-                <ul>
-                    {userData.intervention.map((interv) => (
-                        <li key={interv.id}>
-                            <h4>{interv.intervention}</h4>
-                            <p>{interv.description}</p>
-                            <p>Status: {interv.status}</p>
-                            <p>Geolocation: {interv.geolocation}</p>
-                            <p>Date Added: {interv.date_added}</p>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-            <div>
-                <h3>Redflags</h3>
-                <ul>
-                    {userData.redflags.map((redflg) => (
+            <h3>Redflags</h3>
+            <ul>
+                {userData?.redflags?.length > 0 ? (
+                    userData.redflags.map((redflg) => (
                         <li key={redflg.id}>
                             <h4>{redflg.redflag}</h4>
                             <p>{redflg.description}</p>
@@ -69,10 +74,13 @@ const UserDashboard = () => {
                             <p>Geolocation: {redflg.geolocation}</p>
                             <p>Date Added: {redflg.date_added}</p>
                         </li>
-                    ))}
-                </ul>
-            </div>
+                    ))
+                ) : (
+                    <p>No redflags available.</p>
+                )}
+            </ul>
         </div>
+    </div>
     );
 };
 
