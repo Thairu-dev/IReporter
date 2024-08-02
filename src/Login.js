@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from './context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const { login } = useAuth();
@@ -32,30 +33,76 @@ const Login = () => {
     };
 
     return (
-        <div className="login-container">
-            <h2>Login</h2>
+        
+        <div className="row">
+            <section className='sign in column center' >
+             <Link to="/" className="home-icon"><i className="fas fa-home" /></Link>
+          <h2 >
+                    <span className="primary-text">👁️</span>
+                    Reporter
+                  </h2>
+            
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Email</label>
                     <input
                         type="email"
+                        placeholder='Enter email'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                    />
+                    /> 
                 </div>
+                <br></br>
                 <div>
                     <label>Password</label>
                     <input
                         type="password"
+                        placeholder='Enter password'
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
                 </div>
+                <br></br>
                 {error && <p className="error">{error}</p>}
-                <button type="submit">Login</button>
+                <button className='log' type="submit">Login</button>
+                
             </form>
+            
+            <div>
+            {/* {error && <p className="error">{error}</p>} */}
+            {/* <button type='submit' class="log">Login in</button>  */}
+            <br></br>
+                                <div className="signin--links">
+                                    <a href="#!">Forgot Password</a>
+                                </div>
+            <div className="row center">
+                            <div className="row signin--or">
+                                
+                            <span>or</span>
+                            </div>
+                        </div>
+            <button onClick={() => navigate("/sign-up")} class="reg">Create account</button>
+            
+             </div> 
+       
+             </section>
+             <section className="showcase column center">
+            <div className="showcase--content">
+              <h1>
+                Let&rsquo;s build the Nation
+                {' '}
+                <strong>together</strong>
+              </h1>
+              <h4>
+                <span className="primary-text">👁️Reporter</span>
+                {' '}
+                is a platform for every citizen.
+              </h4>
+            </div>
+          </section>   
+            
         </div>
     );
 };

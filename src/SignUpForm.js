@@ -1,7 +1,10 @@
 import React from 'react'
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+
+
 
 function SignUpForm() {
+  const navigate = useNavigate();
   return (
     <div className='row'>
       
@@ -11,7 +14,7 @@ function SignUpForm() {
                     <span className="primary-text">👁️</span>
                     Reporter
                   </h2>
-         <p className="hint">Fill the form below to create an account</p> <br></br>
+         <p className="hint">Fill the form below to create an account</p>
       <hr className="dash" />
       <div className="input-wrapper">
         
@@ -68,17 +71,17 @@ function SignUpForm() {
       
      
                   <div class="container">
-  <div>
-    <button class="reg">Sign up</button>
-    <div className="row center">
-                    <div className="row signin--or">
-                      <span>or</span>
-                    </div>
-                  </div>
-    <button class="log">Sign in</button>
-    
-  </div>
-</div>
+            <div>
+              <button className="reg">Sign up</button>
+              <div className="row center">
+                              <div className="row signin--or">
+                                <span>or</span>
+                              </div>
+                            </div>
+              <button onClick={() => navigate("/login")} className="log">Login</button>
+              
+            </div>
+          </div>
                   </section>
             
                   <section className="showcase column center">
