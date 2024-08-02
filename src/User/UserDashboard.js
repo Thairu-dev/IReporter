@@ -9,7 +9,7 @@ const UserDashboard = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://127.0.0.1:5555/check_session', {
+        fetch('https://ireporter-server.onrender.com/check_session', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
