@@ -20,17 +20,17 @@ code {
 
 hr.dash {
   width: 10%;
-  border: 1px inset var(--primary-color);
+  border: 1px inset #8E24AA;
   border-radius: 2px;
 }
 
 .signup--form p {
-  margin-bottom: 1.6rem;
+  margin-bottom: 1rem;
   text-align: center;
 }
 
 .signup--form p.hint {
-  font-size: 1.4em;
+  font-size: 1em;
   margin-bottom: 0;
   
 }
@@ -47,37 +47,37 @@ h2 {
 }
 
 .signin--form input,
-.signup--form input,
-.home--signup--form input {
+.signup--form input input {
   width: 100%;
-  border-radius: 2px;
+  /* border-radius: 5px; */
   border: 1px solid #555;
-  background: var(--lightgray);
-  color: var(--gray80);
-  font-size: 1.4rem;
-  padding: 1rem;
-  margin: 0;
+  background: aliceblue;
+  color: black;
+  font-size: 1rem;
+  padding: 12px 20px;
+  margin: 8px;
   transition: all 0.5s;
+  
 }
 
 .icon {
-  background: aqua;
-  min-width: 45px;
+  background: #8E24AA;
+  min-width: 40px;
   color: white;
   text-align: center;
-  font-size: 2rem;
-  line-height: 2;
-  border-radius: 0 2px 2px 0;
+  font-size: 1.1rem;
+  line-height: 1;
+  /* border-radius: 0 2px 2px 0; */
   border: 1px solid #8E24AA;
   border-left: 0;
   cursor: pointer;
   opacity: 0.8;
+  padding-top: 10px;
 }
 
 
 .signin--form input[type=password],
-.signup--form input[type=password],
-.home--signup--form input[type=password] {
+.signup--form input[type=password] input {
   border-right: 0;
   border-radius: 2px 0 0 2px;
 }
@@ -96,7 +96,7 @@ h2 {
 }
 .signin--or span {
   font-family: inherit;
-  font-size: 1.6rem;
+  font-size: 1rem;
   text-transform: uppercase;
   color: #424242;
   padding: 0 1.28rem;
@@ -109,12 +109,6 @@ h2 {
   border: 1px inset #aaa;
 }
 
-.input-wrapper {
-  display: flex;
-  width: 65%;
-  margin-bottom: 1rem;
-  
-}
 
 section.sign.in.column.center { 
 position: relative;
@@ -123,7 +117,7 @@ height: 100vh;
 overflow: hidden;
 /* background: #1a1a1a; */
 background: aliceblue;
-max-width: 30%;
+max-width: 32%;
 box-shadow: 10px 10px 8px 10px #d1e3fc;
 
 }
@@ -162,7 +156,7 @@ section {
 
 p {
   position: relative;
-  top: 30px;
+  top: 3px;
 }
 
 p a {
@@ -183,8 +177,8 @@ button {
 }
 
 .reg {
-  color: #8E24AA;
-  /* background-color: aqua; */
+  color: white;
+  background-color: #8E24AA;
   border: 1px solid rgba(104, 85, 224, 1);
 }
 
@@ -192,6 +186,7 @@ button {
   color: #8E24AA;
   /* background-color: rgba(255, 255, 255, 1); */
   border: 1px solid rgba(104, 85, 224, 1);
+  align-items: center;
 }
 
 button:hover {
@@ -211,7 +206,7 @@ input {
     transition: all 0.5s;
     background: aliceblue;
 }
-showcase {
+.showcase {
   flex: 1;
   height: 100vh;
 }
@@ -245,32 +240,43 @@ h4 {
 .primary-text{
   color: #8E24AA;
 }
-/* input[type=text],
-input[type=email],
-input[type=password],
-select {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
+.signin--links a {
+  display: block;
+  color: black;
+  text-decoration: none;
+  margin-bottom: 1rem;
   font-family: inherit;
-  font-size: 1.6rem;
-  border: 1px solid var(--gray80);
-  border-radius: 0.4rem;
-} */
+  font-size: 1rem;
+  text-align: center;
+  text-transform: capitalize;
+  padding-top: 10px;
+  
+}
+form {
+  text-align: center;
+}
+.home-icon *, .home-icon::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
-/* .signin {
-  position: relative;
-  flex: 1;
-  height: 100vh;
+.home-icon::before {
+  content: '';
+  background: #8E24AA;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
   overflow: hidden;
 }
-.center {
-  align-items: center;
-  justify-content: center;
+
+.home-icon i.fas {
+  text-decoration: none;
+  color: white;
+  padding: 0.5rem;
+  font-size: 1.8rem;
 }
-.column {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
-  flex: 1;
+/* label{
+  float: left;
 } */
