@@ -65,18 +65,7 @@ import PasswordInput from './Inputs/PasswordInputs';
           onChange={event => handleFieldChange(event)}
         />
       </div>
-      <div className="input-wrapper">
-        <input
-          type="text"
-          name="phoneNumber"
-          id="phonenumber"
-          placeholder="Phone number"
-          minLength="11"
-          required
-          onChange={event => handleFieldChange(event)}
-        />
-      </div>
-      <div className="input-wrapper">
+            <div className="input-wrapper">
         <input
           type="email"
           name="email"
