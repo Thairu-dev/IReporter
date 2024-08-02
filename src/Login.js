@@ -42,7 +42,7 @@ const Login = () => {
                     Reporter
                   </h2>
             
-            <form onSubmit={handleSubmit}>
+            <form className='signup--form' onSubmit={handleSubmit}>
                 <div>
                     <label>Email</label>
                     <input
@@ -71,8 +71,7 @@ const Login = () => {
             </form>
             
             <div>
-            {/* {error && <p className="error">{error}</p>} */}
-            {/* <button type='submit' class="log">Login in</button>  */}
+            
             <br></br>
                                 <div className="signin--links">
                                     <a href="#!">Forgot Password</a>
@@ -83,7 +82,7 @@ const Login = () => {
                             <span>or</span>
                             </div>
                         </div>
-            <button onClick={() => navigate("/sign-up")} class="reg">Create account</button>
+            <button onClick={() => navigate("/sign-up")} class="reg">Sign up</button>
             
              </div> 
        
