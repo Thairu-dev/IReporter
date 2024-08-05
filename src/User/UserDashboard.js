@@ -42,7 +42,7 @@ const UserDashboard = () => {
 
     return (
         <div>
-            
+
             <h2>Welcome, {userData.name}</h2>
             <button onClick={handleLogout}>Logout</button>
             <div>

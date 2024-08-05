@@ -60,7 +60,7 @@ h2 {
   
 }
 
-.icon {
+.iconn {
   background: #8E24AA;
   min-width: 40px;
   color: white;
@@ -196,7 +196,7 @@ button:hover {
   background-color: #8E24AA;
 }
 input {
-    height: 1vh;
+    height: 3vh;
     width: 100%;
     border-radius: 2px;
     border: 1px solid #555;
@@ -277,31 +277,41 @@ form {
   padding: 0.5rem;
   font-size: 1.8rem;
 }
-/* label{
-  float: left;
-} */
-.card {
-  width: 300px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-.card-img {
-  width: 100%;
-  border-radius: 5px;
-}
-.card-h2{
-  color: #ccc;
 
-}
-.card-p{
-  margin: 5px 0;
-}
 .cards-container{
   display: flex;
   flex-direction: row;
   gap: 2%;
   align-items: baseline;
+  flex-wrap: wrap;
+  justify-content: center;
   
   
 }
+
+form{
+  /* max-width: 50vh; */
+  width: 50vh;
+  /* height: 50vh; */
+  margin: 0 auto;
+
+}
+
+.redflags-container{
+  height: 100vh;
+}
+.redflags-form-section{
+  display: flex;
+}
+.card-btn{
+  display: flex;
+  text-align: center;
+}
+.delete-btn{
+  color: red;
+}
+/* .report-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+} */

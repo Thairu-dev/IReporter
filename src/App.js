@@ -22,8 +22,8 @@ const App = () => {
                     <Route path="/admin-dashboard" element={<ProtectedRoute element={AdminDashboard} />} />
                     <Route path="/" element={<Home/>} />
                     <Route path="/sign-up" element={<SignupForm />} />
-                    {/* <Route path="/redflags" element={<ProtectedRoute element={<RedFlagsCard/>} />} /> */}
-                    <Route path="/redflags" element={<RedFlagsCard/>} />
+                    <Route path="/redflags" element={<ProtectedRoute element={RedFlagsCard} />} />
+                    
                 </Routes>
             </Router>
         </AuthProvider>
