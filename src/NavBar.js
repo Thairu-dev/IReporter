@@ -50,7 +50,7 @@ const Navbar = () => {
                 <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
               </li>
               <li className="navbar-link">
-                <NavLink to="/all-reports" className={({ isActive }) => isActive ? "active" : ""}>All Reports</NavLink>
+                <NavLink to="/redflags" className={({ isActive }) => isActive ? "active" : ""}>Redflags</NavLink>
               </li>
               <li className="navbar-link">
                 <NavLink to="/sign-up" className={({ isActive }) => isActive ? "active" : ""}>Sign Up</NavLink>

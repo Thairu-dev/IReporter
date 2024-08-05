@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
 const AdminDashboard = () => {
-    const { user, logout } = useAuth();
+    const { logout } = useAuth();
     const [interventions, setInterventions] = useState([]);
     const [redflags, setRedflags] = useState([]);
 

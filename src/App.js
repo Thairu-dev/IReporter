@@ -8,6 +8,7 @@ import ProtectedRoute from './ProtectedRoute'
 import Home from './Home'; 
 import SignupForm from './SignUpForm';
 import Navbar from './NavBar';
+import RedFlagsCard from './RedFlagsCard';
 
 
 const App = () => {
@@ -21,7 +22,7 @@ const App = () => {
                     <Route path="/admin-dashboard" element={<ProtectedRoute element={AdminDashboard} />} />
                     <Route path="/" element={<Home/>} />
                     <Route path="/sign-up" element={<SignupForm />} />
-
+                    <Route path="/redflags" element={<RedFlagsCard />} />
                 </Routes>
             </Router>
         </AuthProvider>
