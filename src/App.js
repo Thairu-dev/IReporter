@@ -8,7 +8,7 @@ import ProtectedRoute from './ProtectedRoute'
 import Home from './Home'; 
 import SignupForm from './SignUpForm';
 import Navbar from './NavBar';
-
+import RedflagsPage from './RedFlags';
 
 const App = () => {
     return (
@@ -21,6 +21,8 @@ const App = () => {
                     <Route path="/admin-dashboard" element={<ProtectedRoute element={AdminDashboard} />} />
                     <Route path="/" element={<Home/>} />
                     <Route path="/sign-up" element={<SignupForm />} />
+                    <Route path="/admin-redflags" element={<RedflagsPage/>} />
+                    <Route path="/admin-interventions" element={<RedflagsPage/>} />
 
                 </Routes>
             </Router>

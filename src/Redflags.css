@@ -1,0 +1,90 @@
+.reports-page {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .sidebar {
+    width: 300px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-right: 1px solid #ddd;
+  }
+  
+  .sidebar h2 {
+    margin-top: 0;
+  }
+  
+  .filters {
+    margin-bottom: 20px;
+  }
+  
+  .filters label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .filters select {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 15px;
+  }
+  
+  .report-list {
+    overflow-y: auto;
+    height: calc(100vh - 200px); /* Adjust based on your layout */
+  }
+  
+  .report {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .report-header {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .report-title {
+    font-weight: bold;
+  }
+  
+  .report-time {
+    color: #666;
+    font-size: 0.9em;
+  }
+  
+  .report-status {
+    margin-top: 5px;
+    padding: 3px 5px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    text-align: center;
+    width: fit-content;
+  }
+  
+  .report-status.resolved {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .report-status.draft{
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .report-status.rejected {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .map {
+    flex: 1;
+    position: relative;
+  }
+  
+  .map img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
