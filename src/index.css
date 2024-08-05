@@ -280,3 +280,28 @@ form {
 /* label{
   float: left;
 } */
+.card {
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.card-img {
+  width: 100%;
+  border-radius: 5px;
+}
+.card-h2{
+  color: #ccc;
+
+}
+.card-p{
+  margin: 5px 0;
+}
+.cards-container{
+  display: flex;
+  flex-direction: row;
+  gap: 2%;
+  align-items: baseline;
+  
+  
+}

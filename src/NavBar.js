@@ -30,6 +30,12 @@ const Navbar = () => {
         <ul className={`navbar-menu ${menuOpen ? 'open' : ''}`}>
           {user ? (
             <>
+             <li className="navbar-link">
+                <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
+              </li>
+              <li className="navbar-link">
+                <NavLink to="/redflags" className={({ isActive }) => isActive ? "active" : ""}>Redflags</NavLink>
+              </li>
               {user.role === 'admin' && (
                 <li className="navbar-link">
                   <NavLink to="/admin-dashboard" className={({ isActive }) => isActive ? "active" : ""}>Admin Dashboard</NavLink>
@@ -43,6 +49,7 @@ const Navbar = () => {
               <li className="navbar-link">
                 <NavLink to="/" onClick={logout} className={({ isActive }) => isActive ? "active" : ""}>Logout</NavLink>
               </li>
+              
             </>
           ) : (
             <>
