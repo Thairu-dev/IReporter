@@ -6,8 +6,8 @@ import AdminInterventions from './Admin/AdminDashboard';
 
 const InterventionsPage = () => {
   const [reports, setReports] = useState([]);
-  const [sortOption, setSortOption] = useState('status'); // Default sorting option
-  const [selectedOption, setSelectedOption] = useState('reports');
+  const [sortOption, /*setSortOption*/] = useState('status'); // Default sorting option
+  //const [selectedOption, setSelectedOption] = useState('reports');
   const navigate = useNavigate(); // Initialize useNavigate hook
 
   useEffect(() => {
