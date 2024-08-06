@@ -3,7 +3,7 @@ import React from 'react'
 export default function AddRedFlag() {
   return (
     <div>
-         <form>
+         <form  >
         
         <label for="title">Title</label>
         <input type='text' id='title' name='title'></input>
