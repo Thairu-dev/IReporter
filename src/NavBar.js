@@ -33,15 +33,7 @@ const Navbar = () => {
              <li className="navbar-link">
                 <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
               </li>
-<<<<<<< HEAD
-              <li className="navbar-link">
-                <NavLink to="/redflags" className={({ isActive }) => isActive ? "active" : ""}>Redflags</NavLink>
-              </li>
-              <li className="navbar-link">
-                <NavLink to="/interventions" className={({ isActive }) => isActive ? "active" : ""}>Interventions</NavLink>
-              </li>
-=======
->>>>>>> f9068dc0d17bd66c5998ecb2700a984f6892930a
+
               {user.role === 'admin' && (
                 <>
                 <li className="navbar-link">
@@ -63,6 +55,9 @@ const Navbar = () => {
                 <li className="navbar-link">
                 <NavLink to="/redflags" className={({ isActive }) => isActive ? "active" : ""}>Redflags</NavLink>
                 </li>
+                <li className="navbar-link">
+                <NavLink to="/interventions" className={({ isActive }) => isActive ? "active" : ""}>Interventions</NavLink>
+              </li>
                 </>
               )}
               <li className="navbar-link">
@@ -75,17 +70,6 @@ const Navbar = () => {
               <li className="navbar-link">
                 <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
               </li>
-<<<<<<< HEAD
-              {/* <li className="navbar-link">
-                <NavLink to="/redflags" className={({ isActive }) => isActive ? "active" : ""}>Redflags</NavLink>
-=======
-              <li className="navbar-link">
-                <NavLink to="/all-reports" className={({ isActive }) => isActive ? "active" : ""}>All Reports</NavLink>
->>>>>>> f9068dc0d17bd66c5998ecb2700a984f6892930a
-              </li>
-              <li className="navbar-link">
-                <NavLink to="/interventions" className={({ isActive }) => isActive ? "active" : ""}>Interventions</NavLink>
-              </li> */}
               <li className="navbar-link">
                 <NavLink to="/sign-up" className={({ isActive }) => isActive ? "active" : ""}>Sign Up</NavLink>
               </li>
