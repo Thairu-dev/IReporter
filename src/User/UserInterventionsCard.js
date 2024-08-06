@@ -4,7 +4,7 @@ import "./Userspinner.css"
 
 
 const InterventionsCard = () => {
-    const [userData, setUserData] = useState(null);
+    const [userData, setUserData] = useState({intervention: []});
     const [error, setError] = useState('');
    
 
@@ -38,8 +38,8 @@ const InterventionsCard = () => {
       })
       .then(response => response.json())
       .then (() => {
-        const updatedInterventions = userData.interventions.filter(intervention => intervention.id !== intervId);
-        setUserData(prevdata => ({...prevdata, interventions: updatedInterventions}));
+        const updatedInterventions = userData.intervention.filter(intervention => intervention.id !== intervId);
+        setUserData(prevdata => ({...prevdata, intervention: updatedInterventions}));
       })
       .catch(() => setError("An error occurred while deleting the redflag"));
       console.log(intervId);
@@ -50,7 +50,7 @@ const InterventionsCard = () => {
         return <p className="error">{error}</p>;
     }
 
-    if (!userData.interventions.length) {
+    if (!userData.intervention.length) {
       return (
         <div className="spinner-container">
             <div className="spinner"></div>
@@ -58,7 +58,7 @@ const InterventionsCard = () => {
     );
     }
     
-    // console.log(newUserData);
+    // console.log(userData.intervention);
     return (
       <div className='interventions-container'>
       
