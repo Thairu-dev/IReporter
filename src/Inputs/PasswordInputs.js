@@ -29,7 +29,7 @@ const PasswordInput = ({
           minLength={minLength}
         />
         <i
-          className={`fas ${showPassword ? 'fa-eye' : 'fa-eye-slash'} icon`}
+          className={`fas ${showPassword ? 'fa-eye' : 'fa-eye-slash'} iconn`}
           onClick={() => setShowPassword(!showPassword)}
         />
       </div>
