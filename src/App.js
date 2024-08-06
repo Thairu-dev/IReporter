@@ -9,6 +9,8 @@ import Home from './Home';
 import SignupForm from './SignUpForm';
 import Navbar from './NavBar';
 import RedFlagsCard from './RedFlagsCard';
+import AdminRedflags from './Admin/AdminRedflags';
+import AdminInterventions from './Admin/AdminInterventions';
 
 
 const App = () => {
@@ -23,6 +25,8 @@ const App = () => {
                     <Route path="/" element={<Home/>} />
                     <Route path="/sign-up" element={<SignupForm />} />
                     <Route path="/redflags" element={<ProtectedRoute element={RedFlagsCard} />} />
+                    <Route path="/adminredflags" element={<ProtectedRoute element={AdminRedflags} />} />
+                    <Route path="/admininterventions" element={<ProtectedRoute element={AdminInterventions} />} />
                     
                 </Routes>
             </Router>
