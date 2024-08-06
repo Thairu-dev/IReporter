@@ -65,7 +65,7 @@ const AdminRedflags = () => {
             </div>
 
             <h2>REDFLAGS</h2>
-            <button className="report-btn"> Report a Redflag</button>
+        
             <div className='cards-container'>
                 {filteredRedflags.map(redflag => (
                     <div key={redflag.id} className="ui card">
