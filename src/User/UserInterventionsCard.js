@@ -58,21 +58,19 @@ const InterventionsCard = () => {
     );
     }
     
-    // console.log(userData.intervention);
+    console.log(userData.intervention);
     return (
       <div className='interventions-container'>
       
         <h2>Interventions</h2>
           <button className="report-btn"> Report an intervention</button>
             <div className='cards-container'>
-            {userData?.intervention?.length > 0 ? (
-                    userData.intervention.map((interv) => (
-                      
+            {/* {userData?.intervention?.length > 0 ? ( */}
+                    {userData.intervention.map((interv) => (
                       <div key={interv.id} className="ui card">
-                        
                         <div className="image"><img src={interv.image} alt={interv.name} /></div>
                         <div className="content">
-                          <div className="header">{interv.redflag}</div>
+                          <div className="header">{interv.intervention}</div>
                           <div className="meta">{interv.date_added}</div>
                           <div className="description">{interv.description}</div>
                           </div>
@@ -93,10 +91,10 @@ const InterventionsCard = () => {
                           </div>
                           </div>
                           
-                    )))
-                    : (
-                        <p>No interventions available.</p>
-                    )}
+                    ))}
+                    {/* // : (
+                    //     <p>No interventions available.</p>
+                    // )} */}
 
             </div>
 
