@@ -42,37 +42,66 @@ const UserDashboard = () => {
 
     return (
         <div>
-
             <h2>Welcome, {userData.name}</h2>
             <button onClick={handleLogout}>Logout</button>
-            <div>
-                <h3>Interventions</h3>
-                <ul>
-                    {userData.intervention.map((interv) => (
-                        <li key={interv.id}>
-                            <h4>{interv.intervention}</h4>
-                            <p>{interv.description}</p>
-                            <p>Status: {interv.status}</p>
-                            <p>Geolocation: {interv.geolocation}</p>
-                            <p>Date Added: {interv.date_added}</p>
-                        </li>
+            <div className='interventions-container'>
+            <h2>Interventions</h2>
+                <div className='cards-container'>
+                {userData.intervention.map((interv) => (
+                    <div key={interv.id} className="ui card"> 
+                         <div className="image"><img src={interv.image}/></div>
+                        <div className="content">
+                          <div className="header">{interv.intervention}</div>
+                          <div className="meta">{interv.date_added}</div>
+                          <div className="description">{interv.description}</div>
+                          </div>
+                          <div className="extra content">Status : {interv.status} </div>
+                          <div className="extra content">Geolocation : {interv.geolocation} </div>
+                    
+                    </div>
+                        
                     ))}
+
+                </div>
+            </div>
+            
+            <div>
+                
+                <ul>
+                    
                 </ul>
             </div>
-            <div>
-                <h3>Redflags</h3>
-                <ul>
+
+            <div className='redflags-container'>
+      
+                 <h2>REDFLAGS</h2>
+                    {/* <button className="report-btn"> Report a Reflag</button> */}
+                <div className='cards-container'>
+              
                     {userData.redflags.map((redflg) => (
-                        <li key={redflg.id}>
-                            <h4>{redflg.redflag}</h4>
-                            <p>{redflg.description}</p>
-                            <p>Status: {redflg.status}</p>
-                            <p>Geolocation: {redflg.geolocation}</p>
-                            <p>Date Added: {redflg.date_added}</p>
-                        </li>
+                      
+                      <div key={redflg.id} className="ui card">
+                        
+                        <div className="image"><img src={redflg.image}/></div>
+                        <div className="content">
+                          <div className="header">{redflg.redflag}</div>
+                          <div className="meta">{redflg.date_added}</div>
+                          <div className="description">{redflg.description}</div>
+                          </div>
+                          <div className="extra content">Status : {redflg.status} </div>
+                          <div className="extra content">Geolocation : {redflg.geolocation} </div>
+                          <div className='card-btn'>
+                            {/* <button className='edit-btn'>Edit</button> */}
+                            {/* {redflg.status === "draft" ? (<button>Edit</button>):(<button disable>edit</button>)} */}
+                            {/* <button onClick={() => handleDelete(redflg.id)} className='delete-btn'>Delete</button> */}
+                          </div>
+                          </div>
+                          
                     ))}
-                </ul>
+                
             </div>
+
+      </div>
         </div>
     );
 };

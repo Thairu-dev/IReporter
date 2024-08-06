@@ -58,12 +58,14 @@ const RedFlagsCard = () => {
     return (
       <div className='redflags-container'>
       
-      <h2>REDFLAGS</h2>
-      <button className="report-btn"> Report a Reflag</button>
+        <h2>REDFLAGS</h2>
+          <button className="report-btn"> Report a Reflag</button>
             <div className='cards-container'>
               
                     {userData.redflags.map((redflg) => (
-                      <div className="ui card">
+                      
+                      <div key={redflg.id} className="ui card">
+                        
                         <div className="image"><img src={redflg.image}/></div>
                         <div className="content">
                           <div className="header">{redflg.redflag}</div>
