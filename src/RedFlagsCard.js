@@ -66,7 +66,7 @@ const RedFlagsCard = () => {
                       
                       <div key={redflg.id} className="ui card">
                         
-                        <div className="image"><img src={redflg.image} alt='Redflag image' /></div>
+                        <div className="image"><img src={redflg.image} alt={redflg.name} /></div>
                         <div className="content">
                           <div className="header">{redflg.redflag}</div>
                           <div className="meta">{redflg.date_added}</div>
