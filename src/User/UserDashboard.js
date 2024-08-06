@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import "../Spinner.css"
 
 const UserDashboard = () => {
     const { logout } = useAuth();
@@ -37,7 +38,11 @@ const UserDashboard = () => {
     }
 
     if (!userData) {
-        return <p>Loading...</p>;
+        return (
+            <div className="spinner-container">
+                <div className="spinner"></div>
+            </div>
+        );
     }
 
     return (

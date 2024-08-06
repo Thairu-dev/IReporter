@@ -9,7 +9,12 @@ import Home from './Home';
 import SignupForm from './SignUpForm';
 import Navbar from './NavBar';
 import RedFlagsCard from './RedFlagsCard';
+<<<<<<< HEAD
 import InterventionsCard from './InterventionsCard';
+=======
+import AdminRedflags from './Admin/AdminRedflags';
+import AdminInterventions from './Admin/AdminInterventions';
+>>>>>>> f9068dc0d17bd66c5998ecb2700a984f6892930a
 
 
 const App = () => {
@@ -24,8 +29,13 @@ const App = () => {
                     <Route path="/" element={<Home/>} />
                     <Route path="/sign-up" element={<SignupForm />} />
                     <Route path="/redflags" element={<ProtectedRoute element={RedFlagsCard} />} />
+<<<<<<< HEAD
                     <Route path="/interventions" element={<ProtectedRoute element={InterventionsCard} />} />
                     {/* <Route path='/interventions' element={<InterventionsCard/>}/> */}
+=======
+                    <Route path="/adminredflags" element={<ProtectedRoute element={AdminRedflags} />} />
+                    <Route path="/admininterventions" element={<ProtectedRoute element={AdminInterventions} />} />
+>>>>>>> f9068dc0d17bd66c5998ecb2700a984f6892930a
                     
                 </Routes>
             </Router>
