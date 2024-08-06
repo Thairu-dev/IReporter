@@ -36,6 +36,9 @@ const Navbar = () => {
               <li className="navbar-link">
                 <NavLink to="/redflags" className={({ isActive }) => isActive ? "active" : ""}>Redflags</NavLink>
               </li>
+              <li className="navbar-link">
+                <NavLink to="/interventions" className={({ isActive }) => isActive ? "active" : ""}>Interventions</NavLink>
+              </li>
               {user.role === 'admin' && (
                 <li className="navbar-link">
                   <NavLink to="/admin-dashboard" className={({ isActive }) => isActive ? "active" : ""}>Admin Dashboard</NavLink>
@@ -56,9 +59,12 @@ const Navbar = () => {
               <li className="navbar-link">
                 <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
               </li>
-              <li className="navbar-link">
+              {/* <li className="navbar-link">
                 <NavLink to="/redflags" className={({ isActive }) => isActive ? "active" : ""}>Redflags</NavLink>
               </li>
+              <li className="navbar-link">
+                <NavLink to="/interventions" className={({ isActive }) => isActive ? "active" : ""}>Interventions</NavLink>
+              </li> */}
               <li className="navbar-link">
                 <NavLink to="/sign-up" className={({ isActive }) => isActive ? "active" : ""}>Sign Up</NavLink>
               </li>
