@@ -79,9 +79,17 @@ const InterventionsCard = () => {
                           <div className="extra content">Status : {interv.status} </div>
                           <div className="extra content">Geolocation : {interv.geolocation} </div>
                           <div className='card-btn'>
-                            {/* <button className='edit-btn'>Edit</button> */}
-                            {interv.status === "draft" ? (<button>Edit</button>):(<button disable>edit</button>)}
-                            <button onClick={() => handleDelete(interv.id)} className='delete-btn'>Delete</button>
+                            {interv.status === "draft" ? (
+                              <>
+                              <button>Update</button>
+                              <button onClick={() => handleDelete(interv.id)} className='delete-btn'>Delete</button>
+                              </>
+                              ):(
+                                <>
+                              <button disabled>Update</button>
+                              <button disabled>Delete</button>
+                              </>
+                            )}
                           </div>
                           </div>
                           
