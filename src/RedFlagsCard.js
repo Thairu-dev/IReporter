@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import "./Spinner.css"
+import "./Spinner.css";
+import UpdateForm from './UpdateForm';
+import Modal from './Modal'; 
+
+
 const RedFlagsCard = () => {
     const [userData, setUserData] = useState({ redflags: [] });
     const [error, setError] = useState('');
+    const [isEditing, setIsEditing] = useState(false);
+    const [currentRedflag, setCurrentRedflag] = useState(null);
 
     useEffect(() => {
         fetch('https://ireporter-server.onrender.com/check_session', {
@@ -23,13 +29,13 @@ const RedFlagsCard = () => {
         .catch(() => setError('An error occurred'));
     }, []);
 
-    function handleDelete(redflagId) {
+    const handleDelete = (redflagId) => {
         fetch(`https://ireporter-server.onrender.com/redflags/${redflagId}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
                 'Content-Type': 'application/json'
-            }  
+            }
         })
         .then(response => response.json())
         .then(() => {
@@ -37,7 +43,47 @@ const RedFlagsCard = () => {
             setUserData(prevData => ({ ...prevData, redflags: updatedRedflags }));
         })
         .catch(() => setError("An error occurred while deleting the redflag"));
-    }
+    };
+
+    const handleEdit = (redflag) => {
+        setCurrentRedflag(redflag);
+        setIsEditing(true);
+    };
+
+    const handleClose = () => {
+        setIsEditing(false);
+        setCurrentRedflag(null);
+    };
+
+    const handleSave = (formData) => {
+        const form = new FormData();
+        form.append('redflag', formData.redflag);
+        form.append('description', formData.description);
+        form.append('geolocation', formData.geolocation);
+        if (formData.image) {
+            form.append('image', formData.image);
+        }
+        if (formData.video) {
+            form.append('video', formData.video);
+        }
+
+        fetch(`https://ireporter-server.onrender.com/redflags/${currentRedflag.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+            },
+            body: form
+        })
+        .then(response => response.json())
+        .then(updatedRedflag => {
+            const updatedRedflags = userData.redflags.map(redflag => 
+                redflag.id === updatedRedflag.id ? updatedRedflag : redflag
+            );
+            setUserData(prevData => ({ ...prevData, redflags: updatedRedflags }));
+            handleClose();
+        })
+        .catch(() => setError('An error occurred while saving the redflag'));
+    };
 
     if (error) {
         return <p className="error">{error}</p>;
@@ -58,7 +104,9 @@ const RedFlagsCard = () => {
             <div className='cards-container'>
                 {userData.redflags.map((redflg) => (
                     <div key={redflg.id} className="ui card">
-                        <div className="image"><img src={redflg.image} alt={redflg.redflag} /></div>
+                        <div className="image">
+                            <img src={redflg.image || "https://via.placeholder.com/150"} alt={redflg.redflag} />
+                        </div>
                         <div className="content">
                             <div className="header">{redflg.redflag}</div>
                             <div className="meta">{redflg.date_added}</div>
@@ -69,19 +117,26 @@ const RedFlagsCard = () => {
                         <div className='card-btn'>
                             {redflg.status === "draft" ? (
                                 <>
-                                    <button>Edit</button>
+                                    <button onClick={() => handleEdit(redflg)}>Edit</button>
                                     <button onClick={() => handleDelete(redflg.id)} className='delete-btn'>Delete</button>
                                 </>
                             ) : (
                                 <>
                                     <button disabled>Edit</button>
-                                    <button disabled className='delete-btn'>Delete</button>
+                                    <button disabled>Delete</button>
                                 </>
                             )}
                         </div>
                     </div>
                 ))}
             </div>
+            <Modal isOpen={isEditing} onClose={handleClose}>
+                <UpdateForm
+                    redflag={currentRedflag}
+                    handleClose={handleClose}
+                    handleSave={handleSave}
+                />
+            </Modal>
         </div>
     );
 };

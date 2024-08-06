@@ -64,7 +64,7 @@ const AdminInterventions = () => {
             <div className='cards-container'>
                 {filteredInterventions.map(intervention => (
                     <div key={intervention.id} className="ui card">
-                        <div className="image"><img src={intervention.image} alt={intervention.intervention} /></div>
+                        <div className="image"><img src={intervention.image  || "https://via.placeholder.com/150"} alt={intervention.intervention} /></div>
                         <div className="content">
                             <div className="header">{intervention.intervention}</div>
                             <div className="meta">{intervention.date_added}</div>
@@ -80,8 +80,8 @@ const AdminInterventions = () => {
                                         onChange={(e) => handleStatusChange(e, intervention.id)}
                                         onBlur={() => updateStatus(intervention.id, statusUpdate[intervention.id] || intervention.status)}
                                     >
-                                        <option value="reported">Reported</option>
-                                        <option value="under_review">Under Review</option>
+                                        <option value="rejected">Rejected</option>
+                                        <option value="under_investigation">under investigation</option>
                                         <option value="resolved">Resolved</option>
                                     </select>
                                     <button 

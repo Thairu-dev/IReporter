@@ -64,7 +64,7 @@ const AdminRedflags = () => {
             <div className='cards-container'>
                 {filteredRedflags.map(redflag => (
                     <div key={redflag.id} className="ui card">
-                        <div className="image"><img src={redflag.image} alt={redflag.redflag} /></div>
+                        <div className="image"><img src={redflag.image || "https://via.placeholder.com/150"} alt={redflag.redflag} /></div>
                         <div className="content">
                             <div className="header">{redflag.redflag}</div>
                             <div className="meta">{redflag.date_added}</div>
@@ -80,8 +80,8 @@ const AdminRedflags = () => {
                                         onChange={(e) => handleStatusChange(e, redflag.id)}
                                         onBlur={() => updateStatus(redflag.id, statusUpdate[redflag.id] || redflag.status)}
                                     >
-                                        <option value="reported">Reported</option>
-                                        <option value="under_review">Under Review</option>
+                                        <option value="rejected">Rejected</option>
+                                        <option value="under_investigation">under investigation</option>
                                         <option value="resolved">Resolved</option>
                                     </select>
                                     <button 
