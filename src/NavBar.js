@@ -30,19 +30,41 @@ const Navbar = () => {
         <ul className={`navbar-menu ${menuOpen ? 'open' : ''}`}>
           {user ? (
             <>
+             <li className="navbar-link">
+                <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
+              </li>
+              
+
               {user.role === 'admin' && (
+                <>
                 <li className="navbar-link">
                   <NavLink to="/admin-dashboard" className={({ isActive }) => isActive ? "active" : ""}>Admin Dashboard</NavLink>
                 </li>
+                <li className="navbar-link">
+                <NavLink to="/adminredflags" className={({ isActive }) => isActive ? "active" : ""}>Redflags</NavLink>
+              </li>
+              <li className="navbar-link">
+                <NavLink to="/admininterventions" className={({ isActive }) => isActive ? "active" : ""}>interventions</NavLink>
+              </li>
+                </>
               )}
               {user.role === 'user' && (
+                <>
                 <li className="navbar-link">
                   <NavLink to="/user-dashboard" className={({ isActive }) => isActive ? "active" : ""}>User Dashboard</NavLink>
                 </li>
+                <li className="navbar-link">
+                <NavLink to="/redflags" className={({ isActive }) => isActive ? "active" : ""}>Redflags</NavLink>
+                </li>
+                <li className="navbar-link">
+                <NavLink to="/interventions" className={({ isActive }) => isActive ? "active" : ""}>Interventions</NavLink>
+              </li>
+                </>
               )}
               <li className="navbar-link">
                 <NavLink to="/" onClick={logout} className={({ isActive }) => isActive ? "active" : ""}>Logout</NavLink>
-              </li>
+              </li> 
+              
             </>
           ) : (
             <>
