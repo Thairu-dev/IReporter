@@ -63,7 +63,6 @@ const UserDashboard = () => {
         </ul>
         </div>
         <div>
-<<<<<<< HEAD
 
             <h2>Welcome, {userData.name}</h2>
             <button onClick={handleLogout}>Logout</button>
@@ -82,15 +81,11 @@ const UserDashboard = () => {
                 </ul>
             </div>
             <div>
-                <h3>Redflags</h3>
-                <ul>
-                    {userData.redflags.map((redflg) => (
-=======
+                
+
             <h3>Redflags</h3>
             <ul>
-                {userData?.redflags?.length > 0 ? (
-                    userData.redflags.map((redflg) => (
->>>>>>> bf685e95e2f283128faf72753d14f41842d2b521
+                   { userData.redflags.map((redflg) => (
                         <li key={redflg.id}>
                             <h4>{redflg.redflag}</h4>
                             <p>{redflg.description}</p>
@@ -98,10 +93,7 @@ const UserDashboard = () => {
                             <p>Geolocation: {redflg.geolocation}</p>
                             <p>Date Added: {redflg.date_added}</p>
                         </li>
-                    ))
-                ) : (
-                    <p>No redflags available.</p>
-                )}
+                    ))}
             </ul>
         </div>
     </div>
