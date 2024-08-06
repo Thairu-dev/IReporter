@@ -55,8 +55,8 @@ function Map() {
             icon={customIcon}
           >
             <Popup>
-              <h3>{intervention.title}</h3>
-              <p>{intervention.description}</p>
+              <h3>Title:{intervention.intervention}</h3>
+              <p>Description:{intervention.description}</p>
               <p>Status: {intervention.status}</p>
             </Popup>
           </Marker>

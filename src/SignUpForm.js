@@ -10,6 +10,7 @@ const SignUpForm = () => {
         email: '',
         password: '',
         passwordConfirmation: '',
+        role: 'User', // Default role
     };
 
     const [formData, setFormData] = useState(initialState);
@@ -28,9 +29,9 @@ const SignUpForm = () => {
 
     const handleSignup = (e) => {
         e.preventDefault();
-        const { firstname, lastname, email, password } = formData;
+        const { firstname, lastname, email, password, role } = formData;
         const name = `${firstname} ${lastname}`;
-        signup(email, password, name)
+        signup(email, password, name, role) // Include role in the signup call
             .then(() => {
                 setStep(2); // Move to verification step on successful signup
                 setError(''); // Clear any previous errors
@@ -114,6 +115,18 @@ const SignUpForm = () => {
                                 placeholder="Repeat password"
                                 handleOnChange={handleFieldChange}
                             />
+                            <div className="input-wrapper">
+                                <select
+                                    name="role"
+                                    value={formData.role}
+                                    onChange={handleFieldChange}
+                                    required
+                                >
+                                    <option value="User">User</option>
+                                    <option value="Admin">Admin</option>
+                                    
+                                </select>
+                            </div>
                             <div className="container">
                                 <div>
                                     <button className="reg" type="submit">Sign up</button>

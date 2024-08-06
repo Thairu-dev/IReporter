@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './Redflags.css'; // Make sure to create a CSS file to style the component
 import Map from './InterventionsMap';
-
+import { useNavigate } from 'react-router-dom';
 const RedflagsPage = () => {
   const [reports, setReports] = useState([]);
   const [sortOption, setSortOption] = useState('status'); // Default sorting option
-
+  const navigate = useNavigate(); // Initialize useNavigate hook
   useEffect(() => {
     // Fetch reports data from the API
     fetch("https://ireporter-server.onrender.com/redflags")
@@ -31,40 +31,30 @@ const RedflagsPage = () => {
     });
   };
 
-  // Handle sorting option change
-  const handleSortChange = (event) => {
-    setSortOption(event.target.value);
-  };
+  
 
   // Sorted reports
   const sortedReports = sortReports(reports, sortOption);
 
+
+  // Function to handle report click
+  const handleReportClick = (reportId) => {
+    // Navigate to a different page with reportId in the URL
+    navigate(/* <AdminRedflags/>*/);
+  };
   return (
     <div className="reports-page">
       <div className="sidebar">
         <h2>Admin Dashboard</h2>
-        <div className="filters">
-          <label htmlFor="reportFilter">Reports About</label>
-          <select id="reportFilter">
-            <option value="everything">Everything</option>
-            {/* Add more filter options as needed */}
-          </select>
-          <label htmlFor="sortBy">Sort by</label>
-          <select id="sortBy" value={sortOption} onChange={handleSortChange}>
-            <option value="status">Status</option>
-            <option value="date">Date</option>
-            {/* Add more sort options as needed */}
-          </select>
-        </div>
         <div className="report-list">
           {sortedReports.map((report) => (
-            <div key={report.id} className="report">
+            <div key={report.id} className="report" onClick={() => handleReportClick()}>
               <div className="report-header">
-                <span className="report-title">{report.redflag}</span>
-                <span className="report-time">{report.date_added}</span>
+                <span className="report-title">Description:{report.redflag}</span>
+                <span className="report-time">Date:{report.date_added}</span>
               </div>
               <div className={`report-status ${report.status.toLowerCase()}`}>
-                {report.status}
+                Status:{report.status}
               </div>
             </div>
           ))}
