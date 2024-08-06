@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../context/AuthContext';
 
 const AdminInterventions = () => {
-    const { logout } = useAuth();
     const [interventions, setInterventions] = useState([]);
-    const [filter, setFilter] = useState('all'); // State for filter
-    const [statusUpdate, setStatusUpdate] = useState({}); // State for status update
+    const [filter, setFilter] = useState('all'); 
+    const [statusUpdate, setStatusUpdate] = useState({});
 
     useEffect(() => {
-        const token = localStorage.getItem('access_token'); // Make sure you use the correct key
+        const token = localStorage.getItem('access_token'); 
 
         fetch('https://ireporter-server.onrender.com/interventions', {
             headers: { Authorization: `Bearer ${token}` }
@@ -51,7 +49,6 @@ const AdminInterventions = () => {
     return (
         <div className='interventions-container'>
             <h1>Admin Dashboard</h1>
-            <button onClick={logout}>Logout</button>
             <div className="filter-container">
                 <label htmlFor="filter">Filter by Status:</label>
                 <select id="filter" onChange={handleFilterChange} value={filter}>

@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../context/AuthContext';
 
 const AdminRedflags = () => {
-    const { logout } = useAuth();
     const [redflags, setRedflags] = useState([]);
-    const [filter, setFilter] = useState('all'); // State for filter
-    const [statusUpdate, setStatusUpdate] = useState({}); // State for status update
+    const [filter, setFilter] = useState('all'); 
+    const [statusUpdate, setStatusUpdate] = useState({}); 
 
     useEffect(() => {
-        const token = localStorage.getItem('access_token'); // Make sure you use the correct key
+        const token = localStorage.getItem('access_token'); 
 
         fetch('https://ireporter-server.onrender.com/redflags', {
             headers: { Authorization: `Bearer ${token}` }
@@ -51,9 +49,6 @@ const AdminRedflags = () => {
     return (
         <div className='redflags-container'>
             <h1>Admin Dashboard</h1>
-            <button onClick={logout}>Logout</button>
-
-            {/* Filter Dropdown */}
             <div className="filter-container">
                 <label htmlFor="filter">Filter by Status:</label>
                 <select id="filter" onChange={handleFilterChange} value={filter}>
@@ -78,7 +73,6 @@ const AdminRedflags = () => {
                         <div className="extra content">Status : {redflag.status}</div>
                         <div className="extra content">Geolocation : {redflag.geolocation}</div>
                         <div className='card-btn'>
-                            {/* Status Update Dropdown */}
                             {redflag.status/*!== 'resolved'*/ && (
                                 <>
                                     <select 
