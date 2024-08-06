@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./Userspinner.css"
 
 
 const RedFlagsCard = () => {
     const [userData, setUserData] = useState({ redflags: [] });
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('https://ireporter-server.onrender.com/check_session', {
@@ -56,7 +58,7 @@ const RedFlagsCard = () => {
     return (
         <div className='redflags-container'>
             <h2>REDFLAGS</h2>
-            <button className="report-btn"> Report a Redflag</button>
+            <button onClick={() => navigate("/addredflag")}className="report-btn"> Report a Redflag</button>
             <div className='cards-container'>
                 {userData.redflags.map((redflg) => (
                     <div key={redflg.id} className="ui card">

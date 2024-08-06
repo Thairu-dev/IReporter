@@ -310,6 +310,15 @@ form{
 .delete-btn{
   color: red;
 }
+input[type=file]{
+  height: 7vh;
+}
+label{
+  text-align: left;
+}
+.submit-button {
+  margin-top: 10px;
+}
 /* .report-btn {
   position: absolute;
   top: 0;
