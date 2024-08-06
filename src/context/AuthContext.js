@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import "../Spinner.css"
 
 const AuthContext = createContext();
 
@@ -9,7 +10,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const token = localStorage.getItem('access_token');
         if (token) {
-            fetch('https://ireporter-server.onrender.com/check_session', { // Ensure this URL is correct
+            fetch('https://ireporter-server.onrender.com/check_session', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -23,7 +24,6 @@ export const AuthProvider = ({ children }) => {
                 return response.json();
             })
             .then(data => {
-                console.log('Session Check Response:', data); // Log the response
                 if (data && data.id && data.token_verified) {
                     setUser(data);
                 } else {
@@ -55,7 +55,6 @@ export const AuthProvider = ({ children }) => {
             return response.json();
         })
         .then(data => {
-            console.log('Login Response:', data); 
             if (data.access_token) {
                 localStorage.setItem('access_token', data.access_token);
                 return fetch('https://ireporter-server.onrender.com/check_session', {
@@ -120,7 +119,11 @@ export const AuthProvider = ({ children }) => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return (
+            <div className="spinner-container">
+                <div className="spinner"></div>
+            </div>
+        );
     }
 
     return (
