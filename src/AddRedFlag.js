@@ -2,7 +2,8 @@ import React from 'react'
 
 export default function AddRedFlag() {
   return (
-    <div>
+    <div className='ui form'>
+      <div className='field'>
          <form encType='multipart/form-data' >
         
         <label for="title">Title</label>
@@ -18,9 +19,10 @@ export default function AddRedFlag() {
         <label for="media" >Image/Video</label>
         <input type='file' id='media' name='media'  ></input> 
         <br></br>
-
-        <button className=''>Submit</button>
+        
+        <button className='submit-button'>Submit</button>
        </form> 
+       </div>
     </div>
   )
 }
