@@ -40,7 +40,7 @@ const RedflagsPage = () => {
   // Function to handle report click
   const handleReportClick = (reportId) => {
     // Navigate to a different page with reportId in the URL
-    navigate(/* <AdminRedflags/>*/);
+    navigate(<AdminRedflags/>);
   };
   return (
     <div className="reports-page">

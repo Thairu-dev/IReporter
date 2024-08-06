@@ -42,7 +42,7 @@ const InterventionsPage = () => {
   // Function to handle report click
   const handleReportClick = () => {
     // Navigate to a different page with reportId in the URL
-    navigate(/* <AdminInterventions/>*/ );
+    navigate(<AdminInterventions/> );
   };
 
   return (
