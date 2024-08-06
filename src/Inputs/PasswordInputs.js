@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 
 const PasswordInput = ({
   name,
   placeholder,
   handleOnChange,
-  label,
-  labelText,
-  pattern,
-  title,
-  minLength
+  label = '',
+  labelText = '',
+  pattern = null,
+  title = null,
+  minLength = null
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -38,22 +38,14 @@ const PasswordInput = ({
 };
 
 PasswordInput.propTypes = {
-  name: PropType.string.isRequired,
-  placeholder: PropType.string.isRequired,
-  handleOnChange: PropType.func.isRequired,
-  label: PropType.string,
-  labelText: PropType.string,
-  pattern: PropType.string,
-  title: PropType.string,
-  minLength: PropType.string,
-};
-
-PasswordInput.defaultProps = {
-  label: '',
-  labelText: '',
-  pattern: null,
-  title: null,
-  minLength: null,
+  name: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  handleOnChange: PropTypes.func.isRequired,
+  label: PropTypes.string,
+  labelText: PropTypes.string,
+  pattern: PropTypes.string,
+  title: PropTypes.string,
+  minLength: PropTypes.string,
 };
 
 export default PasswordInput;

@@ -8,11 +8,13 @@ import ProtectedRoute from './ProtectedRoute';
 import Home from './Home'; 
 import SignupForm from './SignUpForm';
 import Navbar from './NavBar';
+import RedflagsPage from './RedFlags';
 import RedFlagsCard from './User/UserRedFlagsCard';
 import InterventionsCard from './User/UserInterventionsCard';
 import AdminRedflags from './Admin/AdminRedflags';
 import AdminInterventions from './Admin/AdminInterventions';
 import AddRedFlag from './AddRedFlag';
+
 
 
 
