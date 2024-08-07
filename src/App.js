@@ -4,13 +4,18 @@ import { AuthProvider } from './context/AuthContext';
 import Login from './Login';
 import UserDashboard from './User/UserDashboard';
 import AdminDashboard from './Admin/AdminDashboard';
-import ProtectedRoute from './ProtectedRoute'
+import ProtectedRoute from './ProtectedRoute';
 import Home from './Home'; 
 import SignupForm from './SignUpForm';
 import Navbar from './NavBar';
-import RedFlagsCard from './RedFlagsCard';
+import RedflagsPage from './RedFlags';
+import RedFlagsCard from './User/UserRedFlagsCard';
+import InterventionsCard from './User/UserInterventionsCard';
 import AdminRedflags from './Admin/AdminRedflags';
 import AdminInterventions from './Admin/AdminInterventions';
+import AddRedFlag from './AddRedFlag';
+
+
 
 
 const App = () => {
@@ -25,8 +30,10 @@ const App = () => {
                     <Route path="/" element={<Home/>} />
                     <Route path="/sign-up" element={<SignupForm />} />
                     <Route path="/redflags" element={<ProtectedRoute element={RedFlagsCard} />} />
+                    <Route path="/interventions" element={<ProtectedRoute element={InterventionsCard} />} />
                     <Route path="/adminredflags" element={<ProtectedRoute element={AdminRedflags} />} />
                     <Route path="/admininterventions" element={<ProtectedRoute element={AdminInterventions} />} />
+                    <Route path='addredflag' element={<AddRedFlag/>} />
                     
                 </Routes>
             </Router>

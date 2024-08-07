@@ -60,7 +60,6 @@ const AdminInterventions = () => {
             </div>
 
             <h2>INTERVENTIONS</h2>
-            <button className="report-btn"> Report an Intervention</button>
             <div className='cards-container'>
                 {filteredInterventions.map(intervention => (
                     <div key={intervention.id} className="ui card">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import "./Spinner.css";
 import UpdateForm from './UpdateForm';
 import Modal from './Modal'; 
+import "./Userspinner.css"
 
 
 const RedFlagsCard = () => {
@@ -9,6 +9,7 @@ const RedFlagsCard = () => {
     const [error, setError] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [currentRedflag, setCurrentRedflag] = useState(null);
+
 
     useEffect(() => {
         fetch('https://ireporter-server.onrender.com/check_session', {
@@ -100,7 +101,7 @@ const RedFlagsCard = () => {
     return (
         <div className='redflags-container'>
             <h2>REDFLAGS</h2>
-            <button className="report-btn"> Report a Redflag</button>
+            <button onClick={() => navigate("/addredflag")}className="report-btn"> Report a Redflag</button>
             <div className='cards-container'>
                 {userData.redflags.map((redflg) => (
                     <div key={redflg.id} className="ui card">
