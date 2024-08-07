@@ -33,7 +33,7 @@ const App = () => {
                     <Route path="/interventions" element={<ProtectedRoute element={InterventionsCard} />} />
                     <Route path="/adminredflags" element={<ProtectedRoute element={AdminRedflags} />} />
                     <Route path="/admininterventions" element={<ProtectedRoute element={AdminInterventions} />} />
-                    <Route path='addredflag' element={<AddRedFlag/>} />
+                    <Route path='/addredflag' element={<AddRedFlag/>} />
                     
                 </Routes>
             </Router>
