@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../context/AuthContext';
 
 const AdminInterventions = () => {
-    const { logout } = useAuth();
     const [interventions, setInterventions] = useState([]);
-    const [filter, setFilter] = useState('all'); // State for filter
-    const [statusUpdate, setStatusUpdate] = useState({}); // State for status update
+    const [filter, setFilter] = useState('all'); 
+    const [statusUpdate, setStatusUpdate] = useState({});
 
     useEffect(() => {
-        const token = localStorage.getItem('access_token'); // Make sure you use the correct key
+        const token = localStorage.getItem('access_token'); 
 
         fetch('https://ireporter-server.onrender.com/interventions', {
             headers: { Authorization: `Bearer ${token}` }
@@ -51,7 +49,6 @@ const AdminInterventions = () => {
     return (
         <div className='interventions-container'>
             <h1>Admin Dashboard</h1>
-            <button onClick={logout}>Logout</button>
             <div className="filter-container">
                 <label htmlFor="filter">Filter by Status:</label>
                 <select id="filter" onChange={handleFilterChange} value={filter}>
@@ -66,7 +63,7 @@ const AdminInterventions = () => {
             <div className='cards-container'>
                 {filteredInterventions.map(intervention => (
                     <div key={intervention.id} className="ui card">
-                        <div className="image"><img src={intervention.image} alt={intervention.intervention} /></div>
+                        <div className="image"><img src={intervention.image  || "https://via.placeholder.com/150"} alt={intervention.intervention} /></div>
                         <div className="content">
                             <div className="header">{intervention.intervention}</div>
                             <div className="meta">{intervention.date_added}</div>
@@ -82,8 +79,8 @@ const AdminInterventions = () => {
                                         onChange={(e) => handleStatusChange(e, intervention.id)}
                                         onBlur={() => updateStatus(intervention.id, statusUpdate[intervention.id] || intervention.status)}
                                     >
-                                        <option value="reported">Reported</option>
-                                        <option value="under_review">Under Review</option>
+                                        <option value="rejected">Rejected</option>
+                                        <option value="under_investigation">under investigation</option>
                                         <option value="resolved">Resolved</option>
                                     </select>
                                     <button 

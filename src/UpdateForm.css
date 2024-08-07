@@ -1,0 +1,108 @@
+.update-form {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 500px;
+    margin: auto;
+    position: relative;
+}
+
+.update-form h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"], 
+.form-group textarea, 
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+
+.file-input-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-left: 9.5px;
+}
+
+.file-input-label {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background-color: #8E24AA; 
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+}
+
+.file-input-label:hover {
+    background-color: #6A1B9A; 
+}
+
+.file-input {
+    display: none; 
+}
+
+.file-input-display {
+    flex: 1;
+    font-size: 0.875rem; 
+    color: #666;
+}
+
+
+.form-buttons {
+    display: flex;
+    justify-content: flex-start; 
+    margin-top: 20px;
+}
+
+.form-buttons button {
+    background-color: #8E24AA;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    margin-right: 10px; 
+}
+
+.form-buttons button:hover {
+    background-color: #6A1B9A; 
+}
+
+.form-buttons button[type="button"] {
+    background-color: #da0303; 
+}
+
+.form-buttons button[type="button"]:hover {
+    background-color: #c81010;
+}

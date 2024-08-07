@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../context/AuthContext';
 
 const AdminRedflags = () => {
-    const { logout } = useAuth();
     const [redflags, setRedflags] = useState([]);
-    const [filter, setFilter] = useState('all'); // State for filter
-    const [statusUpdate, setStatusUpdate] = useState({}); // State for status update
+    const [filter, setFilter] = useState('all'); 
+    const [statusUpdate, setStatusUpdate] = useState({}); 
 
     useEffect(() => {
-        const token = localStorage.getItem('access_token'); // Make sure you use the correct key
+        const token = localStorage.getItem('access_token'); 
 
         fetch('https://ireporter-server.onrender.com/redflags', {
             headers: { Authorization: `Bearer ${token}` }
@@ -51,9 +49,6 @@ const AdminRedflags = () => {
     return (
         <div className='redflags-container'>
             <h1>Admin Dashboard</h1>
-            <button onClick={logout}>Logout</button>
-
-            {/* Filter Dropdown */}
             <div className="filter-container">
                 <label htmlFor="filter">Filter by Status:</label>
                 <select id="filter" onChange={handleFilterChange} value={filter}>
@@ -69,7 +64,7 @@ const AdminRedflags = () => {
             <div className='cards-container'>
                 {filteredRedflags.map(redflag => (
                     <div key={redflag.id} className="ui card">
-                        <div className="image"><img src={redflag.image} alt={redflag.redflag} /></div>
+                        <div className="image"><img src={redflag.image || "https://via.placeholder.com/150"} alt={redflag.redflag} /></div>
                         <div className="content">
                             <div className="header">{redflag.redflag}</div>
                             <div className="meta">{redflag.date_added}</div>
@@ -78,7 +73,6 @@ const AdminRedflags = () => {
                         <div className="extra content">Status : {redflag.status}</div>
                         <div className="extra content">Geolocation : {redflag.geolocation}</div>
                         <div className='card-btn'>
-                            {/* Status Update Dropdown */}
                             {redflag.status/*!== 'resolved'*/ && (
                                 <>
                                     <select 
@@ -86,8 +80,8 @@ const AdminRedflags = () => {
                                         onChange={(e) => handleStatusChange(e, redflag.id)}
                                         onBlur={() => updateStatus(redflag.id, statusUpdate[redflag.id] || redflag.status)}
                                     >
-                                        <option value="reported">Reported</option>
-                                        <option value="under_review">Under Review</option>
+                                        <option value="rejected">Rejected</option>
+                                        <option value="under_investigation">under investigation</option>
                                         <option value="resolved">Resolved</option>
                                     </select>
                                     <button 
