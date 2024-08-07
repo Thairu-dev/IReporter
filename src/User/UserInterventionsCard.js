@@ -68,7 +68,7 @@ const InterventionsCard = () => {
             {/* {userData?.intervention?.length > 0 ? ( */}
                     {userData.intervention.map((interv) => (
                       <div key={interv.id} className="ui card">
-                        <div className="image"><img src={interv.image} alt={interv.name} /></div>
+                        <div className="image"><img src={interv.image || "https://via.placeholder.com/150"} alt={interv.name} /></div>
                         <div className="content">
                           <div className="header">{interv.intervention}</div>
                           <div className="meta">{interv.date_added}</div>
