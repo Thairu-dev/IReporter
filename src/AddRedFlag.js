@@ -1,29 +1,73 @@
 import React from 'react'
+import './UpdateForm.css';
 
 export default function AddRedFlag() {
   return (
-    <div className='ui form'>
-      <div className='field'>
-         <form encType='multipart/form-data' >
-        
-        <label for="title">Title</label>
-        <input type='text' id='title' name='title'></input>
-
-        <label for="geolocation" >Geolocation</label>
-        <input type='text' id='geolocation' name='geolocation' ></input>
-
-        <label for="description" >Description</label>
-        <textarea id='description' name='description' rows={3}></textarea>
-
-
-        <label for="media" >Image/Video</label>
-        <input type='file' id='media' name='media'  ></input> 
-        <br></br>
-        
-        <button className='submit-button'>Submit</button>
-       </form> 
-       </div>
-    </div>
+    <div className="update-form">
+    <h2>Report a Redflag</h2>
+    <form >
+        <div className="form-group">
+            <label>
+                Redflag:
+                <input 
+                    type="text" 
+                    name="redflag" 
+                    // value={formData.redflag} 
+                    // onChange={handleChange} 
+                />
+            </label>
+        </div>
+        <div className="form-group">
+            <label>
+                Description:
+                <textarea 
+                    name="description" 
+                    // value={formData.description} 
+                    // onChange={handleChange} 
+                />
+            </label>
+        </div>
+        <div className="form-group">
+            <label>
+                Geolocation:
+                <input 
+                    type="text" 
+                    name="geolocation" 
+                    // value={formData.geolocation} 
+                    // onChange={handleChange} 
+                />
+            </label>
+        </div>
+        <div className="form-group file-input-wrapper">
+            <label className="file-input-label">
+                Choose Image
+                <input 
+                    type="file" 
+                    name="image" 
+                    className="file-input" 
+                    // onChange={handleChange} 
+                />
+            </label>
+            {/* <span className="file-input-display">{imageName || 'No file chosen'}</span> */}
+        </div>
+        <div className="form-group file-input-wrapper">
+            <label className="file-input-label">
+                Choose Video
+                <input 
+                    type="file" 
+                    name="video" 
+                    className="file-input" 
+                    // onChange={handleChange} 
+                />
+            </label>
+            <span className="file-input-display"></span>
+        </div>
+        <div className="form-buttons">
+            <button type="submit">Save</button>
+            <button type="button" >Cancel</button>
+        </div>
+    </form>
+</div>
   )
 }
 

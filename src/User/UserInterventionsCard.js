@@ -79,12 +79,12 @@ const InterventionsCard = () => {
                           <div className='card-btn'>
                             {interv.status === "draft" ? (
                               <>
-                              <button>Update</button>
+                              <button>Edit</button>
                               <button onClick={() => handleDelete(interv.id)} className='delete-btn'>Delete</button>
                               </>
                               ):(
                                 <>
-                              <button disabled>Update</button>
+                              <button disabled>Edit</button>
                               <button disabled>Delete</button>
                               </>
                             )}
