@@ -1,14 +1,14 @@
 import React from 'react'
 import './UpdateForm.css';
 
-export default function AddRedFlag() {
+export default function Addintervention() {
   return (
     <div className="update-form">
-    <h2>Report a Redflag</h2>
+    <h2>Report an Intervention</h2>
     <form >
         <div className="form-group">
             <label>
-                Redflag:
+                Interventions :
                 <input 
                     type="text" 
                     name="redflag" 

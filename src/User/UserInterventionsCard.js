@@ -104,7 +104,6 @@ const InterventionsCard = () => {
     }
 
     if (!userData.intervention.length) {
-<<<<<<< HEAD
       return (
         <div className="spinner-container">
             <div className="spinner"></div>
@@ -112,49 +111,12 @@ const InterventionsCard = () => {
     );
     }
     
-    console.log(userData.intervention);
-    return (
-      <div className='interventions-container'>
-      
-        <h2>Interventions</h2>
-          <button className="report-btn"> Report an intervention</button>
-            <div className='cards-container'>
-            {/* {userData?.intervention?.length > 0 ? ( */}
-                    {userData.intervention.map((interv) => (
-                      <div key={interv.id} className="ui card">
-                        <div className="image"><img src={interv.image || "https://via.placeholder.com/150"} alt={interv.name} /></div>
-                        <div className="content">
-                          <div className="header">{interv.intervention}</div>
-                          <div className="meta">{interv.date_added}</div>
-                          <div className="description">{interv.description}</div>
-                          </div>
-                          <div className="extra content">Status : {interv.status} </div>
-                          <div className="extra content">Geolocation : {interv.geolocation} </div>
-                          <div className='card-btn'>
-                            {interv.status === "draft" ? (
-                              <>
-                              <button>Edit</button>
-                              <button onClick={() => handleDelete(interv.id)} className='delete-btn'>Delete</button>
-                              </>
-                              ):(
-                                <>
-                              <button disabled>Edit</button>
-                              <button disabled>Delete</button>
-                              </>
-                            )}
-                          </div>
-                          </div>
-                          
-                    ))}
-                    {/* // : (
-                    //     <p>No interventions available.</p>
-                    // )} */}
 
-=======
+    if (!userData.intervention.length) {                
         return (
             <div className="spinner-container">
                 <div className="spinner"></div>
->>>>>>> 7acadc0e9ada285f752ab47f69778234390d5f4b
+
             </div>
         );
     }
