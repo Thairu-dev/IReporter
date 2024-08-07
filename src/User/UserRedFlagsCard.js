@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import UpdateForm from './UpdateForm';
-import Modal from './Modal'; 
+import UpdateForm from '../UpdateForm';
+import Modal from '../Modal'; 
 import "./Userspinner.css"
+import { useNavigate } from 'react-router-dom';
 
 
 const RedFlagsCard = () => {
@@ -9,6 +10,7 @@ const RedFlagsCard = () => {
     const [error, setError] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [currentRedflag, setCurrentRedflag] = useState(null);
+    const navigate = useNavigate()
 
 
     useEffect(() => {
