@@ -112,14 +112,7 @@ const InterventionsCard = () => {
     }
     
 
-    if (!userData.intervention.length) {                
-        return (
-            <div className="spinner-container">
-                <div className="spinner"></div>
-
-            </div>
-        );
-    }
+   
 
     return (
         <div className='interventions-container'>
