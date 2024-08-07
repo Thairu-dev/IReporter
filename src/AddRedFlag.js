@@ -12,8 +12,7 @@ export default function AddRedFlag() {
                 <input 
                     type="text" 
                     name="redflag" 
-                    // value={formData.redflag} 
-                    // onChange={handleChange} 
+                    
                 />
             </label>
         </div>
@@ -22,8 +21,7 @@ export default function AddRedFlag() {
                 Description:
                 <textarea 
                     name="description" 
-                    // value={formData.description} 
-                    // onChange={handleChange} 
+                    
                 />
             </label>
         </div>
@@ -33,8 +31,7 @@ export default function AddRedFlag() {
                 <input 
                     type="text" 
                     name="geolocation" 
-                    // value={formData.geolocation} 
-                    // onChange={handleChange} 
+                    
                 />
             </label>
         </div>
@@ -45,7 +42,7 @@ export default function AddRedFlag() {
                     type="file" 
                     name="image" 
                     className="file-input" 
-                    // onChange={handleChange} 
+                    
                 />
             </label>
             {/* <span className="file-input-display">{imageName || 'No file chosen'}</span> */}
@@ -57,7 +54,7 @@ export default function AddRedFlag() {
                     type="file" 
                     name="video" 
                     className="file-input" 
-                    // onChange={handleChange} 
+                    
                 />
             </label>
             <span className="file-input-display"></span>

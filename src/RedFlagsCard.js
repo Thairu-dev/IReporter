@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import "./Spinner.css";
 import UpdateForm from './UpdateForm';
-import VideoModal from '../VideoModal';
-import Modal from '../Modal'; 
-import "./Userspinner.css"
-import { useNavigate } from 'react-router-dom';
+import Modal from './Modal'; 
+
 
 const RedFlagsCard = () => {
     const [userData, setUserData] = useState({ redflags: [] });
     const [error, setError] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [currentRedflag, setCurrentRedflag] = useState(null);
-    const [isVideoOpen, setIsVideoOpen] = useState(false);
-    const [currentVideoUrl, setCurrentVideoUrl] = useState('');
-    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('https://ireporter-server.onrender.com/check_session', {
@@ -31,7 +27,7 @@ const RedFlagsCard = () => {
             }
         })
         .catch(() => setError('An error occurred'));
-    },[]);
+    }, []);
 
     const handleDelete = (redflagId) => {
         fetch(`https://ireporter-server.onrender.com/redflags/${redflagId}`, {
@@ -89,32 +85,22 @@ const RedFlagsCard = () => {
         .catch(() => setError('An error occurred while saving the redflag'));
     };
 
-    const handleVideoOpen = (videoUrl) => {
-        setCurrentVideoUrl(videoUrl);
-        setIsVideoOpen(true);
-    };
-
-    const handleVideoClose = () => {
-        setIsVideoOpen(false);
-        setCurrentVideoUrl('');
-    };
-
     if (error) {
         return <p className="error">{error}</p>;
     }
 
     if (!userData.redflags.length) {
-        return (
-            <div className="spinner-container">
-                <div className="spinner"></div>
-            </div>
-        );
+      return (
+        <div className="spinner-container">
+            <div className="spinner"></div>
+        </div>
+    );
     }
 
     return (
         <div className='redflags-container'>
             <h2>REDFLAGS</h2>
-            <button onClick={() => navigate("/addredflag")}className="report-btn"> Report a Redflag</button>
+            <button className="report-btn"> Report a Redflag</button>
             <div className='cards-container'>
                 {userData.redflags.map((redflg) => (
                     <div key={redflg.id} className="ui card">
@@ -129,17 +115,14 @@ const RedFlagsCard = () => {
                         <div className="extra content">Status : {redflg.status} </div>
                         <div className="extra content">Geolocation : {redflg.geolocation} </div>
                         <div className='card-btn'>
-                            {/*redflg.video && */(
-                                <button onClick={() => handleVideoOpen(redflg.video)}>Play Video</button>
-                            )}
                             {redflg.status === "draft" ? (
                                 <>
-                                    <button onClick={() => handleEdit(redflg)}>Update</button>
+                                    <button onClick={() => handleEdit(redflg)}>Edit</button>
                                     <button onClick={() => handleDelete(redflg.id)} className='delete-btn'>Delete</button>
                                 </>
                             ) : (
                                 <>
-                                    <button disabled>Update</button>
+                                    <button disabled>Edit</button>
                                     <button disabled>Delete</button>
                                 </>
                             )}
@@ -154,11 +137,6 @@ const RedFlagsCard = () => {
                     handleSave={handleSave}
                 />
             </Modal>
-            <VideoModal 
-                isOpen={isVideoOpen} 
-                onClose={handleVideoClose} 
-                videoUrl={currentVideoUrl} 
-            />
         </div>
     );
 };
