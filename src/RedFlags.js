@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import AdminRedflags from './Admin/AdminRedflags';
 const RedflagsPage = () => {
   const [reports, setReports] = useState([]);
-  const [sortOption, setSortOption] = useState('status'); // Default sorting option
+  const [sortOption] = useState('status'); // Default sorting option
   const navigate = useNavigate(); // Initialize useNavigate hook
   useEffect(() => {
     // Fetch reports data from the API
