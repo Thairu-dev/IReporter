@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './UpdateForm.css'; 
 
 const UpdateForm = ({ redflag, handleClose, handleSave }) => {
+    const [city, setCity] = useState(''); 
+    const [geolocation, setGeolocation] = useState(''); 
     const [formData, setFormData] = useState({
         redflag: redflag.redflag,
         description: redflag.description,
@@ -31,6 +34,30 @@ const UpdateForm = ({ redflag, handleClose, handleSave }) => {
         e.preventDefault();
         handleSave(formData);
     };
+    const handleGeocode = () => {
+        axios.get('https://nominatim.openstreetmap.org/search', {
+          params: {
+            q: city,
+            format: 'json'
+          }
+        })
+        .then(response => {
+          if (response.data.length > 0) {
+            const { lat, lon } = response.data[0];
+            setGeolocation(`${lat}, ${lon}`);
+          } else {
+            alert('Location not found');
+          }
+        })
+        .catch(error => {
+          console.error('Geocoding error:', error);
+        });
+      };
+
+    const handleCityChange = (e) => {
+        setCity(e.target.value);
+      };
+    
 
     return (
         <div className="update-form">
@@ -57,13 +84,25 @@ const UpdateForm = ({ redflag, handleClose, handleSave }) => {
                         />
                     </label>
                 </div>
+                <div className='form-group'>
+                 <label htmlFor="city">City</label>
+                    <input 
+                        type='text' 
+                        id='city' 
+                        name='city' 
+                        value={city} 
+                        onChange={handleCityChange}
+                    />
+                <div className="form-buttons" ><button type="button"  onClick={handleGeocode}>Get Coordinates</button></div>
+          </div>
                 <div className="form-group">
                     <label>
                         Geolocation:
                         <input 
                             type="text" 
                             name="geolocation" 
-                            value={formData.geolocation} 
+                            id='geolocation'
+                            value={formData.geolocation}
                             onChange={handleChange} 
                         />
                     </label>
