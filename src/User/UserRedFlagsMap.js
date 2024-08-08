@@ -12,7 +12,7 @@ function UserRedflagsmap({ interventions = [], redflags = [] }) {
 
   return (
     <MapContainer
-      center={[1.2921, 36.8219]}
+      center={[1.2921, 36.8219]} // Center at a general location
       zoom={2}
       style={{ height: "100vh", width: "100%" }} // Ensure the map has a height
     >
@@ -38,8 +38,8 @@ function UserRedflagsmap({ interventions = [], redflags = [] }) {
             icon={customIcon}
           >
             <Popup>
-              <h3>{item.intervention || item.redflag}</h3>
-              <p>{item.description}</p>
+              <h3>{item.intervention ? 'Intervention' : 'Redflag'}</h3>
+              <p>Description:{item.description}</p>
               <p>Status: {item.status}</p>
             </Popup>
           </Marker>
@@ -50,3 +50,4 @@ function UserRedflagsmap({ interventions = [], redflags = [] }) {
 }
 
 export default UserRedflagsmap;
+
