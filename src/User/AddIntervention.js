@@ -40,7 +40,7 @@ export default function AddIntervention() {
             showErrorToastMessage()
             console.error('Failed to submit data');
         }
-        } catch (error) {
+        }; catch (error) {
             // Handle error response
             showErrorToastMessage("error");
         }
