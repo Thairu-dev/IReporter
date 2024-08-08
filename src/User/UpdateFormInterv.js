@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import './UpdateForm.css'; 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from 'axios';
 
 const UpdateFormInterv = ({ intervention, handleClose, handleSave }) => {
     const [formData, setFormData] = useState({
@@ -14,6 +16,7 @@ const UpdateFormInterv = ({ intervention, handleClose, handleSave }) => {
     const [imageName, setImageName] = useState(formData.image?.name || '');
     const [videoName, setVideoName] = useState(formData.video?.name || '');
     const [city, setCity] = useState(''); // New state for city input
+
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -29,8 +32,30 @@ const UpdateFormInterv = ({ intervention, handleClose, handleSave }) => {
         }
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // Call handleSave and handle success/error feedback
+        handleSave(formData)
+            .then(() => {
+                showToastMessage(); // Show success toast message
+                handleClose(); // Close the form upon successful save
+            })
+            .catch(() => {
+                showErrorToastMessage(); // Show error toast message
+            });
+    };
+
     const handleCityChange = (e) => {
         setCity(e.target.value);
+    };
+
+    const showToastMessage = () => {
+        toast.success('Redflag updated successfully!');
+    };
+
+    const showErrorToastMessage = () => {
+        toast.error('Failed to update redflag!');
     };
 
     const handleGeocode = () => {
@@ -55,15 +80,10 @@ const UpdateFormInterv = ({ intervention, handleClose, handleSave }) => {
             console.error('Geocoding error:', error);
         });
     };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        handleSave(formData);
-    };
-
     return (
         <div className="update-form">
             <h2>Update Intervention</h2>
+            <ToastContainer position='top-center' autoClose={1000} />
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>
@@ -100,12 +120,12 @@ const UpdateFormInterv = ({ intervention, handleClose, handleSave }) => {
                 </div>
                 <div className="form-group">
                     <label>
-                        Geolocation (Lat, Long):
+                        Geolocation:
                         <input 
                             type="text" 
                             name="geolocation" 
                             value={formData.geolocation} 
-                            readOnly 
+                            onChange={handleChange} 
                         />
                     </label>
                 </div>

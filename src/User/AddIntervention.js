@@ -33,7 +33,7 @@ export default function AddIntervention() {
             showToastMessage()
             setTimeout(() => {
                 navigate("/interventions"); // Redirect after a short delay
-            }, 1000);
+            }, 5000);
             console.log('Data submitted successfully!');
         } else {
             // Handle error response

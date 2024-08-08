@@ -13,7 +13,7 @@ export default function AddRedFlag() {
         toast.success('Redflag added successfully!')
     }
     const showErrorToastMessage=()=>{
-        toast.error('Failed to add intervention!')
+        toast.error('Failed to add redflag!')
     }  
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,7 +32,7 @@ export default function AddRedFlag() {
             showToastMessage()
             setTimeout(() => {
                 navigate("/redflags"); // Redirect after a short delay
-            }, 1000);
+            }, 5000);
             console.log('Data submitted successfully!');
             
         } else {

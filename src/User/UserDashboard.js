@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import "../Spinner.css"
+import "../Spinner.css";
+import UserRedflagsmap from './UserRedFlagsMap'; // Import the map component
 
 const UserDashboard = () => {
     const { logout } = useAuth();
@@ -46,46 +47,21 @@ const UserDashboard = () => {
     }
 
     return (
-    <div>
-    <h2>Welcome, {userData?.name || 'User'}</h2>
-    <button onClick={handleLogout}>Logout</button>
-    <div>
-        <h3>Interventions</h3>
-        <ul>
-            {userData?.intervention?.length > 0 ? (
-                userData.intervention.map((interv) => (
-                    <li key={interv.id}>
-                        <h4>{interv.intervention}</h4>
-                        <p>{interv.description}</p>
-                        <p>Status: {interv.status}</p>
-                        <p>Geolocation: {interv.geolocation}</p>
-                        <p>Date Added: {interv.date_added}</p>
-                    </li>
-                ))
-            ) : (
-                <p>No interventions available.</p>
-            )}
-        </ul>
-        </div>
         <div>
-            <h3>Redflags</h3>
-            <ul>
-                {userData?.redflags?.length > 0 ? (
-                    userData.redflags.map((redflg) => (
-                        <li key={redflg.id}>
-                            <h4>{redflg.redflag}</h4>
-                            <p>{redflg.description}</p>
-                            <p>Status: {redflg.status}</p>
-                            <p>Geolocation: {redflg.geolocation}</p>
-                            <p>Date Added: {redflg.date_added}</p>
-                        </li>
-                    ))
-                ) : (
-                    <p>No redflags available.</p>
-                )}
-            </ul>
+            <h2>Welcome, {userData?.name || 'User'}</h2>
+            <button onClick={handleLogout}>Logout</button>
+            {(userData?.intervention?.length > 0 || userData?.redflags?.length > 0) ? (
+                <div>
+                    <h3>Map</h3>
+                    <UserRedflagsmap
+                        interventions={userData.intervention} 
+                        redflags={userData.redflags}
+                    />
+                </div>
+            ) : (
+                <p>No interventions or redflags available.</p>
+            )}
         </div>
-    </div>
     );
 };
 

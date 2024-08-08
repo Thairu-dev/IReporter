@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './UpdateForm.css'; 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UpdateForm = ({ redflag, handleClose, handleSave }) => {
     const [formData, setFormData] = useState({
@@ -31,13 +33,30 @@ const UpdateForm = ({ redflag, handleClose, handleSave }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleSave(formData);
+
+        // Call handleSave and handle success/error feedback
+        handleSave(formData)
+            .then(() => {
+                showToastMessage(); // Show success toast message
+                handleClose(); // Close the form upon successful save
+            })
+            .catch(() => {
+                showErrorToastMessage(); // Show error toast message
+            });
     };
 
     const handleCityChange = (e) => {
         setCity(e.target.value);
     };
-   
+
+    const showToastMessage = () => {
+        toast.success('Redflag updated successfully!');
+    };
+
+    const showErrorToastMessage = () => {
+        toast.error('Failed to update redflag!');
+    };
+
     const handleGeocode = () => {
         axios.get('https://nominatim.openstreetmap.org/search', {
             params: {
@@ -60,11 +79,11 @@ const UpdateForm = ({ redflag, handleClose, handleSave }) => {
             console.error('Geocoding error:', error);
         });
     };
-    
 
     return (
         <div className="update-form">
             <h2>Update Redflag</h2>
+            <ToastContainer position='top-center' autoClose={1000} />
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>
