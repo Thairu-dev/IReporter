@@ -45,7 +45,7 @@ const InterventionsCard = () => {
         .then(() => {
             const updatedInterventions = userData.intervention.filter(intervention => intervention.id !== intervId);
             setUserData(prevData => ({ ...prevData, intervention: updatedInterventions }));
-            toast.success('Intervention deleted successfully!');
+           
         })
         .catch(() => setError("An error occurred while deleting the intervention"));
     };
@@ -86,7 +86,6 @@ const InterventionsCard = () => {
                 intervention.id === updatedIntervention.id ? updatedIntervention : intervention
             );
             setUserData(prevData => ({ ...prevData, intervention: updatedInterventions }));
-            toast.success('Intervention updated successfully!');
             handleClose();
         })
         .catch(() => setError('An error occurred while saving the intervention'));

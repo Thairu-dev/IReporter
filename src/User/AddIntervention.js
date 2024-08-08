@@ -1,24 +1,26 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
-import './UpdateForm.css';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import './UpdateForm.css';
+
 export default function AddIntervention() {
     const [city, setCity] = useState(''); 
-    const [geolocation, setGeolocation] = useState('');
-    const navigate=useNavigate()
+    const [geolocation, setGeolocation] = useState('');  
+    const navigate = useNavigate();
     const showToastMessage=()=>{
         toast.success('Intervention added successfully!')
-    }
+      }
     const showErrorToastMessage=()=>{
-        toast.error('Failed to add intervention!')
-    }  
+        toast.error('Failed to add Intervention!')
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
+      try {  
         const responseData = await fetch('https://ireporter-server.onrender.com/interventions', {
             method: 'POST',
             headers: {
@@ -29,16 +31,23 @@ export default function AddIntervention() {
         });
         console.log(responseData);
         if (responseData.ok) {
-            // Handle success response
             showToastMessage()
             setTimeout(() => {
                 navigate("/interventions"); // Redirect after a short delay
             }, 2000);
+
+                
             console.log('Data submitted successfully!');
+            
         } else {
             // Handle error response
             showErrorToastMessage()
             console.error('Failed to submit data');
+        }
+        } catch (error) {
+            // Handle error response
+            showErrorToastMessage("error");
+            
         }
     };
 
@@ -73,7 +82,7 @@ export default function AddIntervention() {
     return (
         <div className="update-form">
             <h2>Report an Intervention</h2>
-            <ToastContainer position='top-center' autoClose={1000}/>
+            <ToastContainer position='top-center' autoClose={2500}/>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>
