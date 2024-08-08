@@ -319,6 +319,9 @@ label{
 .submit-button {
   margin-top: 10px;
 }
+.success-message{
+  color: green;
+}
 /* .report-btn {
   position: absolute;
   top: 0;
