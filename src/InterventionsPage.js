@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Redflags.css'; // Make sure to create a CSS file to style the component
 import Map from './InterventionsMap';
 import { useNavigate } from 'react-router-dom';
-import AdminInterventions from './Admin/AdminDashboard';
+// import AdminInterventions from './Admin/AdminDashboard';
 
 const InterventionsPage = () => {
   const [reports, setReports] = useState([]);
