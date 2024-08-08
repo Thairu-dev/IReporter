@@ -9,6 +9,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -45,9 +47,10 @@ const Login = () => {
                     Reporter
                 </h2>
 
-                <form className='signup--form' onSubmit={handleSubmit}>
-                    <div>
-                        <label>Email</label>
+                <form  onSubmit={handleSubmit}>
+                    <div className="input-wrapper">
+                        
+                        <br/>
                         <input
                             type="email"
                             placeholder='Enter email'
@@ -56,18 +59,24 @@ const Login = () => {
                             required
                         />
                     </div>
-                    <br />
-                    <div>
-                        <label>Password</label>
+                    
+                    <div className="input-wrapper">
+                        
+                        <br/>
                         <input
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             placeholder='Enter password'
+                            
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
+                        <i
+                          className={`fas ${showPassword ? 'fa-eye' : 'fa-eye-slash'} iconn`}
+                          onClick={() => setShowPassword(!showPassword)}
+                                />
                     </div>
-                    <br />
+                    
                     {error && <p className="error">{error}</p>}
                     <button className='log' type="submit">Login</button>
                 </form>
