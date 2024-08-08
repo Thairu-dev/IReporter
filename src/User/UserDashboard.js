@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
 import "../Spinner.css";
 import UserRedflagsmap from './UserRedFlagsMap'; // Import the map component
 import './UserDashboard.css'
