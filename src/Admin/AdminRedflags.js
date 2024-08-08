@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+import StatusModal from './StatusModal';
+import VideoModal from '../VideoModal';
 
 const AdminRedflags = () => {
-    const { logout } = useAuth();
     const [redflags, setRedflags] = useState([]);
-    const [filter, setFilter] = useState('all'); // State for filter
-    const [statusUpdate, setStatusUpdate] = useState({}); // State for status update
+    const [filter, setFilter] = useState('all');
+    const [isVideoOpen, setIsVideoOpen] = useState(false);
+    const [currentVideoUrl, setCurrentVideoUrl] = useState('');
+    const [isStatusModalOpen, setIsStatusModalOpen] = useState(false);
+    const [currentRedflag, setCurrentRedflag] = useState(null);
 
     useEffect(() => {
-        const token = localStorage.getItem('access_token'); // Make sure you use the correct key
+        const token = localStorage.getItem('access_token');
 
         fetch('https://ireporter-server.onrender.com/redflags', {
             headers: { Authorization: `Bearer ${token}` }
@@ -31,17 +34,33 @@ const AdminRedflags = () => {
         .then(response => response.json())
         .then(data => {
             setRedflags(redflags.map(redflag => redflag.id === redflagId ? data : redflag));
+            setIsStatusModalOpen(false);
         })
         .catch(err => console.error('Error updating status:', err));
     };
 
-    const handleStatusChange = (e, redflagId) => {
-        const newStatus = e.target.value;
-        setStatusUpdate(prev => ({ ...prev, [redflagId]: newStatus }));
-    };
-
     const handleFilterChange = (e) => {
         setFilter(e.target.value);
+    };
+
+    const handleVideoOpen = (videoUrl) => {
+        setCurrentVideoUrl(videoUrl);
+        setIsVideoOpen(true);
+    };
+
+    const handleVideoClose = () => {
+        setIsVideoOpen(false);
+        setCurrentVideoUrl('');
+    };
+
+    const handleStatusModalOpen = (redflag) => {
+        setCurrentRedflag(redflag);
+        setIsStatusModalOpen(true);
+    };
+
+    const handleStatusModalClose = () => {
+        setIsStatusModalOpen(false);
+        setCurrentRedflag(null);
     };
 
     const filteredRedflags = filter === 'all'
@@ -51,9 +70,6 @@ const AdminRedflags = () => {
     return (
         <div className='redflags-container'>
             <h1>Admin Dashboard</h1>
-            <button onClick={logout}>Logout</button>
-
-            {/* Filter Dropdown */}
             <div className="filter-container">
                 <label htmlFor="filter">Filter by Status:</label>
                 <select id="filter" onChange={handleFilterChange} value={filter}>
@@ -65,43 +81,45 @@ const AdminRedflags = () => {
             </div>
 
             <h2>REDFLAGS</h2>
-        
             <div className='cards-container'>
                 {filteredRedflags.map(redflag => (
                     <div key={redflag.id} className="ui card">
-                        <div className="image"><img src={redflag.image} alt={redflag.redflag} /></div>
+                        <div className="image"><img src={redflag.image || "https://via.placeholder.com/150"} alt={redflag.redflag} /></div>
                         <div className="content">
                             <div className="header">{redflag.redflag}</div>
                             <div className="meta">{redflag.date_added}</div>
                             <div className="description">{redflag.description}</div>
                         </div>
-                        <div className="extra content">Status : {redflag.status}</div>
-                        <div className="extra content">Geolocation : {redflag.geolocation}</div>
+                        <div className="extra content">Status: {redflag.status}</div>
+                        <div className="extra content">Geolocation: {redflag.geolocation}</div>
                         <div className='card-btn'>
-                            {/* Status Update Dropdown */}
-                            {redflag.status/*!== 'resolved'*/ && (
-                                <>
-                                    <select 
-                                        value={statusUpdate[redflag.id] || redflag.status}
-                                        onChange={(e) => handleStatusChange(e, redflag.id)}
-                                        onBlur={() => updateStatus(redflag.id, statusUpdate[redflag.id] || redflag.status)}
+                                <button 
+                                        onClick={() => handleVideoOpen(redflag.video)}
+                                        /*disabled={!redflag.video}*/
                                     >
-                                        <option value="reported">Reported</option>
-                                        <option value="under_review">Under Review</option>
-                                        <option value="resolved">Resolved</option>
-                                    </select>
-                                    <button 
-                                        onClick={() => updateStatus(redflag.id, statusUpdate[redflag.id] || redflag.status)}
-                                        disabled={redflag.status === 'resolved'}
-                                    >
-                                        Update
+                                        Play Video
                                     </button>
-                                </>
+                            {/*redflag.status !== 'resolved' && */(
+                                    <button onClick={() => handleStatusModalOpen(redflag)}>Update Status</button>
                             )}
                         </div>
                     </div>
                 ))}
             </div>
+            <VideoModal 
+                isOpen={isVideoOpen} 
+                onClose={handleVideoClose} 
+                videoUrl={currentVideoUrl} 
+            />
+            {isStatusModalOpen && currentRedflag && (
+                <StatusModal
+                    isOpen={isStatusModalOpen}
+                    onClose={handleStatusModalClose}
+                    item={currentRedflag}
+                    updateStatus={updateStatus}
+                    type="redflag"
+                />
+            )}
         </div>
     );
 };

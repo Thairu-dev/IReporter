@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+// import { useAuth } from '../context/AuthContext';
 import RedflagsPage from '../RedFlags';
 import InterventionsPage from '../InterventionsPage';
 import './AdminDashboard.css'
 const AdminDashboard = () => {
   const [selectedOption, setSelectedOption] = useState('reports');
-  const { logout } = useAuth(); // Assuming you have a logout function from AuthContext
+  // const { logout } = useAuth(); // Assuming you have a logout function from AuthContext
   const [interventions, setInterventions] = useState([]);
   const [redflags, setRedflags] = useState([]);
 
