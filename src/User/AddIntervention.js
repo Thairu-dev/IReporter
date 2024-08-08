@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import './UpdateForm.css';
-
 export default function AddIntervention() {
     const [city, setCity] = useState(''); 
     const [geolocation, setGeolocation] = useState('');  
@@ -20,7 +19,6 @@ export default function AddIntervention() {
         e.preventDefault();
 
         const formData = new FormData(e.target);
-      try {  
         const responseData = await fetch('https://ireporter-server.onrender.com/interventions', {
             method: 'POST',
             headers: {
@@ -45,7 +43,6 @@ export default function AddIntervention() {
         } catch (error) {
             // Handle error response
             showErrorToastMessage("error");
-            
         }
     };
 
@@ -73,6 +70,10 @@ export default function AddIntervention() {
         setCity(e.target.value);
       };
 
+
+      const handleRedirects=()=>{ 
+        navigate("/redflags")
+    }  
     return (
         <div className="update-form">
             <h2>Report an Intervention</h2>
@@ -125,10 +126,9 @@ export default function AddIntervention() {
                     </label>
                 </div>
                 <div className="form-buttons">
-                    <button type="submit">Submit</button>
-                    <button onClick={() => navigate("/interventions")} type="button">Cancel</button>
+                    <button type="submit" >Save</button>
+                    <button type="button"onClick={handleRedirects}>Cancel</button>
                 </div>
-               
             </form>
         </div>
     );
