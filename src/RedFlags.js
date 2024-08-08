@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Redflags.css'; // Make sure to create a CSS file to style the component
-import Map from './InterventionsMap';
 import { useNavigate } from 'react-router-dom';
 import AdminRedflags from './Admin/AdminRedflags';
+import Redflagsmap from './RedflagsMap';
 const RedflagsPage = () => {
   const [reports, setReports] = useState([]);
   const [sortOption] = useState('status'); // Default sorting option
@@ -62,7 +62,7 @@ const RedflagsPage = () => {
         </div>
       </div>
       <div className="map">
-        <Map />
+        <Redflagsmap/>
       </div>
     </div>
   );

@@ -3,8 +3,6 @@ import axios from 'axios';
 import './UpdateForm.css'; 
 
 const UpdateForm = ({ redflag, handleClose, handleSave }) => {
-    const [city, setCity] = useState(''); 
-    const [geolocation, setGeolocation] = useState(''); 
     const [formData, setFormData] = useState({
         redflag: redflag.redflag,
         description: redflag.description,
@@ -15,6 +13,7 @@ const UpdateForm = ({ redflag, handleClose, handleSave }) => {
 
     const [imageName, setImageName] = useState(formData.image?.name || '');
     const [videoName, setVideoName] = useState(formData.video?.name || '');
+    const [city, setCity] = useState(''); // New state for city input
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -34,29 +33,33 @@ const UpdateForm = ({ redflag, handleClose, handleSave }) => {
         e.preventDefault();
         handleSave(formData);
     };
-    const handleGeocode = () => {
-        axios.get('https://nominatim.openstreetmap.org/search', {
-          params: {
-            q: city,
-            format: 'json'
-          }
-        })
-        .then(response => {
-          if (response.data.length > 0) {
-            const { lat, lon } = response.data[0];
-            setGeolocation(`${lat}, ${lon}`);
-          } else {
-            alert('Location not found');
-          }
-        })
-        .catch(error => {
-          console.error('Geocoding error:', error);
-        });
-      };
 
     const handleCityChange = (e) => {
         setCity(e.target.value);
-      };
+    };
+   
+    const handleGeocode = () => {
+        axios.get('https://nominatim.openstreetmap.org/search', {
+            params: {
+                q: city,
+                format: 'json'
+            }
+        })
+        .then(response => {
+            if (response.data.length > 0) {
+                const { lat, lon } = response.data[0];
+                setFormData(prevData => ({
+                    ...prevData,
+                    geolocation: `${lat}, ${lon}`
+                }));
+            } else {
+                alert('Location not found');
+            }
+        })
+        .catch(error => {
+            console.error('Geocoding error:', error);
+        });
+    };
     
 
     return (
@@ -84,17 +87,18 @@ const UpdateForm = ({ redflag, handleClose, handleSave }) => {
                         />
                     </label>
                 </div>
-                <div className='form-group'>
-                 <label htmlFor="city">City</label>
-                    <input 
-                        type='text' 
-                        id='city' 
-                        name='city' 
-                        value={city} 
-                        onChange={handleCityChange}
-                    />
-                <div className="form-buttons" ><button type="button"  onClick={handleGeocode}>Get Coordinates</button></div>
-          </div>
+                <div className="form-group">
+                    <label>
+                        City:
+                        <input 
+                            type="text" 
+                            name="city" 
+                            value={city} 
+                            onChange={handleCityChange} 
+                        />
+                    </label>
+                    <button type="button" onClick={handleGeocode}>Get Coordinates</button>
+                </div>
                 <div className="form-group">
                     <label>
                         Geolocation:

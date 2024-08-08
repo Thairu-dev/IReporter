@@ -4,7 +4,7 @@ import VideoModal from '../VideoModal';
 import Modal from '../Modal'; 
 import "./Userspinner.css"
 import { useNavigate } from 'react-router-dom';
-
+import { ToastContainer,toast } from 'react-toastify';
 const RedFlagsCard = () => {
     const [userData, setUserData] = useState({ redflags: [] });
     const [error, setError] = useState('');
@@ -45,6 +45,7 @@ const RedFlagsCard = () => {
         .then(() => {
             const updatedRedflags = userData.redflags.filter(redflag => redflag.id !== redflagId);
             setUserData(prevData => ({ ...prevData, redflags: updatedRedflags }));
+            toast.success('Redflag deleted successfully!');
         })
         .catch(() => setError("An error occurred while deleting the redflag"));
     };
@@ -84,6 +85,7 @@ const RedFlagsCard = () => {
                 redflag.id === updatedRedflag.id ? updatedRedflag : redflag
             );
             setUserData(prevData => ({ ...prevData, redflags: updatedRedflags }));
+            toast.success('Redflag updated successfully!');
             handleClose();
         })
         .catch(() => setError('An error occurred while saving the redflag'));
@@ -91,6 +93,7 @@ const RedFlagsCard = () => {
 
     const handleVideoOpen = (videoUrl) => {
         setCurrentVideoUrl(videoUrl);
+        console.log(videoUrl)
         setIsVideoOpen(true);
     };
 
@@ -114,6 +117,7 @@ const RedFlagsCard = () => {
     return (
         <div className='redflags-container'>
             <h2>REDFLAGS</h2>
+            <ToastContainer position='top-center' autoClose={1000}/>
             <button onClick={() => navigate('/addredflag')}className="report-btn"> Report a Redflag</button>
             <div className='cards-container'>
                 {userData.redflags.map((redflg) => (
