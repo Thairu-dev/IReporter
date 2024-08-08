@@ -15,31 +15,53 @@ import AdminRedflags from './Admin/AdminRedflags';
 import AdminInterventions from './Admin/AdminInterventions';
 import AddRedFlag from './User/AddRedFlag';
 import AddIntervention from './User/AddIntervention';
+import AllReports from './AllReports'
 
 
 
 
 const App = () => {
     return (
-        <AuthProvider>
-            <Router>
-                <Navbar/>
-                <Routes>
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/user-dashboard" element={<ProtectedRoute element={UserDashboard}/>} />
-                    <Route path="/admin-dashboard" element={<ProtectedRoute element={AdminDashboard} />} />
-                    <Route path="/" element={<Home/>} />
-                    <Route path="/sign-up" element={<SignupForm />} />
-                    <Route path="/redflags" element={<ProtectedRoute element={RedFlagsCard} />} />
-                    <Route path="/interventions" element={<ProtectedRoute element={InterventionsCard} />} />
-                    <Route path="/adminredflags" element={<ProtectedRoute element={AdminRedflags} />} />
-                    <Route path="/admininterventions" element={<ProtectedRoute element={AdminInterventions} />} />
-                    <Route path='addredflag' element={<AddRedFlag/>} />
-                    <Route path='/addintervention' element={<ProtectedRoute element={AddIntervention}/>} />
-                    
-                </Routes>
-            </Router>
-        </AuthProvider>
+      <AuthProvider>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/user-dashboard"
+              element={<ProtectedRoute element={UserDashboard} />}
+            />
+            <Route
+              path="/admin-dashboard"
+              element={<ProtectedRoute element={AdminDashboard} />}
+            />
+            <Route path="/" element={<Home />} />
+            <Route path="/sign-up" element={<SignupForm />} />
+            <Route
+              path="/redflags"
+              element={<ProtectedRoute element={RedFlagsCard} />}
+            />
+            <Route
+              path="/interventions"
+              element={<ProtectedRoute element={InterventionsCard} />}
+            />
+            <Route
+              path="/adminredflags"
+              element={<ProtectedRoute element={AdminRedflags} />}
+            />
+            <Route
+              path="/admininterventions"
+              element={<ProtectedRoute element={AdminInterventions} />}
+            />
+            <Route path="addredflag" element={<AddRedFlag />} />
+            <Route
+              path="/addintervention"
+              element={<ProtectedRoute element={AddIntervention} />}
+            />
+           <Route path="/all-reports" element={<AllReports />} />
+          </Routes>
+        </Router>
+      </AuthProvider>
     );
 };
 

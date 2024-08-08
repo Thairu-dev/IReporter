@@ -33,8 +33,10 @@ export default function AddIntervention() {
         if (responseData.ok) {
             showToastMessage()
             setTimeout(() => {
-                navigate("/redflags"); // Redirect after a short delay
-            }, 5000);
+                navigate("/interventions"); // Redirect after a short delay
+            }, 2000);
+
+                
             console.log('Data submitted successfully!');
             
         } else {
@@ -73,6 +75,10 @@ export default function AddIntervention() {
         setCity(e.target.value);
       };
 
+
+      const handleRedirects=()=>{ 
+        navigate("/redflags")
+    }  
     return (
         <div className="update-form">
             <h2>Report an Intervention</h2>
@@ -125,10 +131,9 @@ export default function AddIntervention() {
                     </label>
                 </div>
                 <div className="form-buttons">
-                    <button type="submit">Submit</button>
-                    <button onClick={() => navigate("/interventions")} type="button">Cancel</button>
+                    <button type="submit" >Save</button>
+                    <button type="button"onClick={handleRedirects}>Cancel</button>
                 </div>
-               
             </form>
         </div>
     );
