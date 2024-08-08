@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import './UpdateForm.css';
+
 export default function AddIntervention() {
     const [city, setCity] = useState(''); 
     const [geolocation, setGeolocation] = useState('');  
@@ -19,6 +20,7 @@ export default function AddIntervention() {
         e.preventDefault();
 
         const formData = new FormData(e.target);
+      try {  
         const responseData = await fetch('https://ireporter-server.onrender.com/interventions', {
             method: 'POST',
             headers: {
@@ -40,9 +42,10 @@ export default function AddIntervention() {
             showErrorToastMessage()
             console.error('Failed to submit data');
         }
-        }; catch (error) {
+        } catch (error) {
             // Handle error response
             showErrorToastMessage("error");
+            
         }
     };
 
