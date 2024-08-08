@@ -2,13 +2,20 @@ import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import './UpdateForm.css';
 
 export default function AddRedFlag() {
   const [city, setCity] = useState('');
   const [geolocation, setGeolocation] = useState('');
-  const [submissionStatus, setSubmissionStatus] = useState('idle'); // Track submission status
   const navigate = useNavigate();  
+  const showToastMessage=()=>{
+    toast.success('Redflag added successfully!')
+  }
+const showErrorToastMessage=()=>{
+    toast.error('Failed to add Redflag!')
+}
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -23,21 +30,20 @@ export default function AddRedFlag() {
       });
 
       if (responseData.ok) {
-        setSubmissionStatus('success'); // Set submission status to success
-        console.log('Data submitted successfully!');
-        // Reset form after a brief delay
+        showToastMessage()
         setTimeout(() => {
-          setSubmissionStatus('idle');
-          e.target.reset(); // Reset form fields
-          navigate('/redflags');
+            navigate("/redflags"); // Redirect after a short delay
         }, 5000);
-      } else {
-        setSubmissionStatus('error'); // Set submission status to error
+        console.log('Data submitted successfully!');
+        
+    } else {
+        // Handle error response
+        showErrorToastMessage()
         console.error('Failed to submit data');
-      }
+    }
     } catch (error) {
       console.error('Error submitting data:', error);
-      setSubmissionStatus('error'); // Set submission status to error
+      showErrorToastMessage('error'); // Set submission status to error
     }
   };
 
@@ -69,6 +75,7 @@ export default function AddRedFlag() {
   return (
     <div className="update-form">
       <h2>Report a Redflag</h2>
+      <ToastContainer position='top-center' autoClose={2500}/>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>
@@ -117,9 +124,9 @@ export default function AddRedFlag() {
           <button onClick={() => navigate("/redflags")} type="button">Cancel</button>
         </div>
         {/* Conditionally render success message based on submission status */}
-        {submissionStatus === 'success' && (
+        {/* {submissionStatus === 'success' && (
           <p className="success-message">You redflag was submitted successfully!</p>
-        )}
+        )} */}
       </form>
     </div>
   );

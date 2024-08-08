@@ -2,13 +2,20 @@ import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import './UpdateForm.css';
 
 export default function AddIntervention() {
     const [city, setCity] = useState(''); 
     const [geolocation, setGeolocation] = useState('');  
-    const [submissionStatus, setSubmissionStatus] = useState('idle');
     const navigate = useNavigate();
+    const showToastMessage=()=>{
+        toast.success('Intervention added successfully!')
+      }
+    const showErrorToastMessage=()=>{
+        toast.error('Failed to add Intervention!')
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -24,18 +31,20 @@ export default function AddIntervention() {
         });
         console.log(responseData);
         if (responseData.ok) {
-            setSubmissionStatus("success");
+            showToastMessage()
             setTimeout(() => {
-                setSubmissionStatus("idle");
-                e.target.reset();
-                navigate("/interventions");
-            },5000);         
-        }else{
-            setSubmissionStatus("error");
-            } 
+                navigate("/redflags"); // Redirect after a short delay
+            }, 5000);
+            console.log('Data submitted successfully!');
+            
+        } else {
+            // Handle error response
+            showErrorToastMessage()
+            console.error('Failed to submit data');
+        }
         } catch (error) {
             // Handle error response
-            setSubmissionStatus("error");
+            showErrorToastMessage("error");
             
         }
     };
@@ -67,6 +76,7 @@ export default function AddIntervention() {
     return (
         <div className="update-form">
             <h2>Report an Intervention</h2>
+            <ToastContainer position='top-center' autoClose={2500}/>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>
@@ -118,10 +128,7 @@ export default function AddIntervention() {
                     <button type="submit">Submit</button>
                     <button onClick={() => navigate("/interventions")} type="button">Cancel</button>
                 </div>
-                {/* Conditionally render success message based on submission status */}
-                        {submissionStatus === 'success' && (
-                        <p className="success-message">You Intervention was submitted successfully!</p>
-                        )}
+               
             </form>
         </div>
     );
