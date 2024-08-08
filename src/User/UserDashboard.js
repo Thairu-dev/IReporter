@@ -5,11 +5,11 @@ import "../Spinner.css";
 import UserRedflagsmap from './UserRedFlagsMap'; // Import the map component
 import './UserDashboard.css'
 const UserDashboard = () => {
-    const { logout } = useAuth();
+    
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState('');
     const [selectedType, setSelectedType] = useState('interventions'); // State to handle dropdown selection
-    const navigate = useNavigate();
+    
 
     useEffect(() => {
         fetch('https://ireporter-server.onrender.com/check_session', {
