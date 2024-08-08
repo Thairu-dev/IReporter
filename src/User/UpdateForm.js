@@ -4,7 +4,7 @@ import './UpdateForm.css';
 
 const UpdateForm = ({ redflag, handleClose, handleSave }) => {
     const [city, setCity] = useState(''); 
-    const [geolocation, setGeolocation] = useState(''); 
+    const [setGeolocation] = useState(''); 
     const [formData, setFormData] = useState({
         redflag: redflag.redflag,
         description: redflag.description,
