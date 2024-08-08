@@ -116,8 +116,11 @@ const InterventionsCard = () => {
 
     return (
         <div className='interventions-container'>
-            <h2>Interventions</h2>
-            <button onClick={() => navigate("/addintervention")} className="report-btn"> Report an Intervention</button>
+            <div className='header-container'>
+                <h2>Interventions</h2>
+                <button onClick={() => navigate("/addintervention")} className="report-btn"> Report an Intervention</button>
+            </div>
+            
             <div className='cards-container'>
                 {userData.intervention.map((interv) => (
                     <div key={interv.id} className="ui card">
