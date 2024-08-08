@@ -30,7 +30,7 @@ export default function AddRedFlag() {
           setSubmissionStatus('idle');
           e.target.reset(); // Reset form fields
           navigate('/redflags');
-        }, 5000); // Adjust delay as needed
+        }, 5000);
       } else {
         setSubmissionStatus('error'); // Set submission status to error
         console.error('Failed to submit data');
