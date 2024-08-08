@@ -29,13 +29,14 @@ const showErrorToastMessage=()=>{
         body: formData,
       });
 
-      if (responseData.ok) {
-        showToastMessage()
-        setTimeout(() => {
-            navigate("/redflags"); // Redirect after a short delay
-        }, 5000);
-        console.log('Data submitted successfully!');
-        
+
+        if (responseData.ok) {
+            // Handle success response
+            showToastMessage()
+            setTimeout(() => {
+                navigate("/redflags"); // Redirect after a short delay
+            }, 2000);
+            console.log('Data submitted successfully!');                    
     } else {
         // Handle error response
         showErrorToastMessage()

@@ -33,8 +33,10 @@ export default function AddIntervention() {
         if (responseData.ok) {
             showToastMessage()
             setTimeout(() => {
-                navigate("/redflags"); // Redirect after a short delay
-            }, 5000);
+                navigate("/interventions"); // Redirect after a short delay
+            }, 2000);
+
+                
             console.log('Data submitted successfully!');
             
         } else {

@@ -58,7 +58,7 @@ const App = () => {
               path="/addintervention"
               element={<ProtectedRoute element={AddIntervention} />}
             />
-            <Route path="/all-reports" element={<AllReports />} />
+           <Route path="/all-reports" element={<AllReports />} />
           </Routes>
         </Router>
       </AuthProvider>
