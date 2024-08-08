@@ -4,7 +4,7 @@ import VideoModal from '../VideoModal';
 import Modal from '../Modal';
 import "./Userspinner.css";
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer,toast } from 'react-toastify';
+import { toast,ToastContainer} from 'react-toastify';
 const InterventionsCard = () => {
     const [userData, setUserData] = useState({ intervention: [] });
     const [error, setError] = useState('');
