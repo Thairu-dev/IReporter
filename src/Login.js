@@ -47,9 +47,10 @@ const Login = () => {
                     Reporter
                 </h2>
 
-                <form className='signin--form' onSubmit={handleSubmit}>
-                    <div>
-                        <label>Email</label>
+                <form  onSubmit={handleSubmit}>
+                    <div className="input-wrapper">
+                        
+                        <br/>
                         <input
                             type="email"
                             placeholder='Enter email'
@@ -58,11 +59,11 @@ const Login = () => {
                             required
                         />
                     </div>
-                    <br />
-                    <div>
-                        <label>Password</label>
+                    
+                    <div className="input-wrapper">
+                        
+                        <br/>
                         <input
-                            // type="password"
                             type={showPassword ? 'text' : 'password'}
                             placeholder='Enter password'
                             
@@ -75,7 +76,7 @@ const Login = () => {
                           onClick={() => setShowPassword(!showPassword)}
                                 />
                     </div>
-                    <br />
+                    
                     {error && <p className="error">{error}</p>}
                     <button className='log' type="submit">Login</button>
                 </form>
