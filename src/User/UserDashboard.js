@@ -30,10 +30,7 @@ const UserDashboard = () => {
         .catch(() => setError('An error occurred'));
     }, []);
 
-    const handleLogout = () => {
-        logout();
-        navigate('/login');  // Redirect to login after logout
-    };
+   
 
     if (error) {
         return <p className="error">{error}</p>;
