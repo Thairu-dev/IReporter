@@ -75,7 +75,7 @@ const AdminRedflags = () => {
                 <select id="filter" onChange={handleFilterChange} value={filter}>
                     <option value="all">All</option>
                     <option value="reported">Reported</option>
-                    <option value="under_review">Under Review</option>
+                    <option value="under_investigation">Under Investigation</option>
                     <option value="resolved">Resolved</option>
                 </select>
             </div>
