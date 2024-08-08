@@ -103,7 +103,7 @@ const RedFlagsCard = () => {
         return <p className="error">{error}</p>;
     }
 
-    if (!userData.redflags.length) {
+    if (!userData) {
         return (
             <div className="spinner-container">
                 <div className="spinner"></div>
@@ -119,36 +119,42 @@ const RedFlagsCard = () => {
             </div>
            
             <div className='cards-container'>
-                {userData.redflags.map((redflg) => (
-                    <div key={redflg.id} className="ui card">
-                        <div className="image">
-                            <img src={redflg.image || "https://via.placeholder.com/150"} alt={redflg.redflag} />
-                        </div>
-                        <div className="content">
-                            <div className="header">{redflg.redflag}</div>
-                            <div className="meta">{redflg.date_added}</div>
-                            <div className="description">{redflg.description}</div>
-                        </div>
-                        <div className="extra content">Status : {redflg.status} </div>
-                        <div className="extra content">Geolocation : {redflg.geolocation} </div>
-                        <div className='card-btn'>
-                            {/*redflg.video && */(
-                                <button onClick={() => handleVideoOpen(redflg.video)}>Play Video</button>
-                            )}
-                            {redflg.status === "draft" ? (
-                                <>
-                                    <button onClick={() => handleEdit(redflg)}>Update</button>
-                                    <button onClick={() => handleDelete(redflg.id)} className='delete-btn'>Delete</button>
-                                </>
-                            ) : (
-                                <>
-                                    <button disabled>Update</button>
-                                    <button disabled>Delete</button>
-                                </>
-                            )}
-                        </div>
-                    </div>
-                ))}
+            {userData.redflags.length === 0 ? (
+    <div className="no-data-container">
+        <p>You do not have any Redflags.</p>
+    </div>
+) : (
+    userData.redflags.map((redflg) => (
+        <div key={redflg.id} className="ui card">
+            <div className="image">
+                <img src={redflg.image || "https://via.placeholder.com/150"} alt={redflg.redflag} />
+            </div>
+            <div className="content">
+                <div className="header">{redflg.redflag}</div>
+                <div className="meta">{redflg.date_added}</div>
+                <div className="description">{redflg.description}</div>
+            </div>
+            <div className="extra content">Status : {redflg.status} </div>
+            <div className="extra content">Geolocation : {redflg.geolocation} </div>
+            <div className='card-btn'>
+                {/*redflg.video && */(
+                    <button onClick={() => handleVideoOpen(redflg.video)}>Play Video</button>
+                )}
+                {redflg.status === "draft" ? (
+                    <>
+                        <button onClick={() => handleEdit(redflg)}>Update</button>
+                        <button onClick={() => handleDelete(redflg.id)} className='delete-btn'>Delete</button>
+                    </>
+                ) : (
+                    <>
+                        <button disabled>Update</button>
+                        <button disabled>Delete</button>
+                    </>
+                )}
+            </div>
+        </div>
+    ))
+)}
             </div>
             <Modal isOpen={isEditing} onClose={handleClose}>
                 <UpdateForm
