@@ -9,6 +9,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -45,7 +47,7 @@ const Login = () => {
                     Reporter
                 </h2>
 
-                <form className='signup--form' onSubmit={handleSubmit}>
+                <form className='signin--form' onSubmit={handleSubmit}>
                     <div>
                         <label>Email</label>
                         <input
@@ -60,12 +62,18 @@ const Login = () => {
                     <div>
                         <label>Password</label>
                         <input
-                            type="password"
+                            // type="password"
+                            type={showPassword ? 'text' : 'password'}
                             placeholder='Enter password'
+                            
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
+                        <i
+                          className={`fas ${showPassword ? 'fa-eye' : 'fa-eye-slash'} iconn`}
+                          onClick={() => setShowPassword(!showPassword)}
+                                />
                     </div>
                     <br />
                     {error && <p className="error">{error}</p>}
