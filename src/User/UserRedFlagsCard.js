@@ -58,7 +58,7 @@ const RedFlagsCard = () => {
     return (
         <div className='redflags-container'>
             <h2>REDFLAGS</h2>
-            <button onClick={() => navigate("/addredflag")}className="report-btn"> Report a Redflag</button>
+            <button onClick={() => navigate('/addredflag')}className="report-btn"> Report a Redflag</button>
             <div className='cards-container'>
                 {userData.redflags.map((redflg) => (
                     <div key={redflg.id} className="ui card">
