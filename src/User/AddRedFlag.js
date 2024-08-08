@@ -32,7 +32,7 @@ export default function AddRedFlag() {
             showToastMessage()
             setTimeout(() => {
                 navigate("/redflags"); // Redirect after a short delay
-            }, 5000);
+            }, 2000);
             console.log('Data submitted successfully!');
             
         } else {

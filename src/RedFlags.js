@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Redflags.css'; // Make sure to create a CSS file to style the component
 import { useNavigate } from 'react-router-dom';
-import AdminRedflags from './Admin/AdminRedflags';
 import Redflagsmap from './RedflagsMap';
 const RedflagsPage = () => {
   const [reports, setReports] = useState([]);

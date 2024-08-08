@@ -121,6 +121,7 @@ const InterventionsCard = () => {
         <div className='interventions-container'>
             <div className='header-container'>
                 <h2>Interventions</h2>
+                <ToastContainer position='top-center' autoClose={1000}/>
                 <button onClick={() => navigate("/addintervention")} className="report-btn"> Report an Intervention</button>
             </div>
             

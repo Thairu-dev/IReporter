@@ -37,13 +37,13 @@ const UpdateFormInterv = ({ intervention, handleClose, handleSave }) => {
 
         // Call handleSave and handle success/error feedback
         handleSave(formData)
-            .then(() => {
-                showToastMessage(); // Show success toast message
-                handleClose(); // Close the form upon successful save
-            })
-            .catch(() => {
-                showErrorToastMessage(); // Show error toast message
-            });
+            //.then(() => {
+              showToastMessage(); // Show success toast message
+                //handleClose(); // Close the form upon successful save
+            //})
+            //.catch(() => {
+                 // Show error toast message
+            //});
     };
 
     const handleCityChange = (e) => {
@@ -73,11 +73,12 @@ const UpdateFormInterv = ({ intervention, handleClose, handleSave }) => {
                     geolocation: `${lat}, ${lon}`
                 }));
             } else {
-                alert('Location not found');
+                showErrorToastMessage();
             }
         })
         .catch(error => {
             console.error('Geocoding error:', error);
+            showErrorToastMessage();
         });
     };
     return (
