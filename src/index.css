@@ -319,6 +319,14 @@ label{
 .submit-button {
   margin-top: 10px;
 }
+.success-message{
+  color: green;
+}
+.header-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
 /* .report-btn {
   position: absolute;
   top: 0;

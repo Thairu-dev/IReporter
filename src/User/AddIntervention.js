@@ -1,15 +1,19 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './UpdateForm.css';
 
 export default function AddIntervention() {
     const [city, setCity] = useState(''); 
     const [geolocation, setGeolocation] = useState('');  
+    const [submissionStatus, setSubmissionStatus] = useState('idle');
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
+      try {  
         const responseData = await fetch('https://ireporter-server.onrender.com/interventions', {
             method: 'POST',
             headers: {
@@ -20,11 +24,19 @@ export default function AddIntervention() {
         });
         console.log(responseData);
         if (responseData.ok) {
-            // Handle success response
-            console.log('Data submitted successfully!');
-        } else {
+            setSubmissionStatus("success");
+            setTimeout(() => {
+                setSubmissionStatus("idle");
+                e.target.reset();
+                navigate("/interventions");
+            },5000);         
+        }else{
+            setSubmissionStatus("error");
+            } 
+        } catch (error) {
             // Handle error response
-            console.error('Failed to submit data');
+            setSubmissionStatus("error");
+            
         }
     };
 
@@ -103,9 +115,13 @@ export default function AddIntervention() {
                     </label>
                 </div>
                 <div className="form-buttons">
-                    <button type="submit">Save</button>
-                    <button type="button">Cancel</button>
+                    <button type="submit">Submit</button>
+                    <button onClick={() => navigate("/interventions")} type="button">Cancel</button>
                 </div>
+                {/* Conditionally render success message based on submission status */}
+                        {submissionStatus === 'success' && (
+                        <p className="success-message">You Intervention was submitted successfully!</p>
+                        )}
             </form>
         </div>
     );
