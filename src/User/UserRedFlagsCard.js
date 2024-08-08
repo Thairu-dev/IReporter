@@ -4,7 +4,7 @@ import VideoModal from '../VideoModal';
 import Modal from '../Modal'; 
 import "./Userspinner.css"
 import { useNavigate } from 'react-router-dom';
-
+import { ToastContainer,toast } from 'react-toastify';
 const RedFlagsCard = () => {
     const [userData, setUserData] = useState({ redflags: [] });
     const [error, setError] = useState('');
@@ -45,6 +45,7 @@ const RedFlagsCard = () => {
         .then(() => {
             const updatedRedflags = userData.redflags.filter(redflag => redflag.id !== redflagId);
             setUserData(prevData => ({ ...prevData, redflags: updatedRedflags }));
+            toast.success('Redflag deleted successfully!');
         })
         .catch(() => setError("An error occurred while deleting the redflag"));
     };
@@ -84,6 +85,7 @@ const RedFlagsCard = () => {
                 redflag.id === updatedRedflag.id ? updatedRedflag : redflag
             );
             setUserData(prevData => ({ ...prevData, redflags: updatedRedflags }));
+            toast.success('Redflag updated successfully!');
             handleClose();
         })
         .catch(() => setError('An error occurred while saving the redflag'));
@@ -91,6 +93,7 @@ const RedFlagsCard = () => {
 
     const handleVideoOpen = (videoUrl) => {
         setCurrentVideoUrl(videoUrl);
+        console.log(videoUrl)
         setIsVideoOpen(true);
     };
 
@@ -103,7 +106,7 @@ const RedFlagsCard = () => {
         return <p className="error">{error}</p>;
     }
 
-    if (!userData) {
+    if (!userData.redflags.length) {
         return (
             <div className="spinner-container">
                 <div className="spinner"></div>
@@ -113,48 +116,40 @@ const RedFlagsCard = () => {
 
     return (
         <div className='redflags-container'>
-            <div className='header-container'>
             <h2>REDFLAGS</h2>
-            <button onClick={() => navigate("/addredflag")}className="report-btn"> Report a Redflag</button>
-            </div>
-           
+            <ToastContainer position='top-center' autoClose={1000}/>
+            <button onClick={() => navigate('/addredflag')}className="report-btn"> Report a Redflag</button>
             <div className='cards-container'>
-            {userData.redflags.length === 0 ? (
-    <div className="no-data-container">
-        <p>You do not have any Redflags.</p>
-    </div>
-) : (
-    userData.redflags.map((redflg) => (
-        <div key={redflg.id} className="ui card">
-            <div className="image">
-                <img src={redflg.image || "https://via.placeholder.com/150"} alt={redflg.redflag} />
-            </div>
-            <div className="content">
-                <div className="header">{redflg.redflag}</div>
-                <div className="meta">{redflg.date_added}</div>
-                <div className="description">{redflg.description}</div>
-            </div>
-            <div className="extra content">Status : {redflg.status} </div>
-            <div className="extra content">Geolocation : {redflg.geolocation} </div>
-            <div className='card-btn'>
-                {/*redflg.video && */(
-                    <button onClick={() => handleVideoOpen(redflg.video)}>Play Video</button>
-                )}
-                {redflg.status === "draft" ? (
-                    <>
-                        <button onClick={() => handleEdit(redflg)}>Update</button>
-                        <button onClick={() => handleDelete(redflg.id)} className='delete-btn'>Delete</button>
-                    </>
-                ) : (
-                    <>
-                        <button disabled>Update</button>
-                        <button disabled>Delete</button>
-                    </>
-                )}
-            </div>
-        </div>
-    ))
-)}
+                {userData.redflags.map((redflg) => (
+                    <div key={redflg.id} className="ui card">
+                        <div className="image">
+                            <img src={redflg.image || "https://via.placeholder.com/150"} alt={redflg.redflag} />
+                        </div>
+                        <div className="content">
+                            <div className="header">{redflg.redflag}</div>
+                            <div className="meta">{redflg.date_added}</div>
+                            <div className="description">{redflg.description}</div>
+                        </div>
+                        <div className="extra content">Status : {redflg.status} </div>
+                        <div className="extra content">Geolocation : {redflg.geolocation} </div>
+                        <div className='card-btn'>
+                            {/*redflg.video && */(
+                                <button onClick={() => handleVideoOpen(redflg.video)}>Play Video</button>
+                            )}
+                            {redflg.status === "draft" ? (
+                                <>
+                                    <button onClick={() => handleEdit(redflg)}>Update</button>
+                                    <button onClick={() => handleDelete(redflg.id)} className='delete-btn'>Delete</button>
+                                </>
+                            ) : (
+                                <>
+                                    <button disabled>Update</button>
+                                    <button disabled>Delete</button>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                ))}
             </div>
             <Modal isOpen={isEditing} onClose={handleClose}>
                 <UpdateForm

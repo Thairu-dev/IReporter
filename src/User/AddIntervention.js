@@ -1,19 +1,24 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import './UpdateForm.css';
-
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function AddIntervention() {
     const [city, setCity] = useState(''); 
-    const [geolocation, setGeolocation] = useState('');  
-    const [submissionStatus, setSubmissionStatus] = useState('idle');
-    const navigate = useNavigate();
+    const [geolocation, setGeolocation] = useState('');
+    const navigate=useNavigate()
+    const showToastMessage=()=>{
+        toast.success('Intervention added successfully!')
+    }
+    const showErrorToastMessage=()=>{
+        toast.error('Failed to add intervention!')
+    }  
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
-      try {  
         const responseData = await fetch('https://ireporter-server.onrender.com/interventions', {
             method: 'POST',
             headers: {
@@ -24,19 +29,16 @@ export default function AddIntervention() {
         });
         console.log(responseData);
         if (responseData.ok) {
-            setSubmissionStatus("success");
+            // Handle success response
+            showToastMessage()
             setTimeout(() => {
-                setSubmissionStatus("idle");
-                e.target.reset();
-                navigate("/interventions");
-            },5000);         
-        }else{
-            setSubmissionStatus("error");
-            } 
-        } catch (error) {
+                navigate("/interventions"); // Redirect after a short delay
+            }, 5000);
+            console.log('Data submitted successfully!');
+        } else {
             // Handle error response
-            setSubmissionStatus("error");
-            
+            showErrorToastMessage()
+            console.error('Failed to submit data');
         }
     };
 
@@ -64,9 +66,14 @@ export default function AddIntervention() {
         setCity(e.target.value);
       };
 
+
+      const handleRedirects=()=>{ 
+        navigate("/redflags")
+    }  
     return (
         <div className="update-form">
             <h2>Report an Intervention</h2>
+            <ToastContainer position='top-center' autoClose={1000}/>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>
@@ -115,13 +122,9 @@ export default function AddIntervention() {
                     </label>
                 </div>
                 <div className="form-buttons">
-                    <button type="submit">Submit</button>
-                    <button onClick={() => navigate("/interventions")} type="button">Cancel</button>
+                    <button type="submit" >Save</button>
+                    <button type="button"onClick={handleRedirects}>Cancel</button>
                 </div>
-                {/* Conditionally render success message based on submission status */}
-                        {submissionStatus === 'success' && (
-                        <p className="success-message">You Intervention was submitted successfully!</p>
-                        )}
             </form>
         </div>
     );

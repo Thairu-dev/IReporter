@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Redflags.css'; // Make sure to create a CSS file to style the component
-import Map from './InterventionsMap';
 import { useNavigate } from 'react-router-dom';
 import AdminRedflags from './Admin/AdminRedflags';
+import Redflagsmap from './RedflagsMap';
 const RedflagsPage = () => {
   const [reports, setReports] = useState([]);
   const [sortOption] = useState('status'); // Default sorting option
@@ -41,12 +41,12 @@ const RedflagsPage = () => {
   // Function to handle report click
   const handleReportClick = (reportId) => {
     // Navigate to a different page with reportId in the URL
-    navigate(<AdminRedflags/>);
+    navigate('/adminredflags');
   };
   return (
     <div className="reports-page">
       <div className="sidebar">
-        <h2>Admin Dashboard</h2>
+        <h2 style={{fontFamily:"sans-serif"}}>Admin Dashboard</h2>
         <div className="report-list">
           {sortedReports.map((report) => (
             <div key={report.id} className="report" onClick={() => handleReportClick()}>
@@ -62,7 +62,7 @@ const RedflagsPage = () => {
         </div>
       </div>
       <div className="map">
-        <Map />
+        <Redflagsmap/>
       </div>
     </div>
   );

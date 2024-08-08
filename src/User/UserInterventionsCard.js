@@ -4,7 +4,7 @@ import VideoModal from '../VideoModal';
 import Modal from '../Modal';
 import "./Userspinner.css";
 import { useNavigate } from 'react-router-dom';
-
+import { ToastContainer,toast } from 'react-toastify';
 const InterventionsCard = () => {
     const [userData, setUserData] = useState({ intervention: [] });
     const [error, setError] = useState('');
@@ -45,6 +45,7 @@ const InterventionsCard = () => {
         .then(() => {
             const updatedInterventions = userData.intervention.filter(intervention => intervention.id !== intervId);
             setUserData(prevData => ({ ...prevData, intervention: updatedInterventions }));
+            toast.success('Intervention deleted successfully!');
         })
         .catch(() => setError("An error occurred while deleting the intervention"));
     };
@@ -68,6 +69,7 @@ const InterventionsCard = () => {
             form.append('image', formData.image);
         }
         if (formData.video) {
+            console.log(formData.video)
             form.append('video', formData.video);
         }
 
@@ -84,6 +86,7 @@ const InterventionsCard = () => {
                 intervention.id === updatedIntervention.id ? updatedIntervention : intervention
             );
             setUserData(prevData => ({ ...prevData, intervention: updatedInterventions }));
+            toast.success('Intervention updated successfully!');
             handleClose();
         })
         .catch(() => setError('An error occurred while saving the intervention'));
