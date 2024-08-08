@@ -3,11 +3,12 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import "../Spinner.css";
 import UserRedflagsmap from './UserRedFlagsMap'; // Import the map component
-
+import './UserDashboard.css'
 const UserDashboard = () => {
     const { logout } = useAuth();
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState('');
+    const [selectedType, setSelectedType] = useState('interventions'); // State to handle dropdown selection
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -46,23 +47,51 @@ const UserDashboard = () => {
         );
     }
 
+    // Filter based on the selected type (interventions or red flags)
+    const records = selectedType === 'interventions' ? userData.intervention : userData.redflags;
+
     return (
-        <div>
-            <h2>Welcome, {userData?.name || 'User'}</h2>
-            <button onClick={handleLogout}>Logout</button>
-            {(userData?.intervention?.length > 0 || userData?.redflags?.length > 0) ? (
-                <div>
-                    <h3>Map</h3>
-                    <UserRedflagsmap
-                        interventions={userData.intervention} 
-                        redflags={userData.redflags}
-                    />
-                </div>
-            ) : (
-                <p>No interventions or redflags available.</p>
-            )}
+        <div style={{ display: 'flex' }}>
+            {/* Sidebar Section */}
+            <div style={{ width: '300px', padding: '10px', backgroundColor: '#f4f4f4' }}>
+                <h2>User Dashboard</h2>
+                <label htmlFor="type-select">Reports</label>
+                <select
+                    id="type-select"
+                    value={selectedType}
+                    onChange={(e) => setSelectedType(e.target.value)}
+                    style={{ marginBottom: '10px', width: '100%' }}
+                >
+                    <option value="interventions">Interventions</option>
+                    <option value="redflags">Redflags</option>
+                </select>
+                {records.length > 0 ? (
+                    <div style={{ overflowY: 'auto', maxHeight: '80vh' }}>
+                        {records.map((item, index) => (
+                            <div key={index} style={{ marginBottom: '10px', padding: '5px', border: '1px solid #ccc', borderRadius: '5px' }}>
+                                <p><strong>Description:</strong> {item.description}</p>
+                                <p><strong>Date:</strong> {item.created_at}</p>
+                                <p><strong>Status:</strong> <span className={`status-${item.status.toLowerCase()}`}>{item.status}</span></p>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p>No {selectedType} available.</p>
+                )}
+                
+            </div>
+            
+            {/* Map Section */}
+            <div style={{ flexGrow: 1 }}>
+                <UserRedflagsmap
+                    interventions={selectedType === 'interventions' ? userData.intervention : []} 
+                    redflags={selectedType === 'redflags' ? userData.redflags : []}
+                />
+            </div>
         </div>
     );
 };
 
 export default UserDashboard;
+
+

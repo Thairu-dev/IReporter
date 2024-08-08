@@ -13,7 +13,7 @@ const SignUpForm = () => {
         role: 'User', // Default role
     };
 
-    const [formData, setFormData] = useState(initialState);
+    const [formData, setFormData]= useState(initialState);
     const [token, setToken] = useState('');
     const [step, setStep] = useState(1); // Step 1: Sign up, Step 2: Verify
     const [error, setError] = useState(''); // State to manage error messages
