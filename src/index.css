@@ -326,6 +326,9 @@ label{
   justify-content: space-between;
   align-items: baseline;
 }
+.ui.card{
+  background-color: ;
+}
 /* .report-btn {
   position: absolute;
   top: 0;
