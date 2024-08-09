@@ -77,7 +77,7 @@ export default function AddIntervention() {
 
 
       const handleRedirects=()=>{ 
-        navigate("/redflags")
+        navigate("/interventions")
     }  
     return (
         <div className="update-form">
