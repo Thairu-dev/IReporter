@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import "../Spinner.css";
 import UserRedflagsmap from './UserRedFlagsMap'; // Import the map component
-import './UserDashboard.css';
-
+import './UserDashboard.css'
 const UserDashboard = () => {
+    
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState('');
     const [selectedType, setSelectedType] = useState('interventions'); // State to handle dropdown selection
-    const POLLING_INTERVAL = 5000; // Polling interval in milliseconds
+    
 
-    const fetchUserData = () => {
+    useEffect(() => {
         fetch('https://ireporter-server.onrender.com/check_session', {
             method: 'GET',
             headers: {
@@ -26,18 +26,9 @@ const UserDashboard = () => {
             }
         })
         .catch(() => setError('An error occurred'));
-    };
-
-    useEffect(() => {
-        // Initial data fetch
-        fetchUserData();
-
-        // Polling setup
-        const intervalId = setInterval(fetchUserData, POLLING_INTERVAL);
-
-        // Cleanup on unmount
-        return () => clearInterval(intervalId);
     }, []);
+
+   
 
     if (error) {
         return <p className="error">{error}</p>;
@@ -75,7 +66,7 @@ const UserDashboard = () => {
                             <div key={index} style={{ marginBottom: '10px', padding: '5px', border: '1px solid #ccc', borderRadius: '5px' }}>
                                 <p><strong>Description:</strong> {item.description}</p>
                                 <p><strong>Date:</strong> {item.date_added.split(" ")[0]}</p>
-                                <p><strong>Time:</strong>{item.date_added.split(" ")[1]}</p>
+                                <p><strong>Time::</strong> {item.date_added.split(" ")[1]}</p>
                                 <p><strong>Status:</strong> <span className={`status-${item.status.toLowerCase()}`}>{item.status}</span></p>
                             </div>
                         ))}
@@ -98,6 +89,5 @@ const UserDashboard = () => {
 };
 
 export default UserDashboard;
-
 
 
