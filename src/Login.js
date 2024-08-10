@@ -31,7 +31,7 @@ const Login = () => {
             .catch((error) => {
                 console.error(error);
                 if (error.message === 'Token not verified') {
-                    setError('Your account is not verified. Please check your email for verification instructions.');
+                    setError('Your account is not verified or has been deactivated. Please check your email for verification instructions.');
                 } else {
                     setError('Invalid email or password');
                 }
