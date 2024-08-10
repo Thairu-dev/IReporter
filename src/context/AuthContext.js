@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import "../Spinner.css"
+import "../Spinner.css";
 
 const AuthContext = createContext();
 
@@ -118,6 +118,65 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
     };
 
+    const updateUserProfile = (profileData) => {
+        const token = localStorage.getItem('access_token');
+        const formData = new FormData();
+
+        // Directly append values to formData if they exist
+        if (profileData.name) formData.append('name', profileData.name);
+        if (profileData.email) formData.append('email', profileData.email);
+        if (profileData.old_password) formData.append('old_password', profileData.old_password);
+        if (profileData.new_password) formData.append('new_password', profileData.new_password);
+        if (profileData.image) formData.append('image', profileData.image);
+
+        return fetch('https://ireporter-server.onrender.com/users', {
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${token}`
+                // 'Content-Type': 'multipart/form-data' // Not needed with FormData
+            },
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Update the user context with the updated profile
+            setUser(prevUser => ({
+                ...prevUser,
+                name: profileData.name || prevUser.name,
+                email: profileData.email || prevUser.email,
+                image: profileData.image ? URL.createObjectURL(profileData.image) : prevUser.image
+            }));
+            return data;
+        })
+        .catch(error => {
+            console.error('Error updating profile:', error);
+            throw error; // Re-throw to handle in the component
+        });
+    };
+
+    const updateTokenVerified = (userId, tokenVerified) => {
+        return fetch(`https://ireporter-server.onrender.com/admin/users/${userId}/update-token`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+            },
+            body: JSON.stringify({ token_verified: tokenVerified })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.json();
+        });
+    };
+
+
     if (loading) {
         return (
             <div className="spinner-container">
@@ -127,7 +186,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, signup, verifyToken }}>
+        <AuthContext.Provider value={{ user, login, logout, signup, verifyToken, updateUserProfile, updateTokenVerified }}>
             {children}
         </AuthContext.Provider>
     );
