@@ -65,7 +65,9 @@ const AdminUserManagement = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {users.map(user => (
+                        {users
+                        .filter(user => user.role !== 'admin')
+                        .map(user => (
                             <TableRow key={user.id}>
                                 <TableCell>{user.name}</TableCell>
                                 <TableCell>{user.email}</TableCell>
@@ -76,7 +78,7 @@ const AdminUserManagement = () => {
                                         color={user.token_verified ? 'error' : 'success'}
                                         onClick={() => handleToggleTokenVerified(user.id, user.token_verified)}
                                     >
-                                        {user.token_verified ? 'Revoke Token' : 'Verify Token'}
+                                        {user.token_verified ? 'Deactivate' : 'Activate'}
                                     </Button>
                                 </TableCell>
                             </TableRow>
