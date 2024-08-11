@@ -114,8 +114,27 @@ export const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
-        localStorage.removeItem('access_token');
-        setUser(null);
+        // Send a POST request to the backend to log the user out
+        setLoading(true)
+        fetch('https://ireporter-server.onrender.com/logout', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+            }
+        }).then(response => {
+            if (response.ok) {
+                // Clear the local storage and user state
+                localStorage.removeItem('access_token');
+                setUser(null);
+                setLoading(false)
+            } else {
+                console.error('Failed to log out');
+                setLoading(false)
+            }
+        }).catch(error => {
+            setLoading(false)
+            console.error('Error logging out:', error);
+        });
     };
 
     const updateUserProfile = (profileData) => {

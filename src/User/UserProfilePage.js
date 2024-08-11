@@ -90,8 +90,14 @@ const UserProfilePage = () => {
                 <Button
                     variant="contained"
                     component="label"
-                    color="primary"
-                    sx={{ mt: 2 }}
+                    sx={{ 
+                        mt: 2, 
+                        backgroundColor: '#9c27b0', 
+                        color: 'white',
+                        '&:hover': {
+                            backgroundColor: '#8E24AA', // Light purple color
+                        }
+                    }}
                 >
                     Upload New Image
                     <input
@@ -103,8 +109,14 @@ const UserProfilePage = () => {
                 {imageSelected && !uploading && (
                     <Button
                         variant="contained"
-                        color="secondary"
-                        sx={{ mt: 2 }}
+                        sx={{ 
+                            mt: 2, 
+                            backgroundColor: '#9c27b0', 
+                            color: 'white',
+                            '&:hover': {
+                                backgroundColor: '#8E24AA',
+                            }
+                        }}
                         onClick={handleImageUpload}
                     >
                         {uploading ? 'Uploading...' : 'Submit'}
@@ -123,8 +135,15 @@ const UserProfilePage = () => {
                 />
                 <Button
                     variant="contained"
-                    color="primary"
                     onClick={() => handleFieldUpdate('name')}
+                    sx={{ 
+                        mt: 2, 
+                        backgroundColor: '#9c27b0', 
+                        color: 'white',
+                        '&:hover': {
+                            backgroundColor: '#8E24AA',
+                        }
+                    }}
                     disabled={loading}
                 >
                     {loading ? 'Updating...' : 'Update Name'}
@@ -142,7 +161,14 @@ const UserProfilePage = () => {
                 />
                 <Button
                     variant="contained"
-                    color="primary"
+                    sx={{ 
+                        mt: 2, 
+                        backgroundColor: '#9c27b0', 
+                        color: 'white',
+                        '&:hover': {
+                            backgroundColor: '#8E24AA', 
+                        }
+                    }}
                     onClick={() => handleFieldUpdate('email')}
                     disabled={loading}
                 >
@@ -171,7 +197,14 @@ const UserProfilePage = () => {
                 />
                 <Button
                     variant="contained"
-                    color="primary"
+                    sx={{ 
+                        mt: 2, 
+                        backgroundColor: '#9c27b0', 
+                        color: 'white',
+                        '&:hover': {
+                            backgroundColor: '#8E24AA',
+                        }
+                    }}
                     onClick={() => handleFieldUpdate('new_password')}
                     disabled={loading}
                 >
@@ -183,7 +216,7 @@ const UserProfilePage = () => {
                 <Typography variant="h5">Your Redflags</Typography>
                 <Box display="flex" justifyContent="space-between">
                     <Box
-                        sx={{ width: '23%', backgroundColor: 'blue', p: 2, boxShadow: 1 }}
+                        sx={{ width: '23%', backgroundColor: 'purple', p: 2, boxShadow: 1 }}
                     >
                         <Typography variant="h6">Total</Typography>
                         <Typography>{redflagStatuses.total}</Typography>
@@ -213,7 +246,7 @@ const UserProfilePage = () => {
                 <Typography variant="h5">Your Interventions</Typography>
                 <Box display="flex" justifyContent="space-between">
                     <Box
-                        sx={{ width: '23%', backgroundColor: 'blue', p: 2, boxShadow: 1 }}
+                        sx={{ width: '23%', backgroundColor: 'purple', p: 2, boxShadow: 1 }}
                     >
                         <Typography variant="h6">Total</Typography>
                         <Typography>{interventionStatuses.total}</Typography>

@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import { green, grey } from '@mui/material/colors';
 import { useAuth } from '../context/AuthContext';
 import "../Spinner.css"
 
@@ -60,6 +63,7 @@ const AdminUserManagement = () => {
                         <TableRow>
                             <TableCell>Name</TableCell>
                             <TableCell>Email</TableCell>
+                            <TableCell>Status</TableCell>
                             <TableCell>Token Verified</TableCell>
                             <TableCell>Actions</TableCell>
                         </TableRow>
@@ -71,6 +75,13 @@ const AdminUserManagement = () => {
                             <TableRow key={user.id}>
                                 <TableCell>{user.name}</TableCell>
                                 <TableCell>{user.email}</TableCell>
+                                <TableCell>
+                                    <FontAwesomeIcon 
+                                        icon={faCircle} 
+                                        style={{ color: user.is_active ? green[500] : grey[500], marginRight: '8px' }} 
+                                    />
+                                    {user.is_active ? 'Active' : 'Offline'}
+                                </TableCell>
                                 <TableCell>{user.token_verified ? 'Yes' : 'No'}</TableCell>
                                 <TableCell>
                                     <Button

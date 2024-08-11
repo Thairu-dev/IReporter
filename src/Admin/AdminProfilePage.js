@@ -64,8 +64,6 @@ const AdminProfilePage = () => {
     return (
         <Container>
             <Typography variant="h4" gutterBottom>Admin Profile</Typography>
-            
-            {/* Profile Picture */}
             <Box display="flex" flexDirection="column" alignItems="center" mb={4}>
                 <Avatar
                     alt="Profile Picture"
@@ -75,8 +73,14 @@ const AdminProfilePage = () => {
                 <Button
                     variant="contained"
                     component="label"
-                    color="primary"
-                    sx={{ mt: 2 }}
+                    sx={{ 
+                        mt: 2, 
+                        backgroundColor: '#9c27b0', 
+                        color: 'white',
+                        '&:hover': {
+                            backgroundColor: '#8E24AA',
+                        }
+                    }}
                 >
                     Upload New Image
                     <input
@@ -88,16 +92,20 @@ const AdminProfilePage = () => {
                 {imageSelected && !uploading && (
                     <Button
                         variant="contained"
-                        color="secondary"
-                        sx={{ mt: 2 }}
+                        sx={{ 
+                            mt: 2, 
+                            backgroundColor: '#9c27b0', 
+                            color: 'white',
+                            '&:hover': {
+                                backgroundColor: '#8E24AA',
+                            }
+                        }}
                         onClick={handleImageUpload}
                     >
                         {uploading ? 'Uploading...' : 'Submit'}
                     </Button>
                 )}
             </Box>
-            
-            {/* Profile Update Form */}
             <Box mb={4}>
                 <TextField
                     label="Name"
@@ -109,7 +117,14 @@ const AdminProfilePage = () => {
                 />
                 <Button
                     variant="contained"
-                    color="primary"
+                    sx={{ 
+                        mt: 2, 
+                        backgroundColor: '#9c27b0', 
+                        color: 'white',
+                        '&:hover': {
+                            backgroundColor: '#8E24AA',
+                        }
+                    }}
                     onClick={() => handleFieldUpdate('name')}
                     disabled={loading}
                 >
@@ -128,7 +143,14 @@ const AdminProfilePage = () => {
                 />
                 <Button
                     variant="contained"
-                    color="primary"
+                    sx={{ 
+                        mt: 2, 
+                        backgroundColor: '#9c27b0', 
+                        color: 'white',
+                        '&:hover': {
+                            backgroundColor: '#8E24AA',
+                        }
+                    }}
                     onClick={() => handleFieldUpdate('email')}
                     disabled={loading}
                 >
@@ -157,7 +179,14 @@ const AdminProfilePage = () => {
                 />
                 <Button
                     variant="contained"
-                    color="primary"
+                    sx={{ 
+                        mt: 2, 
+                        backgroundColor: '#9c27b0', 
+                        color: 'white',
+                        '&:hover': {
+                            backgroundColor: '#8E24AA',
+                        }
+                    }}
                     onClick={() => handleFieldUpdate('new_password')}
                     disabled={loading}
                 >
