@@ -60,6 +60,13 @@
   background-color: #d4edda;
   color: #155724;
 }
+.report-status.under-investigation {
+  background-color: #f9c2c3; /* A soft pink shade */
+  color: #721c24; /* A deep red color for the text */
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
 
 .report-status.draft {
   background-color: #fff3cd;
