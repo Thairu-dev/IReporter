@@ -1,71 +1,79 @@
 import React, { useEffect, useState } from 'react';
-// import { useAuth } from '../context/AuthContext';
-import RedflagsPage from '../RedFlags';
-import InterventionsPage from '../InterventionsPage';
-import './AdminDashboard.css'
+import Redflagsmap from '../RedflagsMap'; // Import the map component
+import './AdminDashboard.css';
+
 const AdminDashboard = () => {
-  const [selectedOption, setSelectedOption] = useState('reports');
-  // const { logout } = useAuth(); // Assuming you have a logout function from AuthContext
+  const [selectedType, setSelectedType] = useState('interventions'); // State to handle dropdown selection
   const [interventions, setInterventions] = useState([]);
   const [redflags, setRedflags] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    const token = localStorage.getItem('access_token'); // Make sure you use the correct key
+    const token = localStorage.getItem('access_token');
+    
+    // Fetch interventions
     fetch('https://ireporter-server.onrender.com/interventions', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => response.json())
       .then(data => setInterventions(data))
-      .catch(err => console.error('Error fetching interventions:', err));
+      .catch(err => setError('Error fetching interventions'));
 
+    // Fetch redflags
     fetch('https://ireporter-server.onrender.com/redflags', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => response.json())
       .then(data => setRedflags(data))
-      .catch(err => console.error('Error fetching redflags:', err));
+      .catch(err => setError('Error fetching redflags'));
   }, []);
 
-  const handleDropdownChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
-
-  const updateStatus = (entityType, entityId, newStatus) => {
-    const token = localStorage.getItem('access_token');
-    fetch(`https://ireporter-server.onrender.com/admin/${entityType}/${entityId}/status`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify({ status: newStatus })
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (entityType === 'intervention') {
-          setInterventions(interventions.map(interv => interv.id === entityId ? data : interv));
-        } else {
-          setRedflags(redflags.map(redflag => redflag.id === entityId ? data : redflag));
-        }
-      })
-      .catch(err => console.error('Error updating status:', err));
-  };
+  // Filter records based on selected type
+  const records = selectedType === 'interventions' ? interventions : redflags;
 
   return (
-    <div>
-      <div>
-        <div className='admin-dropdown'>
-      <label htmlFor="reports-about" >Reports About</label>
-        <select id="reports-about" value={selectedOption} onChange={handleDropdownChange}>
-          <option value="reports">Redflags</option>
+    <div style={{ display: 'flex' }}>
+      {/* Sidebar Section */}
+      <div style={{ width: '300px', padding: '10px', backgroundColor: '#f4f4f4' }}>
+        <h2>Admin Dashboard</h2>
+        <label htmlFor="type-select">Reports</label>
+        <select
+          id="type-select"
+          value={selectedType}
+          onChange={(e) => setSelectedType(e.target.value)}
+          style={{ marginBottom: '10px', width: '100%' }}
+        >
           <option value="interventions">Interventions</option>
+          <option value="redflags">Redflags</option>
         </select>
-        </div>
-        {selectedOption === 'reports' && <RedflagsPage redflags={redflags} updateStatus={updateStatus} />}
-        {selectedOption === 'interventions' && <InterventionsPage interventions={interventions} updateStatus={updateStatus} />}
+        {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
+        {records.length > 0 ? (
+          <div style={{ overflowY: 'auto', maxHeight: '80vh' }}>
+            {records.map((item, index) => (
+              <div key={index} style={{ marginBottom: '10px', padding: '5px', border: '1px solid #ccc', borderRadius: '5px' }}>
+                <p><strong>Description:</strong> {item.description}</p>
+                <p><strong>Date:</strong> {item.date_added.split(" ")[0]}</p>
+                <p><strong>Time:</strong> {item.date_added.split(" ")[1]}</p>
+                <p><strong>Status:</strong> <span className={`status-${item.status.toLowerCase()}`}>{item.status}</span></p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>No {selectedType} available.</p>
+        )}
+      </div>
+      
+      {/* Map Section */}
+      <div style={{ flexGrow: 1 }}>
+        <Redflagsmap
+          interventions={selectedType === 'interventions' ? interventions : []}
+          redflags={selectedType === 'redflags' ? redflags : []}
+        />
       </div>
     </div>
   );
 };
 
 export default AdminDashboard;
+
+
