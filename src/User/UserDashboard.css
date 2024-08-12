@@ -1,27 +1,21 @@
 .status-draft {
-    background-color: yellow;
-    padding: 2px 5px;
-    border-radius: 3px;
-    color: #333;
+    background-color: #fff3cd;
+  color: #856404;
 }
 
 .status-pending {
-    background-color: orange;
+    background-color:  #f8d7da;
     padding: 2px 5px;
     border-radius: 3px;
-    color: #fff;
+    color: orange;
 }
 
 .status-resolved {
-    background-color: green;
-    padding: 2px 5px;
-    border-radius: 3px;
-    color: #fff;
+    background-color: #d4edda;
+    color: #155724;
 }
 
 .status-rejected {
-    background-color: red;
-    padding: 2px 5px;
-    border-radius: 3px;
-    color: #fff;
+    background-color: #f8d7da;
+  color: #721c24;
 }

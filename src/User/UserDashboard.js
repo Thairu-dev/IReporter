@@ -65,7 +65,8 @@ const UserDashboard = () => {
                         {records.map((item, index) => (
                             <div key={index} style={{ marginBottom: '10px', padding: '5px', border: '1px solid #ccc', borderRadius: '5px' }}>
                                 <p><strong>Description:</strong> {item.description}</p>
-                                <p><strong>Date:</strong> {item.created_at}</p>
+                                <p><strong>Date:</strong> {item.date_added.split(" ")[0]}</p>
+                                <p><strong>Time::</strong> {item.date_added.split(" ")[1]}</p>
                                 <p><strong>Status:</strong> <span className={`status-${item.status.toLowerCase()}`}>{item.status}</span></p>
                             </div>
                         ))}

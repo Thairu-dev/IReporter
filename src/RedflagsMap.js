@@ -8,24 +8,34 @@ const customIcon = new Icon({
   iconSize: [38, 38]
 });
 
-function Redflagsmap() {
-  const [interventions, setInterventions] = useState([]);
+function Redflagsmap({ interventions, redflags }) {
+  const [markers, setMarkers] = useState([]);
 
   useEffect(() => {
-    // Fetch interventions data from the API
-    fetch("https://ireporter-server.onrender.com/redflags")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Fetched data:", data);
-        setInterventions(data);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+    // Clear existing markers and set new markers based on the props
+    const records = interventions.length > 0 ? interventions : redflags;
+    const newMarkers = records
+      .filter(record => record.geolocation)
+      .map((record, index) => {
+        const [latitude, longitude] = record.geolocation
+          .split(",")
+          .map(coord => parseFloat(coord.trim()));
+
+        if (isNaN(latitude) || isNaN(longitude)) return null;
+
+        return (
+          <Marker key={index} position={[latitude, longitude]} icon={customIcon}>
+            <Popup>
+              <h3>Title: {record.intervention || record.redflag}</h3>
+              <p>Description: {record.description}</p>
+              <p>Status: {record.status}</p>
+            </Popup>
+          </Marker>
+        );
+      });
+
+    setMarkers(newMarkers);
+  }, [interventions, redflags]); // Trigger re-render when either interventions or redflags change
 
   return (
     <MapContainer
@@ -37,31 +47,7 @@ function Redflagsmap() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {interventions.length === 0 && (
-        <p>No interventions data available. Please check the API response.</p>
-      )}
-      {interventions.map((intervention, index) => {
-        if (!intervention.geolocation) return null;
-        const [latitude, longitude] = intervention.geolocation
-          .split(",")
-          .map((coord) => parseFloat(coord.trim()));
-
-        if (isNaN(latitude) || isNaN(longitude)) return null;
-
-        return (
-          <Marker
-            key={index}
-            position={[latitude, longitude]}
-            icon={customIcon}
-          >
-            <Popup>
-              <h3>Title:{intervention.intervention}</h3>
-              <p>Description:{intervention.description}</p>
-              <p>Status: {intervention.status}</p>
-            </Popup>
-          </Marker>
-        );
-      })}
+      {markers}
     </MapContainer>
   );
 }
