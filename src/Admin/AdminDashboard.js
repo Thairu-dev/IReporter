@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 import Redflagsmap from '../RedflagsMap'; // Import the map component
 import './AdminDashboard.css';
 
@@ -7,6 +8,7 @@ const AdminDashboard = () => {
   const [interventions, setInterventions] = useState([]);
   const [redflags, setRedflags] = useState([]);
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const token = localStorage.getItem('access_token');
@@ -31,6 +33,12 @@ const AdminDashboard = () => {
   // Filter records based on selected type
   const records = selectedType === 'interventions' ? interventions : redflags;
 
+  // Function to handle item click and navigate
+  const handleItemClick = () => {
+    const typePath = selectedType === 'interventions' ? 'admininterventions' : 'adminredflags';
+    navigate(`/${typePath}`); // Navigate to the detailed page
+  };
+
   return (
     <div style={{ display: 'flex' }}>
       {/* Sidebar Section */}
@@ -50,7 +58,11 @@ const AdminDashboard = () => {
         {records.length > 0 ? (
           <div style={{ overflowY: 'auto', maxHeight: '80vh' }}>
             {records.map((item, index) => (
-              <div key={index} style={{ marginBottom: '10px', padding: '5px', border: '1px solid #ccc', borderRadius: '5px' }}>
+              <div
+                key={index}
+                style={{ marginBottom: '10px', padding: '5px', border: '1px solid #ccc', borderRadius: '5px', cursor: 'pointer' }}
+                onClick={() => handleItemClick(item)} // Add onClick handler
+              >
                 <p><strong>Description:</strong> {item.description}</p>
                 <p><strong>Date:</strong> {item.date_added.split(" ")[0]}</p>
                 <p><strong>Time:</strong> {item.date_added.split(" ")[1]}</p>
@@ -75,5 +87,6 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+
 
 
