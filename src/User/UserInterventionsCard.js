@@ -138,10 +138,15 @@ const InterventionsCard = () => {
             </div>
             <div className="content">
                 <div className="header">{interv.intervention}</div>
-                <div className="meta">{interv.date_added}</div>
-                <div className="description">{interv.description}</div>
+                <div className="meta">
+                <p><strong>Date:</strong> {interv.date_added.split(" ")[0]}</p>
+                <p><strong>Time:</strong> {interv.date_added.split(" ")[1]}</p>
+                </div>
+                <div className="description">Description:{interv.description}</div>
             </div>
-            <div className="extra content">Status : {interv.status} </div>
+            <div className="extra content">
+                <p><strong>Status:</strong> <span className={`status-${interv.status.toLowerCase()}`}>{interv.status}</span></p>
+            </div>
             <div className="extra content">Geolocation : {interv.geolocation} </div>
             <div className='card-btn'>
                 {/*interv.video && */(

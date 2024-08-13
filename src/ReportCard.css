@@ -17,3 +17,21 @@
     background-color: #f8d7da;
     color: #721c24;
   }
+
+  .reports-heading {
+    position: relative;
+    font-size: 24px; /* Adjust this size as needed */
+    font-weight: bold; /* Optional: for a bolder look */
+    margin-bottom: 20px; /* Adjust the spacing below the heading */
+}
+
+.reports-heading::after {
+    content: '';
+    display: block;
+    width: 100%; /* Makes the underline span the entire width of the heading */
+    height: 3px; /* Adjust the thickness of the underline */
+    background-color: #8E24AA; /* The underline color */
+    position: absolute;
+    bottom: -5px; /* Adjust this to control the distance of the underline from the text */
+    left: 0;
+}

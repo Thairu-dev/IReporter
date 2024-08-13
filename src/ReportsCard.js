@@ -49,7 +49,7 @@ const ReportCards = () => {
 
     return (
         <div className='reports-container'>
-            <h2>All Reports</h2>
+            <h2 className='reports-heading'>All Reports</h2>
             <select value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)}>
                 <option value="redflags">Red Flags</option>
                 <option value="interventions">Interventions</option>
