@@ -46,6 +46,9 @@ const Navbar = () => {
               <li className="navbar-link">
                 <NavLink to="/admininterventions" className={({ isActive }) => isActive ? "active" : ""}>Interventions</NavLink>
               </li>
+              <li className="navbar-link">
+                  <NavLink to="/analytics" className={({ isActive }) => isActive ? "active" : ""}>Analytics</NavLink>
+                </li>
                 </>
               )}
               {user.role === 'user' && (
