@@ -11,18 +11,19 @@ const Login = () => {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
         login(email, password)
             .then((userData) => {
                 if (userData) {
-                    // Redirect based on user role
+                    const welcomeMessage = `Welcome ${userData.role === 'admin' ? 'Admin' : 'User'} ${userData.name}!`;
+                    
+                    // Redirect based on user role with state
                     if (userData.role === 'admin') {
-                        navigate('/admin-dashboard');
+                        navigate('/admin-dashboard', { state: { welcomeMessage } });
                     } else if (userData.role === 'user') {
-                        navigate('/user-dashboard');
+                        navigate('/user-dashboard', { state: { welcomeMessage } });
                     } else {
                         alert("You must be a user");
                     }
@@ -46,10 +47,8 @@ const Login = () => {
                     <span className="primary-text">👁️</span>
                     Reporter
                 </h2>
-
-                <form  onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <div className="input-wrapper">
-                        
                         <br/>
                         <input
                             type="email"
@@ -59,28 +58,23 @@ const Login = () => {
                             required
                         />
                     </div>
-                    
                     <div className="input-wrapper">
-                        
                         <br/>
                         <input
                             type={showPassword ? 'text' : 'password'}
                             placeholder='Enter password'
-                            
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
                         <i
-                          className={`fas ${showPassword ? 'fa-eye' : 'fa-eye-slash'} iconn`}
-                          onClick={() => setShowPassword(!showPassword)}
-                                />
+                            className={`fas ${showPassword ? 'fa-eye' : 'fa-eye-slash'} iconn`}
+                            onClick={() => setShowPassword(!showPassword)}
+                        />
                     </div>
-                    
                     {error && <p className="error">{error}</p>}
                     <button className='log' type="submit">Login</button>
                 </form>
-
                 <div>
                     <br />
                     <div className="signin--links">
@@ -97,14 +91,10 @@ const Login = () => {
             <section className="showcase column center">
                 <div className="showcase--content">
                     <h1>
-                        Let&rsquo;s build the Nation
-                        {' '}
-                        <strong>together</strong>
+                        Let&rsquo;s build the Nation <strong>together</strong>
                     </h1>
                     <h4>
-                        <span className="primary-text">👁️Reporter</span>
-                        {' '}
-                        is a platform for every citizen.
+                        <span className="primary-text">👁️Reporter</span> is a platform for every citizen.
                     </h4>
                 </div>
             </section>
@@ -112,4 +102,4 @@ const Login = () => {
     );
 };
 
-export default Login; 
+export default Login;

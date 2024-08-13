@@ -89,3 +89,25 @@
     bottom: 0;
     width: 100%;
   }
+
+@keyframes waveBackground {
+  0%{
+    background-position: 50% 50%;
+  }
+  25%{
+    background-position: 48% 52%;
+  }
+  50%{
+    background-position: 52% 50%;
+  }
+  75%{
+    background-position: 52% 48%;
+  }
+  100%{
+    background-position: 50% 50%;
+  }
+}
+
+.wave-effect{
+  animation:waveBackground 5s ease-in-out infinite;
+}

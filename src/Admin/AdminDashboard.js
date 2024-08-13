@@ -2,14 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 import Redflagsmap from '../RedflagsMap'; // Import the map component
 import './AdminDashboard.css';
-
+import { useLocation } from 'react-router-dom';
+import { toast,ToastContainer } from 'react-toastify';
 const AdminDashboard = () => {
   const [selectedType, setSelectedType] = useState('interventions'); // State to handle dropdown selection
   const [interventions, setInterventions] = useState([]);
   const [redflags, setRedflags] = useState([]);
   const [error, setError] = useState('');
   const navigate = useNavigate(); // Initialize useNavigate
+  const location = useLocation();
 
+    useEffect(() => {
+        if (location.state?.welcomeMessage) {
+            toast.success(location.state.welcomeMessage);
+        }
+    }, [location]);
   useEffect(() => {
     const token = localStorage.getItem('access_token');
     
@@ -54,6 +61,7 @@ const AdminDashboard = () => {
           <option value="interventions">Interventions</option>
           <option value="redflags">Redflags</option>
         </select>
+        <ToastContainer position='top-center' autoClose={1500} />
         {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
         {records.length > 0 ? (
           <div style={{ overflowY: 'auto', maxHeight: '80vh' }}>
