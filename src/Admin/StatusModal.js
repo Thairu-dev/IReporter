@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../Modal.css'; // Add your styles
-
+import {toast,ToastContainer} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 const StatusModal = ({ isOpen, onClose, item, updateStatus, type }) => {
     const [newStatus, setNewStatus] = useState(item.status);
 
@@ -10,6 +11,7 @@ const StatusModal = ({ isOpen, onClose, item, updateStatus, type }) => {
 
     const handleUpdateStatus = () => {
         updateStatus(item.id, newStatus);
+        toast.success('Status updated successfully!')
     };
 
     if (!isOpen) return null;
@@ -19,6 +21,7 @@ const StatusModal = ({ isOpen, onClose, item, updateStatus, type }) => {
             <div className="modal-content">
                 <button className="close-button" onClick={onClose}>X</button>
                 <h2>Update Status</h2>
+                <ToastContainer position='top-center' autoClose={1000}/>
                 <select value={newStatus} onChange={handleStatusChange}>
                     <option value="rejected">Rejected</option>
                     <option value="under_investigation">Under Investigation</option>

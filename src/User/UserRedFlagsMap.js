@@ -38,7 +38,7 @@ function UserRedflagsmap({ interventions = [], redflags = [] }) {
             icon={customIcon}
           >
             <Popup>
-              <h3>{item.intervention ? 'Intervention' : 'Redflag'}</h3>
+              <h3>{item.intervention ? item.intervention : item.redflag}</h3>
               <p>Description:{item.description}</p>
               <p>Status: {item.status}</p>
             </Popup>
