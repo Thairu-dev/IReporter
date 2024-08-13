@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { Container, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Select, MenuItem } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { green, grey } from '@mui/material/colors';
@@ -10,7 +10,7 @@ const AdminUserManagement = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const { updateTokenVerified } = useAuth();
+    const { updateTokenVerified, updateUserRole } = useAuth(); // Added updateUserRole here
 
     useEffect(() => {
         fetch('https://ireporter-server.onrender.com/users', {
@@ -35,6 +35,7 @@ const AdminUserManagement = () => {
             setLoading(false);
         });
     }, []);
+
     if (loading) {
         return (
             <div className="spinner-container">
@@ -53,6 +54,16 @@ const AdminUserManagement = () => {
             });
     };
 
+    const handleRoleChange = (userId, newRole) => {
+        updateUserRole(userId, newRole)
+            .then(() => {
+                setUsers(users.map(user => user.id === userId ? { ...user, role: newRole } : user));
+            })
+            .catch(err => {
+                setError(err.message);
+            });
+    };
+
     return (
         <Container>
             <Typography variant="h4" gutterBottom>Admin User Management</Typography>
@@ -64,13 +75,14 @@ const AdminUserManagement = () => {
                             <TableCell>Name</TableCell>
                             <TableCell>Email</TableCell>
                             <TableCell>Status</TableCell>
+                            <TableCell>Role</TableCell>
                             <TableCell>Token Verified</TableCell>
                             <TableCell>Actions</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {users
-                        .filter(user => user.role !== 'admin')
+                        // .filter(user => user.role !== 'admin')
                         .map(user => (
                             <TableRow key={user.id}>
                                 <TableCell>{user.name}</TableCell>
@@ -81,6 +93,16 @@ const AdminUserManagement = () => {
                                         style={{ color: user.is_active ? green[500] : grey[500], marginRight: '8px' }} 
                                     />
                                     {user.is_active ? 'Active' : 'Offline'}
+                                </TableCell>
+                                <TableCell>
+                                    <Select
+                                        value={user.role}
+                                        onChange={(e) => handleRoleChange(user.id, e.target.value)}
+                                    >
+                                        <MenuItem value="user">User</MenuItem>
+                                        <MenuItem value="admin">Admin</MenuItem>
+                                        
+                                    </Select>
                                 </TableCell>
                                 <TableCell>{user.token_verified ? 'Yes' : 'No'}</TableCell>
                                 <TableCell>

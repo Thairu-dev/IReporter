@@ -194,6 +194,22 @@ export const AuthProvider = ({ children }) => {
             return response.json();
         });
     };
+    const updateUserRole = (userId, role) => {
+        return fetch(`https://ireporter-server.onrender.com/admin/users/${userId}/update-token`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+            },
+            body: JSON.stringify({ role })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.json();
+        });
+    };
 
 
     if (loading) {
@@ -205,7 +221,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, signup, verifyToken, updateUserProfile, updateTokenVerified }}>
+        <AuthContext.Provider value={{ user, login, logout, signup, verifyToken, updateUserProfile, updateTokenVerified, updateUserRole }}>
             {children}
         </AuthContext.Provider>
     );
