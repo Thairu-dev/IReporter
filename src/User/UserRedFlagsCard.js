@@ -116,9 +116,12 @@ const RedFlagsCard = () => {
 
     return (
         <div className='redflags-container'>
+            <div className='header-container'>
             <h2>REDFLAGS</h2>
             <ToastContainer position='top-center' autoClose={1000}/>
             <button onClick={() => navigate('/addredflag')}className="report-btn"> Report a Redflag</button>
+            </div>
+            
             <div className='cards-container'>
             {userData.redflags.length === 0 ? (
     <div className="no-data-container">
@@ -146,7 +149,7 @@ const RedFlagsCard = () => {
                 {/*redflg.video && */(
                     <button onClick={() => handleVideoOpen(redflg.video)}>Play Video</button>
                 )}
-                {redflg.status === "draft" ? (
+                {redflg.status /*=== "draft"*/ ?(
                     <>
                         <button onClick={() => handleEdit(redflg)}>Update</button>
                         <button onClick={() => handleDelete(redflg.id)} className='delete-btn'>Delete</button>

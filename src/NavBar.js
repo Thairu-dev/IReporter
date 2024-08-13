@@ -49,6 +49,11 @@ const Navbar = () => {
               <li className="navbar-link">
                   <NavLink to="/analytics" className={({ isActive }) => isActive ? "active" : ""}>Analytics</NavLink>
                 </li>
+                <NavLink to="/user-management" className={({ isActive }) => isActive ? "active" : ""}>Manage Users</NavLink>
+              </li>
+              <li className="navbar-link">
+                <NavLink to="/admin-profile" className={({ isActive }) => isActive ? "active" : ""}>My Profile</NavLink>
+              </li>
                 </>
               )}
               {user.role === 'user' && (
@@ -62,8 +67,12 @@ const Navbar = () => {
                 <li className="navbar-link">
                 <NavLink to="/interventions" className={({ isActive }) => isActive ? "active" : ""}>Interventions</NavLink>
               </li>
-                </>
+              <li className="navbar-link">
+                <NavLink to="user-profile"className={({ isActive }) => isActive ? "active" : ""}>My Profile</NavLink>
+              </li> 
+                </> 
               )}
+              
               <li className="navbar-link">
                 <NavLink to="/" onClick={logout} className={({ isActive }) => isActive ? "active" : ""}>Logout</NavLink>
               </li> 
