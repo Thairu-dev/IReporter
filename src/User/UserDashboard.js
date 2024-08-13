@@ -3,6 +3,8 @@ import "../Spinner.css";
 import UserRedflagsmap from './UserRedFlagsMap'; // Import the map component
 import './UserDashboard.css'
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { toast,ToastContainer } from 'react-toastify';
 const UserDashboard = () => {
     
     const [userData, setUserData] = useState(null);
@@ -10,6 +12,13 @@ const UserDashboard = () => {
     const [selectedType, setSelectedType] = useState('interventions'); // State to handle dropdown selection
     const navigate = useNavigate(); // Initialize useNavigate
 
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.state?.welcomeMessage) {
+            toast.success(location.state.welcomeMessage);
+        }
+    }, [location]);
     useEffect(() => {
         fetch('https://ireporter-server.onrender.com/check_session', {
             method: 'GET',
@@ -65,6 +74,8 @@ const UserDashboard = () => {
                     <option value="interventions">Interventions</option>
                     <option value="redflags">Redflags</option>
                 </select>
+                <ToastContainer position='top-center' autoClose={1000} />
+
                 {records.length > 0 ? (
                     <div style={{ overflowY: 'auto', maxHeight: '80vh' }}>
                         {records.map((item, index) => (

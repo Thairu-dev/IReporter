@@ -135,10 +135,15 @@ const RedFlagsCard = () => {
             </div>
             <div className="content">
                 <div className="header">{redflg.redflag}</div>
-                <div className="meta">{redflg.date_added}</div>
-                <div className="description">{redflg.description}</div>
+                <div className="meta">
+                <p><strong>Date:</strong> {redflg.date_added.split(" ")[0]}</p>
+                <p><strong>Time:</strong> {redflg.date_added.split(" ")[1]}</p>
+                </div>
+                <div className="description">Description:{redflg.description}</div>
             </div>
-            <div className="extra content">Status : {redflg.status} </div>
+            <div className="extra content">
+                <p><strong>Status:</strong> <span className={`status-${redflg.status.toLowerCase()}`}>{redflg.status}</span></p>
+            </div>
             <div className="extra content">Geolocation : {redflg.geolocation} </div>
             <div className='card-btn'>
                 {/*redflg.video && */(

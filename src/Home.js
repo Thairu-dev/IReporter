@@ -7,7 +7,7 @@ export default function Home() {
   const currentYear = new Date().getFullYear(); 
   return (
   <div>
-      <section
+      <section className='wave-effect'
         style={{
           backgroundImage: `
             linear-gradient(to right bottom, rgba(32, 38, 57, 0.5), rgba(63, 76, 119, 0.8)),
