@@ -152,7 +152,7 @@ const InterventionsCard = () => {
                 {/*interv.video && */(
                     <button onClick={() => handleVideoOpen(interv.video)}>Play Video</button>
                 )}
-                {interv.status === "draft" ? (
+                {interv.status /*=== "draft" */?(
                     <>
                         <button onClick={() => handleEdit(interv)}>Update</button>
                         <button onClick={() => handleDelete(interv.id)} className='delete-btn'>Delete</button>
