@@ -3,7 +3,7 @@ import { TextField, Button, Container, Typography, Avatar, Box } from '@mui/mate
 import AuthContext from '../context/AuthContext'; // Adjust the path as needed
 
 const UserProfilePage = () => {
-    const { user, /*setUser*/ updateUserProfile } = useContext(AuthContext);
+    const { user, /*setUser*/ updateUserProfile} = useContext(AuthContext);
     const [name, setName] = useState(user?.name || '');
     const [email, setEmail] = useState(user?.email || '');
     const [oldPassword, setOldPassword] = useState('');
@@ -11,12 +11,12 @@ const UserProfilePage = () => {
     const [image, setImage] = useState(null);
     const [imagePreview, setImagePreview] = useState(user?.image || '');
     const [loading, setLoading] = useState(false);
-    const [/*error*/ setError] = useState('');
+    const [error, setError] = useState('');
     const [imageSelected, setImageSelected] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [interventions, setInterventions] = useState([]);
     const [redflags, setRedflags] = useState([]);
-
+    const [requestingAdmin, setRequestingAdmin] = useState(false);
     useEffect(() => {
         if (user) {
             setName(user.name);
@@ -26,6 +26,38 @@ const UserProfilePage = () => {
             setRedflags(user.redflags || []);
         }
     }, [user]);
+    const handleRequestAdmin = () => {
+        setRequestingAdmin(true);
+    
+        fetch('https://ireporter-server.onrender.com/request-admin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(error => { throw new Error(error.message); });
+            }
+            return response.json();
+        })
+        .then(data => {
+            alert(data.message || 'Admin request sent successfully');
+        })
+        .catch(error => {
+            if (error.message === 'You are already an admin') {
+                alert('You are already an admin.');
+            } else if (error.message === 'You have already requested admin access') {
+                alert('You have already requested admin access.');
+            } else {
+                alert(`Error: ${error.message}`);
+            }
+        })
+        .finally(() => {
+            setRequestingAdmin(false);
+        });
+    };
 
     const handleImageChange = (event) => {
         const selectedImage = event.target.files[0];
@@ -76,7 +108,9 @@ const UserProfilePage = () => {
         resolved: countByStatus(interventions, 'resolved'),
         rejected: countByStatus(interventions, 'rejected'),
     };
-
+    if(error){
+        alert(error)
+    }
     return (
         <Container>
             <Typography variant="h4" gutterBottom>User Profile</Typography>
@@ -209,6 +243,16 @@ const UserProfilePage = () => {
                     disabled={loading}
                 >
                     {loading ? 'Updating...' : 'Update Password'}
+                </Button>
+            </Box>
+            <Box mb={4}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleRequestAdmin}
+                    disabled={requestingAdmin || user.role === 'admin'}
+                >
+                    {requestingAdmin ? 'Requesting...' : 'Request Admin Access'}
                 </Button>
             </Box>
             
