@@ -1,0 +1,19 @@
+.status-resolved {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  .status-under-investigation {
+    background-color: #d1ecf1; /* A light blue background */
+    color: #0c5460; /* A dark teal color for the text */
+  }
+  
+  
+  .status-draft {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .status-rejected {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
