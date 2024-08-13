@@ -3,7 +3,6 @@ import CountUp from 'react-countup';
 import { Bar } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
 import './AllReports.css';
-import ReportCards from './ReportsCard';
 
 Chart.register(...registerables);
 
@@ -67,7 +66,6 @@ const AllReports = () => {
 
   return (
     <div className="all-reports-container">
-      <ReportCards/>
       <h2 className="section-title">General Reports Overview</h2>
       <div className="report-stats">
         <div className="report-card">
