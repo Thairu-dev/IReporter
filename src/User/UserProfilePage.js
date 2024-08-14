@@ -22,7 +22,7 @@ const UserProfilePage = () => {
             setName(user.name);
             setEmail(user.email);
             setImagePreview(user.image);
-            setInterventions(user.interventions || []);
+            setInterventions(user.intervention|| []);
             setRedflags(user.redflags || []);
         }
     }, [user]);
