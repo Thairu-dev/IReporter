@@ -50,10 +50,14 @@ const ReportCards = () => {
     return (
         <div className='reports-container'>
             <h2 className='reports-heading'>All Reports</h2>
-            <select value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)}>
+            <div className="reports-dropdown">
+        <span className="dropdown-label">Reports About:</span>
+        <select value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)}>
                 <option value="redflags">Red Flags</option>
                 <option value="interventions">Interventions</option>
             </select>
+        </div>
+
             <div className='cards-container'>
                 {reports.map((report) => (
                     <div key={report.id} className="ui card">
