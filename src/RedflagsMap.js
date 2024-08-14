@@ -1,45 +1,24 @@
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { useEffect, useState } from "react";
 import { Icon } from "leaflet";
 
 const customIcon = new Icon({
   iconUrl: "https://cdn-icons-png.flaticon.com/128/14090/14090313.png",
-  iconSize: [38, 38]
+  iconSize: [38, 38],
 });
 
-function Redflagsmap({ interventions, redflags }) {
-  const [markers, setMarkers] = useState([]);
-
-  useEffect(() => {
-    // Clear existing markers and set new markers based on the props
-    const records = interventions.length > 0 ? interventions : redflags;
-    const newMarkers = records
-      .filter(record => record.geolocation)
-      .map((record, index) => {
-        const [latitude, longitude] = record.geolocation
-          .split(",")
-          .map(coord => parseFloat(coord.trim()));
-
-        if (isNaN(latitude) || isNaN(longitude)) return null;
-
-        return (
-          <Marker key={index} position={[latitude, longitude]} icon={customIcon}>
-            <Popup>
-              <h3>Title: {record.intervention || record.redflag}</h3>
-              <p>Description: {record.description}</p>
-              <p>Status: {record.status}</p>
-            </Popup>
-          </Marker>
-        );
-      });
-
-    setMarkers(newMarkers);
-  }, [interventions, redflags]); // Trigger re-render when either interventions or redflags change
+function Redflagsmap({ interventions = [], redflags = [], selectedType }) {
+  // Filter based on the selected type
+  const markers =
+    selectedType === "interventions"
+      ? interventions
+      : selectedType === "redflags"
+      ? redflags
+      : [...interventions, ...redflags]; // Fallback to show all if needed
 
   return (
     <MapContainer
-      center={[1.2921, 36.8219]}
+      center={[1.2921, 36.8219]} // Center at a general location
       zoom={2}
       style={{ height: "100vh", width: "100%" }} // Ensure the map has a height
     >
@@ -47,9 +26,29 @@ function Redflagsmap({ interventions, redflags }) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {markers}
+      {markers.length === 0 && <p>No data available for the map.</p>}
+      {markers.map((item, index) => {
+        if (!item.geolocation) return null;
+        const [latitude, longitude] = item.geolocation
+          .split(",")
+          .map((coord) => parseFloat(coord.trim()));
+
+        if (isNaN(latitude) || isNaN(longitude)) return null;
+
+        return (
+          <Marker key={index} position={[latitude, longitude]} icon={customIcon}>
+            <Popup>
+              <h3>{item.intervention ? item.intervention : item.redflag}</h3>
+              <p>Description: {item.description}</p>
+              <p>Status: {item.status}</p>
+            </Popup>
+          </Marker>
+        );
+      })}
     </MapContainer>
   );
 }
 
 export default Redflagsmap;
+
+
