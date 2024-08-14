@@ -149,7 +149,7 @@ const RedFlagsCard = () => {
                 {/*redflg.video && */(
                     <button onClick={() => handleVideoOpen(redflg.video)}>Play Video</button>
                 )}
-                {redflg.status /*=== "draft"*/ ?(
+                {redflg.status === "draft" ?(
                     <>
                         <button onClick={() => handleEdit(redflg)}>Update</button>
                         <button onClick={() => handleDelete(redflg.id)} className='delete-btn'>Delete</button>

@@ -69,6 +69,9 @@ const AdminInterventions = () => {
     return (
         <div className='interventions-container'>
             <h1>Admin Dashboard</h1>
+            
+
+            <h2>INTERVENTIONS</h2>
             <div className="filter-container">
                 <label htmlFor="filter">Filter by Status:</label>
                 <select id="filter" onChange={handleFilterChange} value={filter}>
@@ -78,18 +81,22 @@ const AdminInterventions = () => {
                     <option value="resolved">Resolved</option>
                 </select>
             </div>
-
-            <h2>INTERVENTIONS</h2>
             <div className='cards-container'>
                 {filteredInterventions.map(intervention => (
                     <div key={intervention.id} className="ui card">
                         <div className="image"><img src={intervention.image || "https://via.placeholder.com/150"} alt={intervention.intervention} /></div>
                         <div className="content">
-                            <div className="header">{intervention.intervention}</div>
-                            <div className="meta">{intervention.date_added}</div>
-                            <div className="description">{intervention.description}</div>
+                            <div className="header">Title:{intervention.intervention}</div>
+                            <div className="description">Description:{intervention.description}</div>
+                            <div className="meta">
+                <p><strong>Date:</strong> {intervention.date_added.split(" ")[0]}</p>
+                <p><strong>Time:</strong> {intervention.date_added.split(" ")[1]}</p>
+                </div>
+                        
                         </div>
-                        <div className="extra content">Status: {intervention.status}</div>
+                        <div className="extra content">
+                <p><strong>Status:</strong> <span className={`status-${intervention.status.toLowerCase()}`}>{intervention.status}</span></p>
+            </div>
                         <div className="extra content">Geolocation: {intervention.geolocation}</div>
                         <div className='card-btn'>
                         <button 
