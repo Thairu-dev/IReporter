@@ -16,6 +16,7 @@ import AdminInterventions from './Admin/AdminInterventions';
 import AddRedFlag from './User/AddRedFlag';
 import AddIntervention from './User/AddIntervention';
 import AllReports from './AllReports'
+import ReportCards from './ReportsCard';
 import UserProfilePage from './User/UserProfilePage';
 import AdminProfilePage from './Admin/AdminProfilePage';
 import AdminUserManagement from './Admin/AdminUserManagenent';
@@ -53,6 +54,10 @@ const App = () => {
               element={<ProtectedRoute element={AdminRedflags} />}
             />
             <Route
+              path="/analytics"
+              element={<ProtectedRoute element={AllReports} />}
+            />
+            <Route
               path="/admininterventions"
               element={<ProtectedRoute element={AdminInterventions} />}
             />
@@ -61,7 +66,7 @@ const App = () => {
               path="/addintervention"
               element={<ProtectedRoute element={AddIntervention} />}
             />
-           <Route path="/all-reports" element={<AllReports />} />
+           <Route path="/all-reports" element={<ReportCards />} />
            <Route path='/user-profile' element={<ProtectedRoute element={UserProfilePage}/>}/>
            <Route
               path="/admin-profile"

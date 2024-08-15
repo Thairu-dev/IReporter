@@ -25,6 +25,7 @@ const UserProfilePage = () => {
             setName(user.name);
             setEmail(user.email);
             setImagePreview(user.image);
+<<<<<<< HEAD
             
             const updateStatusCounts = (items) => ({
                 total: items.length,
@@ -37,6 +38,10 @@ const UserProfilePage = () => {
                 redflags: updateStatusCounts(user.redflags || []),
                 interventions: updateStatusCounts(user.intervention || []),
             });
+=======
+            setInterventions(user.intervention|| []);
+            setRedflags(user.redflags || []);
+>>>>>>> origin
         }
     }, [user]);
     console.log(user)

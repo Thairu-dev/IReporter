@@ -84,6 +84,7 @@ const AllReports = () => {
       <div className="chart-container">
         <Bar data={data} options={options} />
       </div>
+      
     </div>
   );
 };

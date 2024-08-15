@@ -70,6 +70,9 @@ const AdminRedflags = () => {
     return (
         <div className='redflags-container'>
             <h1>Admin Dashboard</h1>
+           
+
+            <h2>REDFLAGS</h2>
             <div className="filter-container">
                 <label htmlFor="filter">Filter by Status:</label>
                 <select id="filter" onChange={handleFilterChange} value={filter}>
@@ -79,18 +82,22 @@ const AdminRedflags = () => {
                     <option value="resolved">Resolved</option>
                 </select>
             </div>
-
-            <h2>REDFLAGS</h2>
             <div className='cards-container'>
                 {filteredRedflags.map(redflag => (
                     <div key={redflag.id} className="ui card">
                         <div className="image"><img src={redflag.image || "https://via.placeholder.com/150"} alt={redflag.redflag} /></div>
                         <div className="content">
-                            <div className="header">{redflag.redflag}</div>
-                            <div className="meta">{redflag.date_added}</div>
-                            <div className="description">{redflag.description}</div>
+                            <div className="header">Title:{redflag.redflag}</div>
+                            <div className="description">Description:{redflag.description}</div>
+                            <div className="meta">
+                <p><strong>Date:</strong> {redflag.date_added.split(" ")[0]}</p>
+                <p><strong>Time:</strong> {redflag.date_added.split(" ")[1]}</p>
+                </div>
+                        
                         </div>
-                        <div className="extra content">Status: {redflag.status}</div>
+                        <div className="extra content">
+                <p><strong>Status:</strong> <span className={`status-${redflag.status.toLowerCase()}`}>{redflag.status}</span></p>
+            </div>
                         <div className="extra content">Geolocation: {redflag.geolocation}</div>
                         <div className='card-btn'>
                                 <button 

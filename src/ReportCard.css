@@ -1,0 +1,75 @@
+.status-resolved {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  .status-under-investigation {
+    background-color: #d1ecf1; /* A light blue background */
+    color: #0c5460; /* A dark teal color for the text */
+  }
+  
+  
+  .status-draft {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .status-rejected {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+
+  .reports-container {
+    margin-bottom: 20px; /* Adds space between the container and the content below */
+}
+
+.reports-heading {
+    position: relative;
+    font-size: 24px; /* Adjust this size as needed */
+    font-weight: bold; /* Optional: for a bolder look */
+    margin-bottom: 10px; /* Adjust the spacing below the heading */
+    display: inline-block; /* Ensures that the heading is treated as an inline block element */
+}
+
+.reports-heading::after {
+    content: '';
+    display: block;
+    width: 100%; /* This now only spans the width of the heading text */
+    height: 3px; /* Adjust the thickness of the underline */
+    background-color: #8E24AA; /* The underline color */
+    position: absolute;
+    bottom: -5px; /* Adjust this to control the distance of the underline from the text */
+    left: 0;
+}
+
+.reports-dropdown {
+    margin-top: 10px; /* Space between the heading and dropdown */
+}
+/* Style for the select element */
+.select-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Add a custom style to the select element */
+.select-container select {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+/* Style the options (limited) */
+.select-container select option {
+  color: #000;
+}
+
+/* Add hover effect to the select dropdown */
+.select-container select:hover {
+  border-color: #a64dff; /* Purple border on hover */
+  background-color: #f9f0ff; /* Light purple background on hover */
+}
+
+/* Option hover effect in custom dropdown library (if applicable) */
+
+

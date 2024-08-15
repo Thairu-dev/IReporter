@@ -71,7 +71,6 @@ export const AuthProvider = ({ children }) => {
                     return response.json();
                 })
                 .then(userData => {
-                    console.log('Session Check After Login:', userData); 
                     if (userData.token_verified) {
                         setUser(userData);
                         return userData;
