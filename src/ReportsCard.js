@@ -52,10 +52,13 @@ const ReportCards = () => {
             <h2 className='reports-heading'>All Reports</h2>
             <div className="reports-dropdown">
         <span className="dropdown-label">Reports About:</span>
-        <select value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)}>
-                <option value="redflags">Red Flags</option>
-                <option value="interventions">Interventions</option>
-            </select>
+        <div class="select-container">
+    <select value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)}>
+        <option value="redflags">Red Flags</option>
+        <option value="interventions">Interventions</option>
+    </select>
+</div>
+
         </div>
 
             <div className='cards-container'>
