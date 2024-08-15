@@ -114,7 +114,6 @@ export const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
-        // Send a POST request to the backend to log the user out
         setLoading(true)
         fetch('https://ireporter-server.onrender.com/logout', {
             method: 'POST',
@@ -123,7 +122,6 @@ export const AuthProvider = ({ children }) => {
             }
         }).then(response => {
             if (response.ok) {
-                // Clear the local storage and user state
                 localStorage.removeItem('access_token');
                 setUser(null);
                 setLoading(false)
@@ -141,7 +139,7 @@ export const AuthProvider = ({ children }) => {
         const token = localStorage.getItem('access_token');
         const formData = new FormData();
 
-        // Directly append values to formData if they exist
+
         if (profileData.name) formData.append('name', profileData.name);
         if (profileData.email) formData.append('email', profileData.email);
         if (profileData.old_password) formData.append('old_password', profileData.old_password);
@@ -152,7 +150,6 @@ export const AuthProvider = ({ children }) => {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`
-                // 'Content-Type': 'multipart/form-data' // Not needed with FormData
             },
             body: formData
         })
@@ -163,7 +160,6 @@ export const AuthProvider = ({ children }) => {
             return response.json();
         })
         .then(data => {
-            // Update the user context with the updated profile
             setUser(prevUser => ({
                 ...prevUser,
                 name: profileData.name || prevUser.name,
@@ -174,7 +170,7 @@ export const AuthProvider = ({ children }) => {
         })
         .catch(error => {
             console.error('Error updating profile:', error);
-            throw error; // Re-throw to handle in the component
+            throw error;
         });
     };
 

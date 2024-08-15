@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { TextField, Button, Container, Typography, Avatar, Box } from '@mui/material';
-import AuthContext from '../context/AuthContext'; // Adjust the path as needed
+import AuthContext from '../context/AuthContext';
 
 const UserProfilePage = () => {
     const { user, /*setUser*/ updateUserProfile} = useContext(AuthContext);
@@ -14,18 +14,33 @@ const UserProfilePage = () => {
     const [error, setError] = useState('');
     const [imageSelected, setImageSelected] = useState(false);
     const [uploading, setUploading] = useState(false);
-    const [interventions, setInterventions] = useState([]);
-    const [redflags, setRedflags] = useState([]);
+    const [statuses, setStatuses] = useState({
+        redflags: { total: 0, under_review: 0, resolved: 0, rejected: 0 },
+        interventions: { total: 0, under_review: 0, resolved: 0, rejected: 0 },
+    });
     const [requestingAdmin, setRequestingAdmin] = useState(false);
+
     useEffect(() => {
         if (user) {
             setName(user.name);
             setEmail(user.email);
             setImagePreview(user.image);
-            setInterventions(user.interventions || []);
-            setRedflags(user.redflags || []);
+            
+            const updateStatusCounts = (items) => ({
+                total: items.length,
+                under_review: items.filter(item => item.status === 'under_review').length,
+                resolved: items.filter(item => item.status === 'resolved').length,
+                rejected: items.filter(item => item.status === 'rejected').length,
+            });
+
+            setStatuses({
+                redflags: updateStatusCounts(user.redflags || []),
+                interventions: updateStatusCounts(user.intervention || []),
+            });
         }
     }, [user]);
+    console.log(user)
+
     const handleRequestAdmin = () => {
         setRequestingAdmin(true);
     
@@ -91,22 +106,6 @@ const UserProfilePage = () => {
             .then(() => setError(''))
             .catch(err => setError(`Error: ${err.message}`))
             .finally(() => setLoading(false));
-    };
-
-    const countByStatus = (items, status) => items.filter(item => item.status === status).length;
-
-    const redflagStatuses = {
-        total: redflags.length,
-        under_review: countByStatus(redflags, 'under_review'),
-        resolved: countByStatus(redflags, 'resolved'),
-        rejected: countByStatus(redflags, 'rejected'),
-    };
-
-    const interventionStatuses = {
-        total: interventions.length,
-        under_review: countByStatus(interventions, 'under_review'),
-        resolved: countByStatus(interventions, 'resolved'),
-        rejected: countByStatus(interventions, 'rejected'),
     };
     if(error){
         alert(error)
@@ -263,25 +262,25 @@ const UserProfilePage = () => {
                         sx={{ width: '23%', backgroundColor: 'purple', p: 2, boxShadow: 1 }}
                     >
                         <Typography variant="h6">Total</Typography>
-                        <Typography>{redflagStatuses.total}</Typography>
+                        <Typography>{statuses.redflags.total}</Typography>
                     </Box>
                     <Box
                         sx={{ width: '23%', backgroundColor: 'yellow', p: 2, boxShadow: 1 }}
                     >
                         <Typography variant="h6">Under Review</Typography>
-                        <Typography>{redflagStatuses.under_review}</Typography>
+                        <Typography>{statuses.redflags.under_review}</Typography>
                     </Box>
                     <Box
                         sx={{ width: '23%', backgroundColor: 'green', p: 2, boxShadow: 1 }}
                     >
                         <Typography variant="h6">Resolved</Typography>
-                        <Typography>{redflagStatuses.resolved}</Typography>
+                        <Typography>{statuses.redflags.resolved}</Typography>
                     </Box>
                     <Box
                         sx={{ width: '23%', backgroundColor: 'red', p: 2, boxShadow: 1 }}
                     >
                         <Typography variant="h6">Rejected</Typography>
-                        <Typography>{redflagStatuses.rejected}</Typography>
+                        <Typography>{statuses.redflags.rejected}</Typography>
                     </Box>
                 </Box>
             </Box>
@@ -293,25 +292,25 @@ const UserProfilePage = () => {
                         sx={{ width: '23%', backgroundColor: 'purple', p: 2, boxShadow: 1 }}
                     >
                         <Typography variant="h6">Total</Typography>
-                        <Typography>{interventionStatuses.total}</Typography>
+                        <Typography>{statuses.interventions.total}</Typography>
                     </Box>
                     <Box
                         sx={{ width: '23%', backgroundColor: 'yellow', p: 2, boxShadow: 1 }}
                     >
                         <Typography variant="h6">Under Review</Typography>
-                        <Typography>{interventionStatuses.under_review}</Typography>
+                        <Typography>{statuses.interventions.under_review}</Typography>
                     </Box>
                     <Box
                         sx={{ width: '23%', backgroundColor: 'green', p: 2, boxShadow: 1 }}
                     >
                         <Typography variant="h6">Resolved</Typography>
-                        <Typography>{interventionStatuses.resolved}</Typography>
+                        <Typography>{statuses.interventions.resolved}</Typography>
                     </Box>
                     <Box
                         sx={{ width: '23%', backgroundColor: 'red', p: 2, boxShadow: 1 }}
                     >
                         <Typography variant="h6">Rejected</Typography>
-                        <Typography>{interventionStatuses.rejected}</Typography>
+                        <Typography>{statuses.interventions.rejected}</Typography>
                     </Box>
                 </Box>
             </Box>
