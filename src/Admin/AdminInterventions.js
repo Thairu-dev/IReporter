@@ -76,7 +76,7 @@ const AdminInterventions = () => {
                 <label htmlFor="filter">Filter by Status:</label>
                 <select id="filter" onChange={handleFilterChange} value={filter}>
                     <option value="all">All</option>
-                    <option value="reported">Reported</option>
+                    <option value="rejected">Rejected</option>
                     <option value="under_investigation">Under Investigation</option>
                     <option value="resolved">Resolved</option>
                 </select>
