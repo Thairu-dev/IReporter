@@ -10,7 +10,6 @@ To install and run this project you need to have installed:
 
 To run the app :
 ```bash
-git clone git@github.com:Thairu-dev/IReporter.git
 git clone https://github.com/Thairu-dev/IReporter.git
 cd Ireporter
 npm install
