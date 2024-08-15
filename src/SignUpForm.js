@@ -112,21 +112,10 @@ const SignUpForm = () => {
                             />
                             <PasswordInput
                                 name="passwordConfirmation"
-                                placeholder="Repeat password"
+                                placeholder="Confirm password....."
                                 handleOnChange={handleFieldChange}
                             />
-                            <div className="input-wrapper">
-                                <select
-                                    name="role"
-                                    value={formData.role}
-                                    onChange={handleFieldChange}
-                                    required
-                                >
-                                    <option value="User">User</option>
-                                    <option value="Admin">Admin</option>
-                                    
-                                </select>
-                            </div>
+
                             <div className="container">
                                 <div>
                                     <button className="reg" type="submit">Sign up</button>
