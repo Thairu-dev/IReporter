@@ -82,7 +82,7 @@ const AdminUserManagement = () => {
                     </TableHead>
                     <TableBody>
                         {users
-                        //.filter(user => user.role !== 'admin')
+                        .filter(user => user.role !== 'admin')
                         .map(user => (
                             <TableRow key={user.id}>
                                 <TableCell>{user.name}</TableCell>
