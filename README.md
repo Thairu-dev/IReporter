@@ -9,7 +9,7 @@ Corruption is a huge bane to Africa’s development. African countries must deve
 * A user can add a reflag
 * A user can add an intervention
 * A user can add geolocation coordinates to their record
-*A user gets automated response when their record's status is updated
+*A user gets automated updates when their record's status is updated
 * A user can update their record
 
 
