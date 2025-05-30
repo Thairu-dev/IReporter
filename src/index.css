@@ -186,6 +186,8 @@ button {
   /* background-color: rgba(255, 255, 255, 1); */
   border: 1px solid rgba(104, 85, 224, 1);
   align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 button:hover {
@@ -327,7 +329,7 @@ label{
   align-items: baseline;
 }
 .ui.card{
-  background-color: ;
+  background-color:white ;
 }
 /* .report-btn {
   position: absolute;
